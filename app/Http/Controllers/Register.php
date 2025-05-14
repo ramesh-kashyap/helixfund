@@ -56,7 +56,6 @@ class Register extends Controller
                 'name' => 'required',
                 'password' => 'required|confirmed|min:5',
                 'sponsor' => 'required|exists:users,username',
-                'telegram' => 'required'
               
             ]);
 
@@ -70,12 +69,12 @@ class Register extends Controller
             //check if email exist
           
           
-            if (isset($request->captcha)) {
-                if (!captchaVerify($request->captcha, $request->captcha_secret)) {
-                    $notify[] = ['error', "Invalid Captcha"];
-                    return back()->withNotify($notify)->withInput();
-                }
-            }
+            // if (isset($request->captcha)) {
+            //     if (!captchaVerify($request->captcha, $request->captcha_secret)) {
+            //         $notify[] = ['error', "Invalid Captcha"];
+            //         return back()->withNotify($notify)->withInput();
+            //     }
+            // }
 
             
             $user = User::where('username',$request->sponsor)->first();
@@ -99,7 +98,7 @@ class Register extends Controller
             $data['password'] =   Hash::make($post_array['password']);
             $data['tpassword'] =   Hash::make($tpassword);
             $data['PSR'] =  $post_array['password'];
-            $data['telegram'] =  $post_array['telegram'];
+            // $data['telegram'] =  $post_array['telegram'];
            
             $data['TPSR'] =  $tpassword;
             $data['sponsor'] = $user->id;
@@ -117,19 +116,19 @@ class Register extends Controller
             $user = User::find($registered_user_id);
             Auth::loginUsingId($registered_user_id);
           
-             sendEmail($user->email, 'Welcome to '.siteName(), [
-                'name' => $user->name,
-                'username' => $user->username,
-                'password' => $user->PSR,
-                'tpassword' => $user->TPSR,
-                'viewpage' => 'register_sucess',
-                 'link'=>route('login'),
-            ]);
+            //  sendEmail($user->email, 'Welcome to '.siteName(), [
+            //     'name' => $user->name,
+            //     'username' => $user->username,
+            //     'password' => $user->PSR,
+            //     'tpassword' => $user->TPSR,
+            //     'viewpage' => 'register_sucess',
+            //      'link'=>route('login'),
+            // ]);
             
             
 
-            return redirect()->route('home');
-            //  return redirect()->route('register_sucess')->with('messages', $user);
+            // return redirect()->route('Index');
+             return redirect()->route('register_sucess')->with('messages', $user);
 
         }
         catch(\Exception $e){

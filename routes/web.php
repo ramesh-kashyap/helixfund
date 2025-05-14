@@ -87,6 +87,9 @@ Route::post('/wallet_change', [App\Http\Controllers\UserPanel\Profile::class, 'w
 Route::get('/ChangePass', [App\Http\Controllers\UserPanel\Profile::class, 'change_password'])->name('user.ChangePass');
 Route::get('/security-password', [App\Http\Controllers\UserPanel\Profile::class, 'ChangeSecurityPass'])->name('user.security-password');
 Route::get('/share', [App\Http\Controllers\UserPanel\Profile::class, 'share'])->name('user.share');
+Route::get('/security', [App\Http\Controllers\UserPanel\Profile::class, 'security'])->name('user.security');
+Route::get('/refreals', [App\Http\Controllers\UserPanel\Profile::class, 'refreals'])->name('user.refreals');
+Route::get('/refreallink', [App\Http\Controllers\UserPanel\Profile::class, 'refreallink'])->name('user.refreallink');
 
 Route::post('/edit-password', [App\Http\Controllers\UserPanel\Profile::class, 'change_password_post'])->name('user.edit-password');
 Route::post('/update-password', [App\Http\Controllers\UserPanel\Profile::class, 'change_password_submit'])->name('user.update-password');

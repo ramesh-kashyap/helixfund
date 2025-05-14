@@ -40,151 +40,110 @@ class WithdrawRequest extends Controller
     }
 
 
-    public function WithdrawRequest(Request $request)
-    {
-
-        try{
-
-             $validation =  Validator::make($request->all(), [
+   public function WithdrawRequest(Request $request)
+{
+    try {
+        $validation = Validator::make($request->all(), [
             'amount' => 'required|numeric|min:10',
-            'PSys' => 'required',    
+            'PSys' => 'required',
             'walletAddress' => 'required',
-
-
         ]);
 
-        if($validation->fails()) {
-            Log::info($validation->getMessageBag()->first());
-
+        if ($validation->fails()) {
+            Log::info('Validation failed', ['error' => $validation->getMessageBag()->first()]);
             return Redirect::back()->withErrors($validation->getMessageBag()->first())->withInput();
         }
 
-        $user=Auth::user();
-        $password= $request->transaction_password;
-        $balance=Auth::user()->available_balance();
-        if ($request->PSys=="USDT.TRC20") 
-        {
-          $account =  $user->usdtTrc20;
-        }
-        else
-        {
-          $account =  $user->usdtBep20;
-        }
-       
-        if ($balance>=$request->amount)
-        {
-         $todayWitdrw=Withdraw::where('user_id',$user->id)->where('status','!=','Failed')->where('wdate',date('Y-m-d'))->first();
-         
-         if($todayWitdrw)
-         {
-          return Redirect::back()->withErrors(array('Any Withdraw limit per Id once a day !'));    
-         }
-         
-         
-         
-         $user_detail=Withdraw::where('user_id',$user->id)->where('status','Pending')->first();
+        $user = Auth::user();
+        $balance = $user->available_balance();
+        $account = '';
 
-         if(!empty($user_detail))
-         {
-           return Redirect::back()->withErrors(array('Withdraw Request Already Exist !'));
-         }
-         else
-         {
-             
-                      
-            if($request->PSys=="USDT.BEP20")
-            {
-               $paymentMode= "USDT_BSC"; 
+        if ($request->PSys == "USDT.BEP20") {
+            $account = $user->usdtBep20;
+            $paymentMode = "USDT_BSC";
+        }
+
+        if ($balance >= $request->amount) {
+            $todayWithdraw = Withdraw::where('user_id', $user->id)
+                ->where('status', '!=', 'Failed')
+                ->where('wdate', date('Y-m-d'))
+                ->first();
+
+            if ($todayWithdraw) {
+                return Redirect::back()->withErrors(['Any Withdraw limit per Id once a day!']);
             }
-            else
-            {
-              $paymentMode= "USDT_TRX";    
+
+            $existingRequest = Withdraw::where('user_id', $user->id)->where('status', 'Pending')->first();
+
+            if ($existingRequest) {
+                return Redirect::back()->withErrors(['Withdraw Request Already Exists!']);
             }
-         
-          if(!empty($account))
-              {
-                   
-                 $data = [
-                        'txn_id' =>md5(time() . rand()),     
-                        'user_id' => $user->id,
-                        'user_id_fk' => $user->username,
-                        'amount' => $request->amount,
-                        'account' => $account,
-                        'payment_mode' =>$paymentMode,
-                        'status' => 'Pending',
-                        'walletType' => 1,
-                        'wdate' => Date("Y-m-d"),
-                    ];
-                   $payment =  Withdraw::Create($data);
-                   
-                  $withdraw_id = $payment['id'];
-                   
-                 $netAmt =  $request->amount-$request->amount*5/100;
-                 $apiURL = 'https://plisio.net/api/v1/operations/withdraw';
-                    $postInput = [
+
+            if (!empty($account)) {
+                $data = [
+                    'txn_id' => md5(time() . rand()),
+                    'user_id' => $user->id,
+                    'user_id_fk' => $user->username,
+                    'amount' => $request->amount,
+                    'account' => $account,
+                    'payment_mode' => $paymentMode,
+                    'status' => 'Pending',
+                    'walletType' => 1,
+                    'wdate' => date("Y-m-d"),
+                ];
+
+                $payment = Withdraw::create($data);
+                $withdraw_id = $payment->id;
+
+                $netAmt = $request->amount - ($request->amount * 5 / 100);
+                $apiURL = 'https://plisio.net/api/v1/operations/withdraw';
+
+                $postInput = [
                     'currency' => $paymentMode,
                     'amount' => $netAmt,
                     'type' => 'cash_out',
-                    'to' =>$account,
+                    'to' => $account,
                     'api_key' => '4iJxhwNsKCrdhtDn8Q9ctk_vdMvDs6JoXb7DeiRm95R45OeCUhFH8RcgRDOK-lIM',
-                    ];
-              
-                    $headers = [
-                        'Content-Type' => 'application/json'
-                    ];
-              
-                    $response = Http::withHeaders($headers)->get($apiURL, $postInput);
-              
-                    $statusCode = $response->status();
-                    $responseBody = json_decode($response->getBody(), true);
-                
-                if($responseBody['status']=="success")
-                {
-                 
-                  Withdraw::where('id',$withdraw_id)->update(['status' => 'Approved','txn_id'=>$responseBody['data']['txn_id']]);
-                
-                $notify[] = ['success','Withdraw Request Submited successfully'];
-        
-                return redirect()->back()->with('withdralId',$withdraw_id)->withNotify($notify);
-                   
-                    
+                ];
+
+                $headers = [
+                    'Content-Type' => 'application/json'
+                ];
+
+                $response = Http::withHeaders($headers)->post($apiURL, $postInput);
+                $responseBody = json_decode($response->getBody(), true);
+
+                if (is_array($responseBody)) {
+                    Log::info('Plisio Response:', ['response' => $responseBody]);
+
+                    if (isset($responseBody['status']) && $responseBody['status'] == "success") {
+                        Withdraw::where('id', $withdraw_id)->update([
+                            'status' => 'Approved',
+                            'txn_id' => $responseBody['data']['txn_id'] ?? $data['txn_id'],
+                        ]);
+
+                        $notify[] = ['success', 'Withdraw Request Submitted successfully'];
+                        return redirect()->back()->with('withdrawId', $withdraw_id)->withNotify($notify);
+                    } else {
+                        Withdraw::where('id', $withdraw_id)->update(['status' => 'Failed']);
+                        return Redirect::back()->withErrors(['Something went wrong with the withdrawal API.']);
+                    }
+                } else {
+                    Withdraw::where('id', $withdraw_id)->update(['status' => 'Failed']);
+                    Log::info('Plisio API returned null or invalid JSON');
+                    return Redirect::back()->withErrors(['Withdrawal failed. API response not received properly.']);
                 }
-                else
-                {
-                    
-                  Withdraw::where('id',$withdraw_id)->update(['status' => 'Failed']);
-                  return Redirect::back()->withErrors(array('something went wrong'));  
-                }
-                 
-                
-              }
-              else
-                {
-                return Redirect::back()->withErrors(array('Please Update Your '.$request->paymentMode.' Payment address'));
-                }  
-
-
-         }
-
+            } else {
+                return Redirect::back()->withErrors(['Please update your ' . $request->PSys . ' payment address.']);
+            }
+        } else {
+            return Redirect::back()->withErrors(['Insufficient balance in your account.']);
         }
-        else
-        {
-     return Redirect::back()->withErrors(array('Insufficient balance in Your account'));
-        }
-
+    } catch (\Exception $e) {
+        Log::error('WithdrawRequest Exception', ['error' => $e->getMessage()]);
+        return redirect()->route('user.WithdrawRequest')->withErrors(['error' => $e->getMessage()])->withInput();
     }
-    catch(\Exception $e){
-     Log::info('error here');
-     Log::info($e->getMessage());
-     print_r($e->getMessage());
-     die("hi");
-     return  redirect()->route('user.WithdrawRequest')->withErrors('error', $e->getMessage())->withInput();
-       }
-
-
-
-
-    }
+}
 
 
 

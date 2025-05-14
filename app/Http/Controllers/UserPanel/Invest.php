@@ -22,14 +22,36 @@ class Invest extends Controller
 
     public function index()
     {
-        $user=Auth::user();
-        $invest_check=Investment::where('user_id',$user->id)->where('status','!=','Decline')->orderBy('id','desc')->limit(1)->first();
+           $userInfo = auth()->user(); // or however you're getting the user info
+    $refId = $userInfo->phone;
+    $url = 'https://api.cryptapi.io/bep20/usdt/create/';
+    $queryParams = [
+        'callback'      => 'https://rrpranjal.com/cryptapicallback?refid=' . $refId,
+        'address'       => '0x29EFD41e774E88E3374Eb741572e14076816F413',
+        'pending'       => 0,
+        'confirmations' => 1,   
+        'email'         => 'string',
+        'post'          => 0,
+        'priority'      => 'default',
+        'multi_token'   => 0,
+'multi_chain' => 0,
+'convert' => 0,
+];
+$response = Http::get($url, $queryParams);
+$data = $response->json();
+unset($data['callback_url']); // remove callback_url
+// return response()->json([
+// 'message' => $data,
+// 'status' => true,
+// ]);
+         $this->data['data'] =$data;
 
-        $this->data['last_package'] = ($invest_check)?$invest_check->amount:0;
         $this->data['page'] = 'user.invest.Deposit';
         return $this->dashboard_layout();
     }  
-    
+
+
+   
     public function deposit()
     {
         $user=Auth::user();

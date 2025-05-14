@@ -115,6 +115,7 @@ Route::any('/confirmDeposit', [App\Http\Controllers\UserPanel\Invest::class, 'co
 Route::any('/confirmDeposit_new', [App\Http\Controllers\UserPanel\Invest::class, 'confirmDeposit_new'])->name('user.confirmDeposit_new');
 
 Route::get('/DepositHistory', [App\Http\Controllers\UserPanel\Invest::class, 'invest_list'])->name('user.DepositHistory');
+Route::post('/create-crypto-address', [App\Http\Controllers\UserPanel\Invest::class,'createCryptoAddress'])->name('user.createCryptoAddress');
 
 // end invest
 

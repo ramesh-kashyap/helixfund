@@ -10,7 +10,7 @@
                 <i class="fas fa-bars"></i>
             </button>
 
-            <span class="navbar-brand text-capitalize text-white mb-0 h1 d-none d-sm-inline-block">edit account</span>
+            <span class="navbar-brand text-capitalize text-white mb-0 h1 d-none d-sm-inline-block">Withdraw</span>
 
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item mb-0 dropdown">
@@ -128,32 +128,29 @@
                         <h3>Withdraw</h3>
                     </div>
                     <div class="card-body">
-                       <div class="mb-3">
-                <label>Wallet Address (USDT BEP20)</label>
-                <input type="text" name="PSys"
-                    value="USDT.BEP20" readonly
-                    class="form-control">
-            </div>
                         <div class="mb-3">
-                            <label>enter amount</label>
+                            <label>Enter Amount</label>
                             <input type="text" name="amount" value="" placeholder="0"  class="form-control" >
                         </div>
-                        <div class="mb-3">
-    <label>Enter Code</label>
-    <div class="input-group">
-        <input type="text" name="code" class="form-control" placeholder="Enter Code">
-        <button style="background-color:rgba(114, 161, 222, 0.032);border-color:#fff,box-shadow: 0 0 10px rgba(114, 161, 222, 0.168627451), inset 0 0 5px rgba(114, 161, 222, 0.2392156863);color: #ffffff;"  type="button" id="getCodeBtn">Get Code</button>
-    </div>
-</div>
-
-
-                        <div class="mb-3">
+                       <div class="mb-3">
+                            <label>Payment Type (USDT BEP20)</label>
+                            <input type="text" name="PSys" value="USDT.BEP20" readonly class="form-control">
+                      </div>
+                       <div class="mb-3">
                             <label>Wallet Address</label>
                             <input type=text name="walletAddress"  value="{{Auth::user()->usdtBep20}}"  readonly placeholder="0" class="form-control" size=30>
                         </div>
+                        
+                        <div class="mb-3">
+                           <label>Enter Verification Code</label>
+                                <div class="input-group">
+                                 <input type="text" name="code" class="form-control" placeholder="Enter Code">
+                                <button class="" type="button"style="    border-radius: 4px;background: #11171f;border: 1px solid #333333;color: white;">Get Code</button> 
+                               </div>
+                        </div>
 
 
-                               <input type=submit value="Submit" class=sbmt>
+                         <input type=submit value="Submit" class=sbmt>
 
                     </div>
                 </div>

@@ -126,16 +126,16 @@
         <div class="card-body">
           <div class="mb-3">
             <label>Username</label>
-            <input type="text" value="{{ $profile_data ? $profile_data->username : '' }}" class="form-control" disabled>
+            <input type="text" value="{{ $profile_data ? $profile_data->username : '' }}" class="form-control" readonly>
           </div>
           <div class="mb-3">
             <label>Account Name</label>
             <input type=text name=fullname value="{{ $profile_data ? $profile_data->name : '' }}"
-              class="form-control" size=30>
+              class="form-control"readonly size=30>
           </div>
           <div class="mb-3">
             <label>Registration date</label>
-            <input type="text" value="{{ $profile_data ? $profile_data->created_at : '' }}" class="form-control" disabled>
+            <input type="text" value="{{ $profile_data ? $profile_data->created_at : '' }}" class="form-control" readonly>
           </div>
 
           

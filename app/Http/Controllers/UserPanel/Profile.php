@@ -28,6 +28,28 @@ class Profile extends Controller
 
     }
 
+    public function security()
+    {
+    
+    $this->data['page'] = 'user.profile.security';
+    return $this->dashboard_layout();
+
+    }
+    public function refreallink()
+    {
+    
+    $this->data['page'] = 'user.profile.refreallink';
+    return $this->dashboard_layout();
+
+    }
+    
+    public function refreals()
+    {
+    
+    $this->data['page'] = 'user.profile.refreals';
+    return $this->dashboard_layout();
+
+    }
     public function wallets()
     {
     $user=Auth::user();

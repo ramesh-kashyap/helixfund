@@ -28,8 +28,9 @@ class Dashboard extends Controller
 
     public function index()
     {
-
+   
       $user=Auth::user();
+        $profile_data = User::where('id',$user->id)->orderBy('id','desc')->first();
       $user_direct=User::where('sponsor',$user->id)->where('active_status','Active')->count();
       $directIds=User::where('sponsor',$user->id)->where('active_status','Active')->pluck('id');
       $personal_deposit=Investment::where('user_id',$user->id)->where('status','Active')->sum('amount');
@@ -67,6 +68,7 @@ class Dashboard extends Controller
         $this->data['totalIncome'] =$percentage;
   
 
+    $this->data['profile_data'] =$profile_data;
 
 
 

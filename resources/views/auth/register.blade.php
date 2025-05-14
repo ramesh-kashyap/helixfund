@@ -1,157 +1,317 @@
-<!DOCTYPE html>
-<html>
+@include('layouts.mainsite.header')
 
-<head>
-    <!-- Google Tag Manager -->
-
-    <!-- End Google Tag Manager -->
-    <meta charset="utf-8">
-    <title>{{siteName()}}</title>
-    <base href="{{asset('')}}" />
-    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-iconf9e3.png?v=1.1">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32f9e3.png?v=1.1">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16f9e3.png?v=1.1">
-    <link rel="manifest" href="/favicons/site.webmanifest?v=1.1">
-    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg?v=1.0" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#603cba">
-    <meta name="theme-color" content="#ffffff">
-
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-    <meta content="ie=edge" http-equiv="x-ua-compatible">
-
-
-    <link rel="stylesheet" href="{{asset('')}}assets/css/libs.css">
-    <link rel="stylesheet" href="{{asset('')}}assets/css/app54f9.css?v=1.009995">
-    <link rel="stylesheet" href="{{asset('')}}assets/css/customb361.css?v=1.000099999">
-    <!--[if lt IE 9]>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script><![endif]-->
-
-</head>
-
-<body>
-
-
-    <div class="copy-success">
-        <svg>
-            <use xlink:href="/assets/img/sprite.svg#check"></use>
-        </svg>
+<div class="hero">
+    <div class="container text-center">
+        <h1>Create an <span class="gradient-text">Account</span></h1>
+        <p class="lead mt-4 mb-5" style="color: rgba(255, 255, 255, 0.9); max-width: 600px; margin: 0 auto;">
+            Join xyo-flow.com and start your investment journey today
+        </p>
     </div>
-    <div class="wrapper">
-        <section class="sign">
-            <div class="container"> <a class="sign-logo" href="/"><img style="    width: 200px;" src="/assets/img/Clogo.png?v=1.0"
-                alt="logo" /></a>
-                <div class="row">
-                    <div class="col-lg-6 offset-lg-3">
-                        <form method="post" action="{{ route('registers') }}" name="register_frm" id="registr">
-                              {{ csrf_field() }}
-                              
-                            <div class="sign-box">
-                                <div class="sign-img"> <img src="/assets/img/contacts-form-img.png"
-                                        alt="contacts-form-img" /></div>
-                                <div class="sign-title">Sign up<p>Welcome to {{siteName()}}</p>
-                                </div>
-                                <div class="contacts-form__inputs">
-                                    <label
-                                        class="contacts-form__input contacts-form__input_icon"><input type="text"
-                                            name="name" value="" placeholder="Your Name"><svg>
-                                            <use xlink:href="/assets/img/sprite.svg#user"></use>
-                                        </svg></label>
-                                        
-                                        <label
-                                        class="contacts-form__input contacts-form__input_icon"><input type="text"
-                                            name="email" value="" placeholder="Your email"><svg>
-                                            <use xlink:href="/assets/img/sprite.svg#mail"></use>
-                                        </svg></label>
-                                        
-                                        <label
-                                        class="contacts-form__input contacts-form__input_icon"><input type="password"
-                                            name="password" value="" placeholder="Your Password"><svg>
-                                            <use xlink:href="/assets/img/sprite.svg#pass"></use>
-                                        </svg></label>
-                                        
-                                        <label
-                                        class="contacts-form__input contacts-form__input_icon"><input type="password"
-                                            name="password_confirmation" value="" placeholder="Retype password"><svg>
-                                            <use xlink:href="/assets/img/sprite.svg#pass"></use>
-                                        </svg></label>
-                                        
-                                         <label
-                                        class="contacts-form__input contacts-form__input_icon"><input type="text"
-                                            name="telegram" value="" placeholder="Your Telegram"><svg>
-                                            <use xlink:href="/assets/img/sprite.svg#mail"></use>
-                                        </svg></label>
-                                        
-                                           <label
-                                        class="contacts-form__input contacts-form__input_icon"><input type="text"
-                                            name="captcha" value="" placeholder="Enter Captcha"><svg>
-                                            <use xlink:href="/assets/img/sprite.svg#mail"></use>
-                                        </svg></label>
-                                        
-                                      
-                                        
-                                        
-                                        
-                                        @php
-                                    $sponsor = @$_GET['ref'];
-                                    $name = \App\Models\User::where('username', $sponsor)->first();
-                                    @endphp
-                                     @if ($name)
-                                     
-                                      <label
-                                        class="contacts-form__input contacts-form__input_icon"><input type="text"
-                                            name="sponsor" value="{{$name->username}}" readonly ><svg>
-                                            <use xlink:href="/assets/img/sprite.svg#user"></use>
-                                        </svg></label>
-                                        
-                                        
-                                    <div class="sign-sponsor">Invited by: <span> {{$name->name}} </span></div>
-                                        @else
-                                       <div class="sign-sponsor">Invited by: <span><input type="hidden" name="uRef"
-                                                value=""></span></div>  
-                                        
-                                        @endif
-                                    <input name="__Cert"
-                                        value="c94003ff" type="hidden">
-                                </div>
-                                
-                                  <label
-                                        class="contacts-form__input contacts-form__input_icon">
-                                              @php
-                                                $captcha = getCustomCaptcha($height = 46, $width = '100%', $bgcolor = '#003');
-                                                @endphp 
+</div>
 
-                                              @php echo  $captcha @endphp
-                                            @if(reCaptcha())
-                                            @php echo reCaptcha(); @endphp
-                                            @endif
-                                            
-                                        </label>
-                                        <br>
+<section class="unique-section">
+    <div class="container">
+
+        <script language=javascript>
+            function checkform() {
+                if (document.regform.fullname.value == '') {
+                    alert("Please enter your full name!");
+                    document.regform.fullname.focus();
+                    return false;
+                }
+
+
+                if (document.regform.username.value == '') {
+                    alert("Please enter your username!");
+                    document.regform.username.focus();
+                    return false;
+                }
+                if (!document.regform.username.value.match(/^[A-Za-z0-9_\-]+$/)) {
+                    alert("For username you should use English letters and digits only!");
+                    document.regform.username.focus();
+                    return false;
+                }
+                if (document.regform.password.value == '') {
+                    alert("Please enter your password!");
+                    document.regform.password.focus();
+                    return false;
+                }
+                if (document.regform.password.value != document.regform.password2.value) {
+                    alert("Please check your password!");
+                    document.regform.password2.focus();
+                    return false;
+                }
+
+
+                if (document.regform.email.value == '') {
+                    alert("Please enter your e-mail address!");
+                    document.regform.email.focus();
+                    return false;
+                }
+                if (document.regform.email.value != document.regform.email1.value) {
+                    alert("Please retype your e-mail!");
+                    document.regform.email.focus();
+                    return false;
+                }
+
+                for (i in document.regform.elements) {
+                    f = document.regform.elements[i];
+                    if (f.name && f.name.match(/^pay_account/)) {
+                        if (f.value == '') continue;
+                        var notice = f.getAttribute('data-validate-notice');
+                        var invalid = 0;
+                        if (f.getAttribute('data-validate') == 'regexp') {
+                            var re = new RegExp(f.getAttribute('data-validate-regexp'));
+                            if (!f.value.match(re)) {
+                                invalid = 1;
+                            }
+                        } else if (f.getAttribute('data-validate') == 'email') {
+                            var re = /^[^\@]+\@[^\@]+\.\w{2,4}$/;
+                            if (!f.value.match(re)) {
+                                invalid = 1;
+                            }
+                        }
+                        if (invalid) {
+                            alert('Invalid account format. Expected ' + notice);
+                            f.focus();
+                            return false;
+                        }
+                    }
+                }
+
+                if (document.regform.agree.checked == false) {
+                    alert("You have to agree with the Terms and Conditions!");
+                    return false;
+                }
+
+                return true;
+            }
+
+            function IsNumeric(sText) {
+                var ValidChars = "0123456789";
+                var IsNumber = true;
+                var Char;
+                if (sText == '') return false;
+                for (i = 0; i < sText.length && IsNumber == true; i++) {
+                    Char = sText.charAt(i);
+                    if (ValidChars.indexOf(Char) == -1) {
+                        IsNumber = false;
+                    }
+                }
+                return IsNumber;
+            }
+
+        </script>
+
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card bento-card">
+                    <div class="card-body p-4">
+
+                        <form method="post" action="{{ route('registers') }}" name="regform">
+                            {{ csrf_field() }}
+
+
+                            <div class="row g-4">
+
+                                <div class="col-12">
+                                    <h4 class="mb-4">Personal Information</h4>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="mb-2">Full Name</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">
+                                                <i class='bx bx-user'></i>
+                                            </span>
+                                            <input type="text" name="name" value="" class="form-control"
+                                                placeholder="Enter your full name">
+                                        </div>
+                                    </div>
+                                </div>
+  
                                         
-                                <label class="sign-check"><input type="checkbox" name="Agree" value="1"
-                                        checked><span>I agree with <a href="terms" target="_blank">Terms and
-                                            Conditions</a></span></label><button name="register_frm_btn" type="submit"
-                                    class="main-btn main-btn_orange main-btn_m">Sign up</button>
-                                <div class="sign-bot">Do you have an account?<a href="login"> Sign IN</a></div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="mb-2">Username</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">
+                                                <i class='bx bx-user-circle'></i>
+                                            </span>
+                                            <input type="text" name="sponsor" value=""   class="form-control"
+                                                placeholder="Choose a username">
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="mb-2">Password</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">
+                                                <i class='bx bx-lock-alt'></i>
+                                            </span>
+                                            <input type="password" name="password" value="" class="form-control"
+                                                placeholder="Create password">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="mb-2">Confirm Password</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">
+                                                <i class='bx bx-lock'></i>
+                                            </span>
+                                            <input type="password" name="password_confirmation" value="" class="form-control"
+                                                placeholder="Confirm password">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-12">
+                                    <h4 class="mb-4 mt-4">Contact Information</h4>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="mb-2">Email Address</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">
+                                                <i class='bx bx-envelope'></i>
+                                            </span>
+                                            <input type="email" name="email" value="" class="form-control"
+                                                placeholder="Enter your email">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="mb-2">Phone</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">
+                                                <i class='bx bx-envelope'></i>
+                                            </span>
+                                            <input type="number" name="phone" value="" class="form-control"
+                                                placeholder="Enter your phone">
+                                        </div>
+                                    </div>
+                                </div>
+                          
+
+                                <div class="col-12">
+                                    <h4 class="mb-4 mt-4">Referral Information</h4>
+                                    <div class="alert alert-info d-flex align-items-center">
+                                        <i class='bx bx-user-plus me-2' style="font-size: 1.2rem;"></i>
+                                        Your Upline: <strong class="ms-2">N/A (n/a)</strong>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mt-4">
+
+                                </div>
+
+
+                                <div class="col-12 mt-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="agree" value="1"
+                                            id="agreeTerms">
+                                        <label class="form-check-label" for="agreeTerms">
+                                            I agree with the <a href="?a=rules" class="themed-link">Terms and
+                                                Conditions</a>
+                                        </label>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="button w-100">Create Account</button>
+                                </div>
                             </div>
                         </form>
+
+                        <div class="text-center mt-4">
+                            <p style="color: rgba(255, 255, 255, 0.7);">
+                                Already have an account?
+                                <a href="?a=login" class="themed-link">Sign in here</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="sign-footer">Copyright © 2023 etriton.co All rights reserved</div>
-        </section>
+        </div>
     </div>
+</section>
+
+@include('layouts.mainsite.footer')
 @include('partials.notify')
-    <script src="{{asset('')}}assets/js/libsb883.js?v=1.01"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
-<script src="{{asset('')}}assets/js/app437f.js?v=1.000991"></script>
-    <script>
-        var images = document.getElementsByTagName('img');
-        for (var i = 0; i < images.length; i++) {
-            var imageUrl = images[i].src;
-            images[i].src = imageUrl + '?v=1.0';
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">
+</script>
+<script src="{{asset('')}}assets/js/gsap.min.js"></script>
+<script src="{{asset('')}}assets/js/ScrollTrigger.min.js"></script>
+<script src="{{asset('')}}assets/js/SplitText.min.js"></script>
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+<script src="{{asset('')}}assets/js/app.js"></script>
+
+
+<script>
+    window.addEventListener('load', function () {
+        // All resources (images, scripts, stylesheets, etc.) are loaded
+        const preloaderContainer = document.querySelector('.preloader-container');
+        const content = document.querySelector('.content');
+
+        if (preloaderContainer) {
+            // Add the 'hidden' class to trigger the fade-out animation
+            preloaderContainer.classList.add('hidden');
+
+            // Optional: If you want to completely remove the preloader from the DOM
+            // after the transition, you can listen for the 'transitionend' event.
+            preloaderContainer.addEventListener('transitionend', function () {
+                if (preloaderContainer.style.opacity === '0' || getComputedStyle(preloaderContainer)
+                    .opacity === '0') {
+                    preloaderContainer.style.display = 'none'; // Or preloaderContainer.remove();
+                }
+            }, {
+                once: true
+            }); // {once: true} ensures the event listener is removed after it fires
         }
-    </script>
+
+        if (content) {
+            content.style.display = 'block'; // Or any other display type you need, e.g., 'flex'
+            // If you used opacity for content:
+            // content.style.opacity = '1';
+            // content.style.visibility = 'visible';
+        }
+    });
+
+    // Fallback in case 'load' event doesn't fire or takes too long (e.g., for broken images)
+    // You might want to adjust the timeout duration
+    setTimeout(function () {
+        const preloaderContainer = document.querySelector('.preloader-container');
+        const content = document.querySelector('.content');
+
+        if (preloaderContainer && !preloaderContainer.classList.contains('hidden')) {
+            console.warn("Preloader timeout reached. Forcing hide.");
+            preloaderContainer.classList.add('hidden');
+            if (preloaderContainer.style.opacity === '0' || getComputedStyle(preloaderContainer).opacity ===
+                '0') {
+                preloaderContainer.style.display = 'none';
+            }
+            if (content) {
+                content.style.display = 'block';
+            }
+        }
+    }, 10000); // 10 seconds timeout as an example
+
+</script>
 
 
 </body>

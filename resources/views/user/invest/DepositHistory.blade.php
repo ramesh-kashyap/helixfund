@@ -1,100 +1,331 @@
 
-            <div class="cab-content">
-                <div class="container">
-                    <div class="cab-title">Deposit History<span>:</span></div>
-                    <div class="cab-tabs" data-tabs-btns="his">
-                        <style>
-                            .cab-tabs__item {
-                                text-decoration: none;
-                            }
-                        </style><a href="{{route('user.roi-bonus')}}" class="cab-tabs__item ">All Operations</a><a
-                            href="{{route('user.DepositHistory')}}" class="cab-tabs__item active">Deposits</a><a
-                            href="{{route('user.Withdraw-History')}}" class="cab-tabs__item">Withdrawal</a><a
-                            href="{{route('user.roi-bonus')}}" class="cab-tabs__item">Other</a>
-                    </div>
-                    <div data-tabs-wrapper="his">
-                        <div class="cab-table" data-tabs-item="1">
-                            <table class="responsive">
-                                <thead>
-                                    <tr>
-                                        <td>
-                                            <div class="cab-table__title">Date</div>
-                                        </td>
-                                        <td>
-                                            <div class="cab-table__title">Amount</div>
-                                        </td>
-                                        <td>
-                                            <div class="cab-table__title">Transaction ID</div>
-                                        </td>
-                                        <td>
-                                            <div class="cab-table__title">Status</div>
-                                        </td>
-                                        <td>
-                                            <div class="cab-table__title">payment system</div>
-                                        </td> 
-                                        
-                                        <td>
-                                            <div class="cab-table__title">Action</div>
-                                        </td>
-                                    </tr>
-                                </thead>
-                                <tbody>
 
-                                    <?php if(is_array($deposit_list) || is_object($deposit_list)){ ?>
+        <div id="main-content" class="flex-grow-1 m-3">
+            <nav class="navbar navbar-expand-lg sticky-top shadow-sm main-header">
+                <div class="container-fluid">
+                    <button class="btn btn-outline-secondary d-md-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu">
+                        <i class="fas fa-bars"></i>
+                    </button>
 
-                                        <?php
-                                         date_default_timezone_set('UTC');
-                                        $cnt = 0; ?>
-                                        @foreach($deposit_list as $value)
-                                            <tr>
-                                                <td>
-                                                    <div class="cab-table__date">{{date("D, d M Y H:i:s ", strtotime($value->created_at))}}</div>
-                                                </td>
+                    <button id="sidebarToggle" class="btn btn-outline-secondary d-none d-md-inline-block me-3">
+                        <i class="fas fa-bars"></i>
+                    </button>
 
-                                                <td>
-                                                    <div class="cab-table__val"> {{ $value->amount }} {{generalDetail()->cur_text}}</div>
-                                                </td>
+                    <span class="navbar-brand text-capitalize text-white mb-0 h1 d-none d-sm-inline-block">history</span>
 
-                                                <td>
-                                                    <div class="cab-table__text">{{ $value->transaction_id }}</div>
-                                                </td>
-
-                                                <td>
-                                                    <div class="cab-table__status"><span
-                                                        class="badge badge-{{ ($value->status=='Active')?'success':'danger' }}">{{ $value->status }}</span></div>
-                                                </td>
-
-                                                <td>
-                                                    <div class="cab-table__wallet"><img src="assets/img/usdt.svg"
-                                                            alt="usdt" />{{$value->payment_mode}}</div>
-                                                </td>
-                                                    <td>
-                                                    <div class="cab-table__wallet">
-                                                        
-                                                         @if($value->status=="Pending")
-                                                <a href="{{route('user.cancel-payment',['id'=>$value->orderId])}}"
-                                                name="balance/oper_frm_btncancel"
-                                                class="" style="       background: #df3131;
-    padding: 10px;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 7px; background: #df3131;"
-                                                onClick="return confirm('Are you want to  \'Cancel\'');">Cancel</a>
-                                                        @else
-                                                            <span>N/A</span>
-                                                        @endif
-                                                    </div>
-                                                </td>
-
-                
-                                            </tr>
-                                        @endforeach
-                
-                                        <?php }?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item mb-0 dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user-circle fa-lg me-1"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownUser">
+                                <li><a class="dropdown-item" href="?a=support"><i class="fas fa-headset fa-fw me-2"></i>Support</a></li>
+                                <li><a class="dropdown-item" href="?a=edit_account"><i class="fas fa-user-edit fa-fw me-2"></i>Edit Account</a></li>
+                                <li><a class="dropdown-item" href="?a=security"><i class="fas fa-shield-alt fa-fw me-2"></i>Security</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="?a=logout"><i class="fas fa-sign-out-alt fa-fw me-2"></i>Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
-            </div>
+            </nav>
            
+
+
+<script language=javascript>
+function go(p) {
+  document.opts.page.value = p;
+  document.opts.submit();
+}
+</script>
+
+
+<div class="card mt-3 mb-4">
+  <div class="card-header">
+    <h3>Filter Transactions</h3>
+  </div>
+  <div class="card-body">
+    <form method=post name=opts><input type="hidden" name="form_id" value="17471373813072"><input type="hidden" name="form_token" value="093f914d8d95a4a85b1344f0ce4e2fdb">
+      <input type=hidden name=a value=history>
+      <input type=hidden name=page value=1>
+      
+      <div class="row g-3">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="form-label">Transaction Type</label>
+            <select name=type class="form-control" onchange="document.opts.submit();">
+              <option value="">All transactions</option>
+                            <option value="deposit" >Deposit</option>
+                            <option value="withdrawal" >Withdrawal</option>
+                            <option value="earning" >Earning</option>
+                            <option value="commissions" >Referral commission</option>
+                          </select>
+          </div>
+          
+                    <div class="form-group mt-3">
+            <label class="form-label">Currency</label>
+            <select name=ec class="form-control">
+              <option value=-1>All eCurrencies</option>
+                            <option value=48 >Bitcoin</option>
+                            <option value=68 >Litecoin</option>
+                            <option value=85 >Tron</option>
+                            <option value=92 >Tether TRC20</option>
+                            <option value=102 >Tether BEP20</option>
+                          </select>
+          </div>
+                  </div>
+
+        <div class="col-md-12">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">From</label>
+              <div class="d-flex gap-2">
+                <select name=month_from class="form-control">
+                                    <option value=1 >Jan</option>
+                                    <option value=2 >Feb</option>
+                                    <option value=3 >Mar</option>
+                                    <option value=4 >Apr</option>
+                                    <option value=5 selected>May</option>
+                                    <option value=6 >Jun</option>
+                                    <option value=7 >Jul</option>
+                                    <option value=8 >Aug</option>
+                                    <option value=9 >Sep</option>
+                                    <option value=10 >Oct</option>
+                                    <option value=11 >Nov</option>
+                                    <option value=12 >Dec</option>
+                                  </select>
+                <select name=day_from class="form-control">
+                                    <option value=1 >1</option>
+                                    <option value=2 >2</option>
+                                    <option value=3 >3</option>
+                                    <option value=4 >4</option>
+                                    <option value=5 >5</option>
+                                    <option value=6 >6</option>
+                                    <option value=7 >7</option>
+                                    <option value=8 >8</option>
+                                    <option value=9 >9</option>
+                                    <option value=10 >10</option>
+                                    <option value=11 >11</option>
+                                    <option value=12 selected>12</option>
+                                    <option value=13 >13</option>
+                                    <option value=14 >14</option>
+                                    <option value=15 >15</option>
+                                    <option value=16 >16</option>
+                                    <option value=17 >17</option>
+                                    <option value=18 >18</option>
+                                    <option value=19 >19</option>
+                                    <option value=20 >20</option>
+                                    <option value=21 >21</option>
+                                    <option value=22 >22</option>
+                                    <option value=23 >23</option>
+                                    <option value=24 >24</option>
+                                    <option value=25 >25</option>
+                                    <option value=26 >26</option>
+                                    <option value=27 >27</option>
+                                    <option value=28 >28</option>
+                                    <option value=29 >29</option>
+                                    <option value=30 >30</option>
+                                    <option value=31 >31</option>
+                                  </select>
+                <select name=year_from class="form-control">
+                                    <option value=2025 selected>2025</option>
+                                  </select>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">To</label>
+              <div class="d-flex gap-2">
+                <select name=month_to class="form-control">
+                                    <option value=1 >Jan</option>
+                                    <option value=2 >Feb</option>
+                                    <option value=3 >Mar</option>
+                                    <option value=4 >Apr</option>
+                                    <option value=5 selected>May</option>
+                                    <option value=6 >Jun</option>
+                                    <option value=7 >Jul</option>
+                                    <option value=8 >Aug</option>
+                                    <option value=9 >Sep</option>
+                                    <option value=10 >Oct</option>
+                                    <option value=11 >Nov</option>
+                                    <option value=12 >Dec</option>
+                                  </select>
+                <select name=day_to class="form-control">
+                                    <option value=1 >1</option>
+                                    <option value=2 >2</option>
+                                    <option value=3 >3</option>
+                                    <option value=4 >4</option>
+                                    <option value=5 >5</option>
+                                    <option value=6 >6</option>
+                                    <option value=7 >7</option>
+                                    <option value=8 >8</option>
+                                    <option value=9 >9</option>
+                                    <option value=10 >10</option>
+                                    <option value=11 >11</option>
+                                    <option value=12 >12</option>
+                                    <option value=13 selected>13</option>
+                                    <option value=14 >14</option>
+                                    <option value=15 >15</option>
+                                    <option value=16 >16</option>
+                                    <option value=17 >17</option>
+                                    <option value=18 >18</option>
+                                    <option value=19 >19</option>
+                                    <option value=20 >20</option>
+                                    <option value=21 >21</option>
+                                    <option value=22 >22</option>
+                                    <option value=23 >23</option>
+                                    <option value=24 >24</option>
+                                    <option value=25 >25</option>
+                                    <option value=26 >26</option>
+                                    <option value=27 >27</option>
+                                    <option value=28 >28</option>
+                                    <option value=29 >29</option>
+                                    <option value=30 >30</option>
+                                    <option value=31 >31</option>
+                                  </select>
+                <select name=year_to class="form-control">
+                                    <option value=2025 selected>2025</option>
+                                  </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <label class="form-label d-block">&nbsp;</label>
+          <button type="submit" class="sbmt w-100">Filter</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div class="row g-3">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body text-center">
+        No transactions found
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pagination justify-content-center mt-4">
+  <ul class="pagination"><li class="page-item"><a class="prev page-link disabled">&lt;&lt;</a></li><li class="page-item active"><a class="page-link">1</a></li><li class="page-item"><a class="next page-link disabled">&gt;&gt;</a></li></ul>
+</div>
+
+</div>
+    <div class="offcanvas offcanvas-start text-white d-md-none" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="mobileMenuLabel">Menu</h5>
+        <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+         <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+                <a href="?a=account" class="nav-link text-white">
+                    <i class="fas fa-user fa-fw me-2"></i>Account
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="?a=deposit" class="nav-link text-white">
+                    <i class="fas fa-download fa-fw me-2"></i>Deposit
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="?a=withdraw" class="nav-link text-white">
+                    <i class="fas fa-upload fa-fw me-2"></i>Withdraw
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="?a=deposit_list" class="nav-link text-white">
+                    <i class="fas fa-list-alt fa-fw me-2"></i>Deposit List
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="?a=history" class="nav-link text-white">
+                    <i class="fas fa-history fa-fw me-2"></i>History
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="?a=referals" class="nav-link text-white">
+                    <i class="fas fa-users fa-fw me-2"></i>Referrals
+                </a>
+            </li>
+             <li class="nav-item">
+                <a href="?a=referallinks" class="nav-link text-white">
+                    <i class="fas fa-link fa-fw me-2"></i>Banners
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="?a=security" class="nav-link text-white">
+                    <i class="fas fa-shield-alt fa-fw me-2"></i>Security
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="?a=edit_account" class="nav-link text-white">
+                    <i class="fas fa-user-edit fa-fw me-2"></i>Edit Account
+                </a>
+            </li>
+             <li class="nav-item mt-auto">
+                <a href="?a=logout" class="nav-link text-warning">
+                    <i class="fas fa-sign-out-alt fa-fw me-2"></i>Logout
+                </a>
+            </li>
+        </ul>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="{{asset('')}}assets/js/dash.js"></script>
+    
+
+<script>
+    window.addEventListener('load', function() {
+    // All resources (images, scripts, stylesheets, etc.) are loaded
+    const preloaderContainer = document.querySelector('.preloader-container');
+    const content = document.querySelector('.content');
+
+    if (preloaderContainer) {
+        // Add the 'hidden' class to trigger the fade-out animation
+        preloaderContainer.classList.add('hidden');
+
+        // Optional: If you want to completely remove the preloader from the DOM
+        // after the transition, you can listen for the 'transitionend' event.
+        preloaderContainer.addEventListener('transitionend', function() {
+            if (preloaderContainer.style.opacity === '0' || getComputedStyle(preloaderContainer).opacity === '0') {
+                 preloaderContainer.style.display = 'none'; // Or preloaderContainer.remove();
+            }
+        }, { once: true }); // {once: true} ensures the event listener is removed after it fires
+    }
+
+    if (content) {
+        content.style.display = 'block'; // Or any other display type you need, e.g., 'flex'
+        // If you used opacity for content:
+        // content.style.opacity = '1';
+        // content.style.visibility = 'visible';
+    }
+});
+
+// Fallback in case 'load' event doesn't fire or takes too long (e.g., for broken images)
+// You might want to adjust the timeout duration
+setTimeout(function() {
+    const preloaderContainer = document.querySelector('.preloader-container');
+    const content = document.querySelector('.content');
+
+    if (preloaderContainer && !preloaderContainer.classList.contains('hidden')) {
+        console.warn("Preloader timeout reached. Forcing hide.");
+        preloaderContainer.classList.add('hidden');
+        if (preloaderContainer.style.opacity === '0' || getComputedStyle(preloaderContainer).opacity === '0') {
+            preloaderContainer.style.display = 'none';
+        }
+        if (content) {
+            content.style.display = 'block';
+        }
+    }
+}, 10000); // 10 seconds timeout as an example
+</script>
+
+</body>
+</html>

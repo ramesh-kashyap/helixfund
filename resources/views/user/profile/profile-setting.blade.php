@@ -125,30 +125,31 @@
         </div>
         <div class="card-body">
           <div class="mb-3">
-            <label> Account Name</label>
-            <input type="text" value="rameshk036" class="form-control" disabled>
+            <label>Username</label>
+            <input type="text" value="{{ $profile_data ? $profile_data->username : '' }}" class="form-control" readonly>
+          </div>
+          <div class="mb-3">
+            <label>Account Name</label>
+            <input type=text name=fullname value="{{ $profile_data ? $profile_data->name : '' }}"
+              class="form-control"readonly size=30>
           </div>
           <div class="mb-3">
             <label>Registration date</label>
-            <input type="text" value="May-12-2025 06:02:16 AM" class="form-control" disabled>
+            <input type="text" value="{{ $profile_data ? $profile_data->created_at : '' }}" class="form-control" readonly>
           </div>
 
-          <div class="mb-3">
-            <label>Your Full Name</label>
-            <input type=text name=fullname value="Ramesh"
-              class="form-control" size=30>
-          </div>
+          
           
 
           <div class="mb-3">
             <label>Your E-mail address</label>
-            rameshkashyap8801@gmail.com
+            {{ $profile_data ? $profile_data->email : '' }}
                       </div>
           
-            <div class="mb-3">
+            <!-- <div class="mb-3">
               <label>Your RCB Percent</label>
               <input type=text class="form-control" size=30 name="rcb"
-                value="0.00">            </div>
+                value="0.00">            </div> -->
                             </div>
       </div>
     </div>
@@ -168,7 +169,17 @@
         <label>Retype Password</label>
   <input type=password name=password2 value="" class="form-control" size=30>
         </div>
-   
+   <div class="mb-3">
+    <label>Verification Code</label>
+    <div class="input-group">
+        <input type="text" name="code" class="form-control" placeholder="Enter code" />
+        <button class="" type="button"style="    border-radius: 4px;
+    background: #11171f;
+    border: 1px solid #333333;
+    color: white;">Send</button>
+    </div>
+</div>
+
 
       
         </div>

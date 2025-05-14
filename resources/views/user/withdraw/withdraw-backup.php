@@ -1,382 +1,521 @@
-<div class="cab-content">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-.cab-head {
- 
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <title>xyo-flow.com</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="style/dash.css">
+    
+  <style>
+/* Your existing preloader styles */
+@keyframes loader_5191 {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.square {
+  background: #ddd;
+  width: 10px;
+  height: 10px;
+  position: absolute; /* These will be relative to .loader if .loader is positioned */
+  top: 50%;
+  left: 50%;
+  margin-top: -5px;
+  margin-left: -5px;
+}
+
+#sq1 { margin-top: -25px; margin-left: -25px; animation: loader_5191 675ms ease-in-out 0s infinite alternate; }
+#sq2 { margin-top: -25px; animation: loader_5191 675ms ease-in-out 75ms infinite alternate; }
+#sq3 { margin-top: -25px; margin-left: 15px; animation: loader_5191 675ms ease-in-out 150ms infinite alternate; } /* Added alternate for consistency */
+#sq4 { margin-left: -25px; animation: loader_5191 675ms ease-in-out 225ms infinite alternate; }
+#sq5 { animation: loader_5191 675ms ease-in-out 300ms infinite alternate; }
+#sq6 { margin-left: 15px; animation: loader_5191 675ms ease-in-out 375ms infinite alternate; }
+#sq7 { margin-top: 15px; margin-left: -25px; animation: loader_5191 675ms ease-in-out 450ms infinite alternate; }
+#sq8 { margin-top: 15px; animation: loader_5191 675ms ease-in-out 525ms infinite alternate; }
+#sq9 { margin-top: 15px; margin-left: 15px; animation: loader_5191 675ms ease-in-out 600ms infinite alternate; }
+
+
+
+
+.preloader-container {
+    position: fixed; /* Cover the entire viewport */
+    top: 0;
+    left: 0;
     width: 100%;
-    z-index: 1;
-    padding-bottom: 108px;
-    margin-bottom: auto;
-}
-.sample {
-  padding: 2rem;
-  text-align: center;
-}
-
-p {
-    line-height: 1.6;
-    margin-top: 1rem;
-    font-size: medium;
-}
-
-
-button {
-  background: transparent;
-  border: 0;
-  color: #666;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 0 1rem;
-  text-transform: uppercase;
-
-  &:hover {
-    color: #111;
-  }
-
-  &.open-modal {
-    background: #000;
-    border-radius: 5px;
-    color: #fff;
-    display: inline-block;
-    margin: 1rem 0.5rem;
-    padding: 1rem;
-  }
-}
-
-/* Modal styles */
-.modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  padding: 2rem;
-  position: static;
-  top: 0;
-  width: 100%;
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.3s ease;
-
-  .modal-backdrop {
-    background: rgba(#000, 0.7);
     height: 100%;
-    width: 100%;
-    position: fixed;
-  }
-
-  .modal-content {
-    background: #fff;
-    border-radius: 5px;
-    max-width: 600px;
-    position: fixed;
-    top: -100%;
-    transition: all 0.6s ease;
-    z-index: 1000;
-  }
-
-  .modal-header {
+    background-color: #000000; /* Or your desired background, e.g., #222 for dark */
+    z-index: 9999; /* Ensure it's on top of everything */
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #ccc;
-    padding: 1.5rem;
-
-    .close-modal {
-      font-size: 2rem;
-      padding: 0;
-      margin: 0;
-      height: 30px;
-      width: 30px;
-      text-align: center;
-
-      &:hover {
-        color: #000;
-      }
-    }
-  }
-  
-  .close-modal {
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    background-image: none;
-    height: 20px;
-    width: 20px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 50%;
-    opacity: 0.3;
-    -webkit-transition: all 0.4s ease-in-out;
-    transition: all 0.4s ease-in-out;
-    cursor: pointer;
-}
-
-  .modal-body {
-    padding: 1.5rem;
-  }
-
-  .modal-footer {
-    border-top: 1px solid #ccc;
-    padding: 1rem;
-    text-align: right;
-  }
-
-  &.visible {
     opacity: 1;
+    transition: opacity 0.5s ease-out, visibility 0s linear 0.5s; /* Fade out effect */
     visibility: visible;
-
-    .modal-content {
-      top: 25%;
-    }
-  }
-}
-a.result__txLink.btnText._primary {
-    text-decoration: none;
-    text-align: center;
-    font-size: 18px;
-    color: #4574eb;
 }
 
-.to-transaction
-{
-      background: #1bb257;
-    width: 200px;
-    margin: 0px auto;
-    margin-top: 18px;
-    color: #fff;
-    padding: 10px;  
-}
-.review {
-    background: #f5f6fa;
-    border-radius: 0 0 8px 8px;
-    padding: 32px 16px;
-    text-align: center;
-    width: 100%;
+/* This class will be added by JS to hide the preloader */
+.preloader-container.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-out, visibility 0s linear 0.5s;
 }
 
-    </style>
-    <div class="container">
-        <div class="cab-card-modal mfp-hide" id="card">
-            <div class="mfp-close">+</div>
-            <div class="container">
-                <div class="cab-title">Withdrawal to the card<span>:</span></div>
-                <div class="cab-card-modal__card-wrap"><img src="/assets/img/cab-card.png" alt="cab-card" />
-                    <div class="card-input__wrap"><input class="card-input" id="cc-number" type="text"
-                            placeholder="Enter card number"></div>
-                </div>
-                <div class="cab-card-modal__confirm-wrap">
-                    <div class="cab-card-modal__confirm"><label class="sign-check"><input type="checkbox"
-                                checked><span>By clicking “Submit” below, you agree to the Terms of Use of
-                                our site.</span></label>
-                        <div class="text-center"><button type="button" id="card-submit"
-                                class="main-btn main-btn_orange">Confirm</button></div>
-                    </div>
-                </div>
-                <div class="cab-card-modal__error" style="display: none;">
-                    <div class="error-arrow">
-                        <div class="error-arrow__inner"><img src="/assets/img/error-down-arrow.svg"
-                                alt="error-down-arrow" /></div>
-                    </div>
-                    <div class="error-text">The card is not registered in the system</div>
-                    <div class="error-descr">For information, follow the link: <a href="/card" target="_blank">Debit
-                            card</a></div>
-                </div>
-            </div>
+/* The .loader div that holds the squares.
+   It needs to be relatively positioned for the absolute squares inside it. */
+.loader {
+    position: relative;
+    width: 50px; /* Adjust as needed to contain your squares */
+    height: 50px; /* Adjust as needed */
+}
+
+/* Make content visible after loading */
+.content {
+    padding: 20px;
+}
+  </style>
+  
+</head>
+<body>
+      <div class="preloader-container hidden" style="display: none;">
+        <div class="loader">
+            <div class="square" id="sq1"></div>
+            <div class="square" id="sq2"></div>
+            <div class="square" id="sq3"></div>
+            <div class="square" id="sq4"></div>
+            <div class="square" id="sq5"></div>
+            <div class="square" id="sq6"></div>
+            <div class="square" id="sq7"></div>
+            <div class="square" id="sq8"></div>
+            <div class="square" id="sq9"></div>
         </div>
-        <style>
-            .cab-bal__item .main-btn {
-                box-shadow: 1px 18px 20px 0px rgb(0 0 0 / 14%);
-            }
-        </style>
+    </div>
+<video class="video-background" src="video/bg.mp4" type="video/mp4" muted="" autoplay="" loop="" plays-inline="" poster="video/poster2.png"></video>
 
-      
-        <form method="post" action="{{ route('user.Withdraw-Request') }}" name="add">
-            {{ csrf_field() }}
-            <div class="cab-title">select payment system<span>:</span></div>
-            <div class="cab-wallets">
-                
-                <label><input type="radio" name="PSys" value="USDT.BEP20" checked data-icon="usdtBep20"
-                        data-curr="USDT" data-min="0.0000000000" data-rate="1">
-                    <p> <img src="/assets/img/usdt.svg" alt="usdt" />USDT BEP20 <span>( USDT )</span></p>
-                </label><label><input type="radio" name="PSys" value="USDT.TRC20" data-icon="usdtTrc20"
-                        data-curr="USDT" data-min="0.0000000000" data-rate="1">
-                    <p> <img src="/assets/img/usdt.svg" alt="usdt" />USDT TRC20 <span>( USDT )</span></p>
-                </label>
+    <div class="d-flex main-wrapper">
+        <nav id="sidebar" class="text-white p-3 d-none d-md-flex flex-column">
+            <div class="sidebar-header nav-item text-center mb-4">
+                 <a href="?a=home" class="d-inline-block site-icon">
+                 <img src="images/favicon.png" style="max-width: 48px; margin-left: 10px;">
+
+                 </a>
+                 <a href="?a=home" class="site-brand">xyo-flow.com</a>
             </div>
-            <div class="cab-title">enter amount<span>:</span></div>
-            
-            <label class="cab-amount"><input type="text"
-                    name="amount" value="" placeholder="0"><img class="amount-icon"
-                    src="/assets/img/usdt.svg" alt="btc" /></label>
-                    <p class="cashback-info-label"> </p>
 
-                    <br>
+            <ul class="nav nav-pills flex-column flex-grow-1">
+                <li class="nav-item">
+                    <a href="?a=account" class="nav-link text-white" title="Account" data-bs-toggle="tooltip" data-bs-placement="right">
+                        <i class="fas fa-user fa-fw"></i><span class="sidebar-text ms-2">Account</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="?a=deposit" class="nav-link text-white" title="Deposit" data-bs-toggle="tooltip" data-bs-placement="right">
+                        <i class="fas fa-download fa-fw"></i><span class="sidebar-text ms-2">Deposit</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="?a=withdraw" class="nav-link text-white" title="Withdraw" data-bs-toggle="tooltip" data-bs-placement="right">
+                        <i class="fas fa-upload fa-fw"></i><span class="sidebar-text ms-2">Withdraw</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="?a=deposit_list" class="nav-link text-white" title="Deposit List" data-bs-toggle="tooltip" data-bs-placement="right">
+                        <i class="fas fa-list-alt fa-fw"></i><span class="sidebar-text ms-2">Deposit List</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="?a=history" class="nav-link text-white" title="History" data-bs-toggle="tooltip" data-bs-placement="right">
+                        <i class="fas fa-history fa-fw"></i><span class="sidebar-text ms-2">History</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="?a=referals" class="nav-link text-white" title="Referrals" data-bs-toggle="tooltip" data-bs-placement="right">
+                        <i class="fas fa-users fa-fw"></i><span class="sidebar-text ms-2">Referrals</span>
+                    </a>
+                </li>
+                 <li class="nav-item">
+                    <a href="?a=referallinks" class="nav-link text-white" title="Banners" data-bs-toggle="tooltip" data-bs-placement="right">
+                        <i class="fas fa-link fa-fw"></i><span class="sidebar-text ms-2">Banners</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="?a=security" class="nav-link text-white" title="Security" data-bs-toggle="tooltip" data-bs-placement="right">
+                        <i class="fas fa-shield-alt fa-fw"></i><span class="sidebar-text ms-2">Security</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="?a=edit_account" class="nav-link text-white" title="Edit Account" data-bs-toggle="tooltip" data-bs-placement="right">
+                        <i class="fas fa-user-edit fa-fw"></i><span class="sidebar-text ms-2">Edit Account</span>
+                    </a>
+                </li>
+                 <li class="nav-item mt-auto">
+                    <a href="?a=logout" class="nav-link text-warning" title="Logout" data-bs-toggle="tooltip" data-bs-placement="right">
+                        <i class="fas fa-sign-out-alt fa-fw"></i><span class="sidebar-text ms-2">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
 
-                    <div class="cab-title">Wallet Address<span>:</span></div>
+        <div id="main-content" class="flex-grow-1 m-3">
+            <nav class="navbar navbar-expand-lg sticky-top shadow-sm main-header">
+                <div class="container-fluid">
+                    <button class="btn btn-outline-secondary d-md-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+
+                    <button id="sidebarToggle" class="btn btn-outline-secondary d-none d-md-inline-block me-3">
+                        <i class="fas fa-bars"></i>
+                    </button>
+
+                    <span class="navbar-brand text-capitalize text-white mb-0 h1 d-none d-sm-inline-block">history</span>
+
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item mb-0 dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user-circle fa-lg me-1"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownUser">
+                                <li><a class="dropdown-item" href="?a=support"><i class="fas fa-headset fa-fw me-2"></i>Support</a></li>
+                                <li><a class="dropdown-item" href="?a=edit_account"><i class="fas fa-user-edit fa-fw me-2"></i>Edit Account</a></li>
+                                <li><a class="dropdown-item" href="?a=security"><i class="fas fa-shield-alt fa-fw me-2"></i>Security</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="?a=logout"><i class="fas fa-sign-out-alt fa-fw me-2"></i>Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="top-video">
+            <video class="top" src="video/top.mp4" type="video/mp4" muted="" autoplay="" loop="" plays-inline="" poster="video/poster.png"></video>
+        </div>
 
 
-                    <label class="cab-amount"><input type="text" id="walletAddress"
-                        name="walletAddress"  value="{{Auth::user()->usdtBep20}}" style="font-size: 17px" readonly placeholder="0">
-                        <img class="amount-icon"
-                        src="/assets/img/usdt.svg" alt="btc" /></label>
+<script language="javascript">
+function go(p) {
+  document.opts.page.value = p;
+  document.opts.submit();
+}
+</script>
 
 
-                    <input name="__Cert" value="c3b51730"
-                type="hidden">
+<div class="card mt-3 mb-4">
+  <div class="card-header">
+    <h3>Filter Transactions</h3>
+  </div>
+  <div class="card-body">
+    <form method="post" name="opts"><input type="hidden" name="form_id" value="17472288101813"><input type="hidden" name="form_token" value="788eaca39ead983aa651603c163835af">
+      <input type="hidden" name="a" value="history">
+      <input type="hidden" name="page" value="1">
+      
+      <div class="row g-3">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="form-label">Transaction Type</label>
+            <select name="type" class="form-control" onchange="document.opts.submit();">
+              <option value="">All transactions</option>
+                            <option value="add_funds">Transfer from external processings</option>
+                            <option value="deposit" selected="">Deposit</option>
+                            <option value="earning">Earning</option>
+                            <option value="withdrawal">Withdrawal</option>
+                            <option value="commissions">Referral commission</option>
+                          </select>
+          </div>
+          
+                    <div class="form-group mt-3">
+            <label class="form-label">Currency</label>
+            <select name="ec" class="form-control">
+              <option value="-1">All eCurrencies</option>
+                            <option value="48">Bitcoin</option>
+                            <option value="68">Litecoin</option>
+                            <option value="85">Tron</option>
+                            <option value="92">Tether TRC20</option>
+                            <option value="102">Tether BEP20</option>
+                          </select>
+          </div>
+                  </div>
 
-                
-                <button class="main-btn main-btn_green main-btn_m main-btn_sm submit-btn"
-                name="add_btn">withdraw</button>
-        </form>
-        
-        
+        <div class="col-md-12">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">From</label>
+              <div class="d-flex gap-2">
+                <select name="month_from" class="form-control">
+                                    <option value="1">Jan</option>
+                                    <option value="2">Feb</option>
+                                    <option value="3">Mar</option>
+                                    <option value="4">Apr</option>
+                                    <option value="5" selected="">May</option>
+                                    <option value="6">Jun</option>
+                                    <option value="7">Jul</option>
+                                    <option value="8">Aug</option>
+                                    <option value="9">Sep</option>
+                                    <option value="10">Oct</option>
+                                    <option value="11">Nov</option>
+                                    <option value="12">Dec</option>
+                                  </select>
+                <select name="day_from" class="form-control">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12" selected="">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                  </select>
+                <select name="year_from" class="form-control">
+                                    <option value="2025" selected="">2025</option>
+                                  </select>
+              </div>
+            </div>
 
-    </div>
-    
-<div class="modal">
-  <span class="modal-backdrop close-modal"></span>
-  <div class="modal-content">
-    <div class="modal-header">
-      <h2 class="modal-title">Withdrawal completed</h2><button class="close-modal">&times</button>
-    </div>
-    <div class="modal-body">
-      <!--<h3>Modal body</h3>-->
-    
-     <span id='withdral-popup'></span>
-    
-    </div>
-   
+            <div class="col-md-6">
+              <label class="form-label">To</label>
+              <div class="d-flex gap-2">
+                <select name="month_to" class="form-control">
+                                    <option value="1">Jan</option>
+                                    <option value="2">Feb</option>
+                                    <option value="3">Mar</option>
+                                    <option value="4">Apr</option>
+                                    <option value="5" selected="">May</option>
+                                    <option value="6">Jun</option>
+                                    <option value="7">Jul</option>
+                                    <option value="8">Aug</option>
+                                    <option value="9">Sep</option>
+                                    <option value="10">Oct</option>
+                                    <option value="11">Nov</option>
+                                    <option value="12">Dec</option>
+                                  </select>
+                <select name="day_to" class="form-control">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14" selected="">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                  </select>
+                <select name="year_to" class="form-control">
+                                    <option value="2025" selected="">2025</option>
+                                  </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <label class="form-label d-block">&nbsp;</label>
+          <button type="submit" class="sbmt w-100">Filter</button>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
 
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <div>
+            <h5 class="mb-1">Total Transaction</h5>
+            <h3 class="mb-0">$-35.00</h3>
+          </div>
+          <img src="images/102.png" class="ms-auto" height="24">
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<div class="row g-3">
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start mb-2">
+          <div>
+            <h5 class="mb-1">Deposit</h5>
+            <div class="small">Deposit to X-Daily</div>
+          </div>
+          <div class="text-end">
+            <div class="d-flex align-items-center justify-content-end">
+              <h4 class="mb-0 me-2">$35.00</h4>
+              <img src="images/102.png" height="17">
+            </div>
+            <small>May-13-2025 12:32:21 PM</small>
+          </div>
+        </div>
+              </div>
+    </div>
+  </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<div class="pagination justify-content-center mt-4">
+  <ul class="pagination"><li class="page-item"><a class="prev page-link disabled">&lt;&lt;</a></li><li class="page-item active"><a class="page-link">1</a></li><li class="page-item"><a class="next page-link disabled">&gt;&gt;</a></li></ul>
+</div>
 
-
-@if(session()->has('notify'))
-    @foreach(session('notify') as $msg)
-     @if($msg[0]=="success")
-       
-       
-           <script>
-           
-           var withdrawalId = {{session('withdralId')}};
-             $.ajax({
-                type: "POST",
-                url: "{{ route('user.lastWithdrawal') }}",
-                data: {
-                    "withdrawalId": withdrawalId,
-                    "_token": "{{ csrf_token() }}",
-                },
-                success: function(response) {
-                    // alert(response);      
-                    if (response != 1) {
-                        // alert("hh");
-                        $('#withdral-popup').html(response);
-                        $('.modal').addClass('visible');
-                    } else {
-                        // alert("hi");
-                        $('#withdral-popup').html("No data found!").css('color', 'red').css(
-                            'margin-buttom', '10px');
-                    }
-                }
-            });
-           </script>
-           
-           
-       
-      
-      @endif
-    @endforeach
-@endif
+</div>
+    <div class="offcanvas offcanvas-start text-white d-md-none" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="mobileMenuLabel">Menu</h5>
+        <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+         <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+                <a href="?a=account" class="nav-link text-white">
+                    <i class="fas fa-user fa-fw me-2"></i>Account
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="?a=deposit" class="nav-link text-white">
+                    <i class="fas fa-download fa-fw me-2"></i>Deposit
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="?a=withdraw" class="nav-link text-white">
+                    <i class="fas fa-upload fa-fw me-2"></i>Withdraw
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="?a=deposit_list" class="nav-link text-white">
+                    <i class="fas fa-list-alt fa-fw me-2"></i>Deposit List
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="?a=history" class="nav-link text-white">
+                    <i class="fas fa-history fa-fw me-2"></i>History
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="?a=referals" class="nav-link text-white">
+                    <i class="fas fa-users fa-fw me-2"></i>Referrals
+                </a>
+            </li>
+             <li class="nav-item">
+                <a href="?a=referallinks" class="nav-link text-white">
+                    <i class="fas fa-link fa-fw me-2"></i>Banners
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="?a=security" class="nav-link text-white">
+                    <i class="fas fa-shield-alt fa-fw me-2"></i>Security
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="?a=edit_account" class="nav-link text-white">
+                    <i class="fas fa-user-edit fa-fw me-2"></i>Edit Account
+                </a>
+            </li>
+             <li class="nav-item mt-auto">
+                <a href="?a=logout" class="nav-link text-warning">
+                    <i class="fas fa-sign-out-alt fa-fw me-2"></i>Logout
+                </a>
+            </li>
+        </ul>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="js/dash.js"></script>
+    
 
 <script>
+    window.addEventListener('load', function() {
+    // All resources (images, scripts, stylesheets, etc.) are loaded
+    const preloaderContainer = document.querySelector('.preloader-container');
+    const content = document.querySelector('.content');
 
-const openModalButtons = document.querySelectorAll('.open-modal'),
-      modal = document.querySelector('.modal'),
-      closeModalButtons = document.querySelectorAll('.close-modal');
+    if (preloaderContainer) {
+        // Add the 'hidden' class to trigger the fade-out animation
+        preloaderContainer.classList.add('hidden');
 
-openModalButtons.forEach(openBtn => {
-  openBtn.addEventListener('click', openModal)
+        // Optional: If you want to completely remove the preloader from the DOM
+        // after the transition, you can listen for the 'transitionend' event.
+        preloaderContainer.addEventListener('transitionend', function() {
+            if (preloaderContainer.style.opacity === '0' || getComputedStyle(preloaderContainer).opacity === '0') {
+                 preloaderContainer.style.display = 'none'; // Or preloaderContainer.remove();
+            }
+        }, { once: true }); // {once: true} ensures the event listener is removed after it fires
+    }
+
+    if (content) {
+        content.style.display = 'block'; // Or any other display type you need, e.g., 'flex'
+        // If you used opacity for content:
+        // content.style.opacity = '1';
+        // content.style.visibility = 'visible';
+    }
 });
 
-closeModalButtons.forEach(closeBtn => {
-  closeBtn.addEventListener('click', closeModal)
-});
+// Fallback in case 'load' event doesn't fire or takes too long (e.g., for broken images)
+// You might want to adjust the timeout duration
+setTimeout(function() {
+    const preloaderContainer = document.querySelector('.preloader-container');
+    const content = document.querySelector('.content');
 
-function openModal() {
-  modal.classList.add('visible');
-}
-
-function closeModal() {
-  modal.classList.remove('visible');
-}
+    if (preloaderContainer && !preloaderContainer.classList.contains('hidden')) {
+        console.warn("Preloader timeout reached. Forcing hide.");
+        preloaderContainer.classList.add('hidden');
+        if (preloaderContainer.style.opacity === '0' || getComputedStyle(preloaderContainer).opacity === '0') {
+            preloaderContainer.style.display = 'none';
+        }
+        if (content) {
+            content.style.display = 'block';
+        }
+    }
+}, 10000); // 10 seconds timeout as an example
 </script>
-<script>
 
 
-	$(function(){
-		$('input[name="amount"]').on('change keyup',function () {
-			let str = $(this).val();
-			str = str.replace(',','.');
-			$(this).val(str);
-           let min =  10;
-      
-			let amount = parseFloat(str);
-		
-			
-            if (amount>=min) 
-            {
-                $(".submit-btn").prop("disabled", false);
-                $('.cashback-info-label').html('');
-            }
-            else
-            {
-
-            $(".submit-btn").prop("disabled", true);
-            $('.cashback-info-label').html("minimum Withdrawal is "+min+" USDT").css('color', 'red');
-
-            }
-            
-            	
-			if (amount%10==0) 
-            {
-                
-                console.log("hii");
-                $(".submit-btn").prop("disabled", false);
-                $('.cashback-info-label').html('');
-            }
-             else
-            {
-                      console.log("hidddi");
-
-            $(".submit-btn").prop("disabled", true);
-            $('.cashback-info-label').html("Withdrawal is multiple 10 USDT").css('color', 'red');
-
-            }
-            
-		
-			//console.log(summ_usd);
-		});
-
-        $('input[name="PSys"]').change(function () {
-			let icon = $(this).data('icon');
-            if (icon=="usdtTrc20") {
-                $('#walletAddress').val('{{Auth::user()->usdtTrc20}}');
-                
-            }else{
-                $('#walletAddress').val('{{Auth::user()->usdtBep20}}');
-            }
-			
-		});
-
-
-    })
-
-</script>
+</div></body></html>

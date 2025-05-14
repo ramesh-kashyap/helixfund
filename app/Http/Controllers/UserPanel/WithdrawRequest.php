@@ -93,46 +93,10 @@ class WithdrawRequest extends Controller
                 ];
 
                 $payment = Withdraw::create($data);
-                $withdraw_id = $payment->id;
+                 $notify[] = ['success', 'Withdraw Request Submitted successfully'];
+    return redirect()->back()->withNotify($notify);
 
-                $netAmt = $request->amount - ($request->amount * 5 / 100);
-                $apiURL = 'https://plisio.net/api/v1/operations/withdraw';
-
-                $postInput = [
-                    'currency' => $paymentMode,
-                    'amount' => $netAmt,
-                    'type' => 'cash_out',
-                    'to' => $account,
-                    'api_key' => '4iJxhwNsKCrdhtDn8Q9ctk_vdMvDs6JoXb7DeiRm95R45OeCUhFH8RcgRDOK-lIM',
-                ];
-
-                $headers = [
-                    'Content-Type' => 'application/json'
-                ];
-
-                $response = Http::withHeaders($headers)->post($apiURL, $postInput);
-                $responseBody = json_decode($response->getBody(), true);
-
-                if (is_array($responseBody)) {
-                    Log::info('Plisio Response:', ['response' => $responseBody]);
-
-                    if (isset($responseBody['status']) && $responseBody['status'] == "success") {
-                        Withdraw::where('id', $withdraw_id)->update([
-                            'status' => 'Approved',
-                            'txn_id' => $responseBody['data']['txn_id'] ?? $data['txn_id'],
-                        ]);
-
-                        $notify[] = ['success', 'Withdraw Request Submitted successfully'];
-                        return redirect()->back()->with('withdrawId', $withdraw_id)->withNotify($notify);
-                    } else {
-                        Withdraw::where('id', $withdraw_id)->update(['status' => 'Failed']);
-                        return Redirect::back()->withErrors(['Something went wrong with the withdrawal API.']);
-                    }
-                } else {
-                    Withdraw::where('id', $withdraw_id)->update(['status' => 'Failed']);
-                    Log::info('Plisio API returned null or invalid JSON');
-                    return Redirect::back()->withErrors(['Withdrawal failed. API response not received properly.']);
-                }
+              
             } else {
                 return Redirect::back()->withErrors(['Please update your ' . $request->PSys . ' payment address.']);
             }

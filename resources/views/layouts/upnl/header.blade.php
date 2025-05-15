@@ -218,7 +218,7 @@
                     </a>
                 </li>
                 <li class="nav-item mt-auto">
-                    <a href="?a=logout" class="nav-link text-warning" title="Logout" data-bs-toggle="tooltip"
+                    <a href="{{route('logout')}}" class="nav-link text-warning" title="" data-bs-toggle=""
                         data-bs-placement="right">
                         <i class="fas fa-sign-out-alt fa-fw"></i><span class="sidebar-text ms-2">Logout</span>
                     </a>

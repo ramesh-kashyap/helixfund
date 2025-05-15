@@ -39,6 +39,8 @@ Route::any('/dynamicupicallback', [App\Http\Controllers\Cron::class, 'dynamicupi
 
 
 Route::post('login', [App\Http\Controllers\Login::class, 'login'])->name('login');
+Route::get('/logout', [App\Http\Controllers\Login::class, 'logout'])->name('logout');
+
 Route::get('forgot-password', [App\Http\Controllers\Login::class, 'forgot_password'])->name('forgot-password');
 Route::any('forgot_submit', [App\Http\Controllers\Login::class, 'forgot_password_submit'])->name('forgot_submit');
 Route::any('submitResetPassword', [App\Http\Controllers\Login::class, 'submitResetPassword'])->name('submitResetPassword');

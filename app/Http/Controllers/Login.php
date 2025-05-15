@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-use Redirect;
+use Illuminate\Support\Facades\Redirect;
 use App\Models\PasswordReset;
 use App\Models\User;
 use App\Models\UserLogin;
 
-use DB;
+use Illuminate\Support\Facades\DB;
 class Login extends Controller
 {
 
@@ -71,20 +71,18 @@ class Login extends Controller
     public function forgot_password_submit(Request $request)
     {
          $validation =  Validator::make($request->all(), [
-                'username' => 'required|unique:users',
-                'email' => 'required',
-
+              'email' => 'required|email|exists:users,email',
             ]);
 
 
-         if (isset($request->captcha)) {
-                if (!captchaVerify($request->captcha, $request->captcha_secret)) {
-                    $notify[] = ['error', "Invalid Captcha"];
-                    return back()->withNotify($notify)->withInput();
-                }
-            }
-            
-        $credentials = User::where('username',$request->username)->where('email',$request->email)->first();
+        //  if (isset($request->captcha)) {
+        //         if (!captchaVerify($request->captcha, $request->captcha_secret)) {
+        //             $notify[] = ['error', "Invalid Captcha"];
+        //             return back()->withNotify($notify)->withInput();
+        //         }
+        //     }
+            // rameshkashyap8801@gmail.com
+        $credentials = User::where('email',$request->email)->first();
 
         if ($credentials)
         {
@@ -101,22 +99,22 @@ class Login extends Controller
             $password->created_at = \Carbon\Carbon::now();
             $password->save();
 
-               sendEmail($credentials->email, 'Recovery Password', [
-                'name' => $credentials->name,
-                 'browser' => @$userBrowserInfo['browser'],
-                 'ip' => @$userIpInfo['ip'],
-                 'time' => @$userIpInfo['time'],
-                'operating_system' => @$userBrowserInfo['os_platform'],
-                'code' => $code,
-                'viewpage' => 'forgot_sucess',
+            //    sendEmail($credentials->email, 'Recovery Password', [
+            //     'name' => $credentials->name,
+            //      'browser' => @$userBrowserInfo['browser'],
+            //      'ip' => @$userIpInfo['ip'],
+            //      'time' => @$userIpInfo['time'],
+            //     'operating_system' => @$userBrowserInfo['os_platform'],
+            //     'code' => $code,
+            //     'viewpage' => 'forgot_sucess',
 
-             ]);
+            //  ]);
 
               $page_title = 'Account Recovery';
              $userID = $credentials->id;
             session()->put('pass_res_mail',$userID);
             $notify[] = ['success', 'Password reset email sent successfully'];
-            return redirect()->route('codeVerify')->withNotify($notify);
+            return redirect()->route('resetPassword')->withNotify($notify);
         }
         else{
             $notify[] = ['error', 'Invalid Username '];
@@ -170,23 +168,30 @@ class Login extends Controller
 
     public function submitResetPassword(Request $request)
     {
+    $request->validate([
+        'code' => 'required|string|max:6',
+        'password' => 'required|string|confirmed|min:6',
+    ]);
 
-    $request->validate(['password' => 'required|confirmed|min:5']);
+    $userId = session('pass_res_mail');
+    if (!$userId) {
+        return redirect()->route('forgot-password')
+            ->withNotify([['error', 'Session expired. Please try again.']]);
+    }
 
-       $userID = session()->get('resetMail');
+    $user = User::find($userId);
+    if (!$user) {
+        return redirect()->route('forgot-password')
+            ->withNotify([['error', 'User not found.']]);
+    }
 
-    //    dd($userID);
-    //    die;
+    $resetEntry = PasswordReset::where('email', $user->email)
+        ->where('token', $request->code)
+        ->first();
 
-       $user_name = session()->get('username');
-
-       $user = User::where('id',$userID)->orderBy('id', 'DESC')->first();
-
-
-       if (!$user) {
-        $notify[] = ['error','Opps! session expired'];
-        return redirect()->route('forgot-password')->withNotify($notify);
-       }
+    if (!$resetEntry) {
+        return back()->withNotify([['error', 'Invalid or expired verification code.']]);
+    }
        $password = password_hash($request->password, PASSWORD_DEFAULT);
 
        $user->password=$password;
@@ -196,6 +201,16 @@ class Login extends Controller
        return redirect()->route('login')->withNotify($notify);
 
     }
+ public function logout(Request $request)
+{
+    
+    Auth::logout();
+    
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return redirect('/login'); // instead of ->route('login')
+}
 
 
 

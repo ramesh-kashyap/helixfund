@@ -31,7 +31,7 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item text-danger" href="?a=logout"><i
+                                <li><a class="dropdown-item text-danger" href="{{route('logout')}}"><i
                                             class="fas fa-sign-out-alt fa-fw me-2"></i>Logout</a></li>
                             </ul>
                         </li>

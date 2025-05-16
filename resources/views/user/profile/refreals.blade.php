@@ -69,7 +69,84 @@
     
               </div>
 </div>
+<div class="card mt-3">
+  <div class="card-header">
+    <h3>Your Referrals</h3>
+  </div>
+  <div class="card-body">
+    
+    <div class="row mb-4">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h5>Total Referrals</h5>
+            <h2 class="mb-0">2</h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h5>Active Referrals</h5>
+            <h2 class="mb-0">0</h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h5>Total Commission</h5>
+            <h2 class="mb-0">$0.00</h2>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    
+            <h4 class="mb-4 mt-5">Your Referral List</h4>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+                    <tr>
+            <td><b>Ronik036</b></td>
+            <td><a href="mailto:arkashyap1772@gmail.com" class="themed-link">arkashyap1772@gmail.com</a></td>
+            <td><span class="text-warning">No deposit yet</span></td>
+          </tr>
+                    <tr>
+            <td colspan="3">
+              <small>
+                User referrals:
+                                <span class="badge bg-primary">0 active of 1 on level 1</span>                              </small>
+            </td>
+          </tr>
+                                        <tr>
+            <td><b>11223344</b></td>
+            <td><a href="mailto:sagartyagi1024@gmail.com" class="themed-link">sagartyagi1024@gmail.com</a></td>
+            <td><span class="text-warning">No deposit yet</span></td>
+          </tr>
+                                      </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3">
+              <div class="d-flex justify-content-between align-items-center">
+                <div><b>2-10 level referrals:</b> 1</div>
+                <div><b>2-10 level active referrals:</b> 0</div>
+              </div>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+          </div>
+</div>
+00
 </div>
     <div class="offcanvas offcanvas-start text-white d-md-none" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
       <div class="offcanvas-header">

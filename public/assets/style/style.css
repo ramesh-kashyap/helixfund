@@ -1497,7 +1497,7 @@ textarea.form-control {
 .gradient-text {
     display: inline-block;
     /* Good for background-clip */
-    background: linear-gradient(to right, #008baa, #7e42a7, #6600c5, #6070fd, #2a46ff, #0099ff, #008baa);
+    background: linear-gradient(to right, #ffffff, #c979ff, #d6c507, #c1ff28, #b47606, #ff8e01, #ffffff);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;

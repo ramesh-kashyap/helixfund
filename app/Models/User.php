@@ -79,6 +79,11 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\User','sponsor','id')->where('active_status','Active');
     } 
+    public function user_directall()
+    {
+        return $this->hasMany('App\Models\User','sponsor','id');
+    } 
+
 
 
     
@@ -179,7 +184,13 @@ class User extends Authenticatable
     } 
 
 
-    public function investment(){
+    // App\Models\User.php
+
+public function investment()
+{
+    return $this->hasOne(\App\Models\Investment::class, 'user_id');
+}
+public function Activeinvestment(){
         return $this->hasMany('App\Models\Investment','user_id','id')->where('status','Active');
     }
 

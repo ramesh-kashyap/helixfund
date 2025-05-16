@@ -181,12 +181,12 @@
                         <i class="fas fa-upload fa-fw"></i><span class="sidebar-text ms-2">Withdraw</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="{{route('user.deposit')}}" class="nav-link text-white" title="Deposit List" data-bs-toggle="tooltip"
                         data-bs-placement="right">
                         <i class="fas fa-list-alt fa-fw"></i><span class="sidebar-text ms-2">Deposit List</span>
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a href="{{route('user.DepositHistory')}}" class="nav-link text-white" title="History" data-bs-toggle="tooltip"
                         data-bs-placement="right">
@@ -194,31 +194,41 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('user.refreals')}}" class="nav-link text-white" title="Referrals" data-bs-toggle="tooltip"
+                    <a href="{{route('user.referral-team')}}" class="nav-link text-white" title="Referrals" data-bs-toggle="tooltip"
                         data-bs-placement="right">
                         <i class="fas fa-users fa-fw"></i><span class="sidebar-text ms-2">Referrals</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="{{route('user.refreallink')}}" class="nav-link text-white" title="Banners" data-bs-toggle="tooltip"
                         data-bs-placement="right">
                         <i class="fas fa-link fa-fw"></i><span class="sidebar-text ms-2">Banners</span>
                     </a>
-                </li>
-                <li class="nav-item">
+                </li> -->
+                <!-- <li class="nav-item">
                     <a href="{{route('user.security')}}" class="nav-link text-white" title="Security" data-bs-toggle="tooltip"
                         data-bs-placement="right">
                         <i class="fas fa-shield-alt fa-fw"></i><span class="sidebar-text ms-2">Security</span>
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a href="{{route('user.profile')}}" class="nav-link text-white" title="Edit Account" data-bs-toggle="tooltip"
                         data-bs-placement="right">
                         <i class="fas fa-user-edit fa-fw"></i><span class="sidebar-text ms-2">Edit Account</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('user.ChangePass')}}" class="nav-link text-white" title="Edit Account" data-bs-toggle="tooltip"
+                        data-bs-placement="right">
+                        <i class="fas fa-user-edit fa-fw"></i><span class="sidebar-text ms-2">Change Password</span>
+                    </a>
+                </li>
                 <li class="nav-item mt-auto">
-                    <a href="?a=logout" class="nav-link text-warning" title="Logout" data-bs-toggle="tooltip"
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                            class="d-none">
+                            @csrf
+                        </form>
+                    <a href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link text-warning" title="Logout" data-bs-toggle="tooltip"
                         data-bs-placement="right">
                         <i class="fas fa-sign-out-alt fa-fw"></i><span class="sidebar-text ms-2">Logout</span>
                     </a>

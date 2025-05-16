@@ -122,7 +122,7 @@
                                         </tr> -->
                                         <tr>
                                             <td><i class="fas fa-coins me-2"></i>Active Deposit:</td>
-                                            <td class="text-end">$<b>{{ number_format(Auth::user()->investment->sum('amount'), 2) }} {{generalDetail()->cur_text}}</b></td>
+                                            <td class="text-end">$<b>{{ number_format(Auth::user()->Activeinvestment->sum('amount'), 2) }} {{generalDetail()->cur_text}}</b></td>
                                         </tr>
                                         <tr>
                                             <td><i class="fas fa-hand-holding-usd me-2"></i>Earned Total:</td>

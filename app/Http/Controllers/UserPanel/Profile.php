@@ -13,6 +13,7 @@ use Log;
 use Redirect;
 use Hash;
 use Validator;
+use Illuminate\Support\Facades\DB;
 
 class Profile extends Controller
 {
@@ -64,6 +65,10 @@ class Profile extends Controller
 
     public function change_password()
     {
+        $user=Auth::user();
+    $profile_data = User::where('id',$user->id)->orderBy('id','desc')->first();
+    $this->data['login_logs'] =UserLogin::where('user_id',$user->id)->orderBy('id','DESC')->limit(10)->get();
+    $this->data['profile_data'] =$profile_data;
     $this->data['page'] = 'user.profile.ChangePass';
     return $this->dashboard_layout();
 
@@ -255,8 +260,71 @@ public function BankDetail()
         }
     }
 
-    
 
+
+    public function sendOtp(Request $request)
+{
+    $user = Auth::user();
+    $otp = rand(1000, 9999);
+
+    // Save OTP and email to password_resets table
+    DB::table('password_resets')->updateOrInsert(
+        ['email' => $user->email],
+        [
+            'token' => $otp,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]
+    );
+
+    // Send email
+    // Mail::raw("Your OTP Code is: $otp", function($message) use ($user) {
+    //     $message->to($user->email)
+    //             ->subject('Your OTP Code');
+    // });
+     sendEmail($user->email, 'Your One-Time Password', [
+                'name' => $user->name,
+                'code' => $otp,
+                'purpose' => 'Change Password',
+                'viewpage' => 'one_time_password',
+
+             ]);
+
+ $notify[] = ['success', 'Password Change email sent successfully'];
+           return Redirect::back()->withNotify($notify);
+        }
+
+
+
+        public function updatePassword(Request $request)
+{
+    $request->validate([
+        'password' => 'required|same:password2|min:6',
+        'code' => 'required'
+    ]);
+
+    $user = Auth::user();
+
+    // Check OTP from password_resets table
+    $record = DB::table('password_resets')
+        ->where('email', $user->email)
+        ->where('token', $request->code)
+        ->first();
+
+    if (!$record) {
+        return back()->withErrors(['code' => 'Invalid or expired OTP']);
+    }
+
+    // Update password
+    $user->PSR = $request->password; // plain password
+    $user->password = Hash::make($request->password);
+    $user->save();
+
+    // Remove OTP record after use
+    DB::table('password_resets')->where('email', $user->email)->delete();
+
+    return back()->with('success', 'Password updated successfully.');
+}
     public function change_password_post(Request $request)
     {
 

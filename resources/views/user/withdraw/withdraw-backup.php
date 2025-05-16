@@ -207,7 +207,7 @@ function go(p) {
     <h3>Filter Transactions</h3>
   </div>
   <div class="card-body">
-    <form method="post" name="opts"><input type="hidden" name="form_id" value="17472288101813"><input type="hidden" name="form_token" value="788eaca39ead983aa651603c163835af">
+    <form method="post" name="opts"><input type="hidden" name="form_id" value="17472870167916"><input type="hidden" name="form_token" value="4614ddf0ba029e19e3747227092aa67e">
       <input type="hidden" name="a" value="history">
       <input type="hidden" name="page" value="1">
       
@@ -327,8 +327,8 @@ function go(p) {
                                     <option value="11">11</option>
                                     <option value="12">12</option>
                                     <option value="13">13</option>
-                                    <option value="14" selected="">14</option>
-                                    <option value="15">15</option>
+                                    <option value="14">14</option>
+                                    <option value="15" selected="">15</option>
                                     <option value="16">16</option>
                                     <option value="17">17</option>
                                     <option value="18">18</option>

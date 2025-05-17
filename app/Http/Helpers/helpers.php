@@ -190,7 +190,48 @@ function osBrowser(){
     return $data;
 }
 
+function coinrates()
+{
+    // Use Laravel Cache (for 60 seconds)
+    $cached = cache()->get('coin_rates');
+    if ($cached) {
+        return $cached;
+    }
 
+    $url = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,binancecoin,cardano,solana,dogecoin,xrp,tron&vs_currencies=usd";
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    if (!$response) {
+        return ["error" => "Coin API request failed"];
+    }
+
+    $result = json_decode($response, true);
+    if (!is_array($result)) {
+        return ["error" => "Invalid Coin API response"];
+    }
+
+    $prices = [
+        "eth" => $result["ethereum"]["usd"] ?? "0",
+        "btc" => $result["bitcoin"]["usd"] ?? "0",
+        "bnb" => $result["binancecoin"]["usd"] ?? "0",
+        "usdt" => $result["tether"]["usd"] ?? "0",
+        "trx" => $result["tron"]["usd"] ?? "0",
+        "doge" => $result["dogecoin"]["usd"] ?? "0",
+        "sol" => $result["solana"]["usd"] ?? "0",
+        "xrp" => $result["xrp"]["usd"] ?? "0",
+        "car" => $result["cardano"]["usd"] ?? "0"
+    ];
+
+    // Cache for 60 seconds
+    cache()->put('coin_rates', $prices, 60);
+
+    return $prices;
+}
 function verificationCode($length)
 {
     if ($length == 0) return 0;
@@ -205,7 +246,10 @@ function verificationCode($length)
 
 
 
-
+function isEven($number)
+{
+  return $number % 2 === 0;
+}
 
 function add_leadership_bonus($id,$amt)
 {
@@ -360,30 +404,39 @@ return true;
                       $pp=0;
                        if($sp_status=="Active")
                        {
-                         if($cnt==1 && $Sposnor_cnt>=1)
+                         if($cnt==1 )
                           {
-                            $pp= $amount*1;
+                            $pp= $amount*0.05;
 
-                          } if($cnt==2 && $Sposnor_cnt>=1 )
+                          } if($cnt==2  )
                           {
-                            $pp= $amount*0.50;
+                            $pp= $amount*0.10;
 
-                          } if($cnt==3 && $Sposnor_cnt>=1)
+                          } if($cnt==3 )
                           {
-                            $pp= $amount*0.50;
+                            $pp= $amount*0.15;
 
                           }  
                           
-                          if($cnt==4 && $Sposnor_cnt>=2)
+                          if($cnt==4 )
+                          {
+                            $pp= $amount*0.20;
+
+                          }  
+                          if($cnt==5)
                           {
                             $pp= $amount*0.25;
 
                           }  
-                          if($cnt==5 && $Sposnor_cnt>=2)
-                          {
-                            $pp= $amount*0.25;
+                          if($cnt==6 )
+{
+    $pp = $amount * 0.30;
+}
 
-                          }  
+if($cnt==7 )
+{
+    $pp = $amount * 0.35;
+}
 
 
                         }
@@ -399,7 +452,7 @@ return true;
                       $idate = date("Y-m-d");
 
                       $user_id_fk=$sponsor;
-                      if($spid>0 && $cnt<=5){
+                      if($spid>0 && $cnt<=7){
                         if($pp>0){
 
                          $data = [

@@ -154,7 +154,7 @@ class User extends Authenticatable
 
     public function principleBalance()
     {
-    $balance = (Auth::user()->investment->sum('amount'))-(Auth::user()->tradeAmt+Auth::user()->withdrawPrinciple());
+    $balance = (Auth::user()->investment->sum('amount'));
     return $balance;
     } 
     

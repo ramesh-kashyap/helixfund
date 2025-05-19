@@ -40,7 +40,7 @@ class Dashboard extends Controller
     public function addPrice()
     {     
      
-     $trade= Trade::get();   
+     $trade= \DB::table('machines')->get();   
      $this->data['trade'] = $trade;
      $this->data['page'] = 'admin.setting.add-price';
      return $this->admin_dashboard();
@@ -50,6 +50,7 @@ class Dashboard extends Controller
     {     
      
      $trade= Trade::get();   
+  
      $this->data['trade'] = $trade;
      $this->data['page'] = 'admin.setting.add-address';
      return $this->admin_dashboard();
@@ -166,16 +167,17 @@ class Dashboard extends Controller
      }
 
 
-    public function change_price(Request $request)
+   public function change_price(Request $request)
     {
 
         try {
             $data = $request->all();
-            $rules = array('total_fund_invested' => 'required','paid_withdrawal' => 'required','our_investors' => 'required');
+            $rules = array('vip1_percentage' => 'required','vip2_percentage' => 'required','vip3_percentage' => 'required');
             $msg = [
-                'total_fund_invested.required'     => 'Roi Plan 1 is required',
-                'paid_withdrawal.required'     => 'Roi Plan 2 is required',
-                'our_investors.required'     => 'Roi Plan 1 is required',
+                'vip1_percentage.required'     => 'VIP 1 is required',
+                'vip2_percentage.required'     => 'VIP2 is required',
+                'vip3_percentage.required'     => 'VIP3 is required',
+              
            
             ];
 
@@ -184,13 +186,9 @@ class Dashboard extends Controller
                 return Redirect::back()->withErrors($validator->getMessageBag()->first());
 
 
-                $data2['total_fund_invested']= $request['total_fund_invested'];
-                $data2['paid_withdrawal']= $request['paid_withdrawal'];
-                $data2['people_online']= $request['people_online'];
-                $data2['our_investors']= $request['our_investors'];
-    
-
-              \DB::table('general_settings')->where('id',1)->update($data2);
+              \DB::table('machines')->where('m_id',1)->update(['m_return'=>$request->vip1_percentage]);
+              \DB::table('machines')->where('m_id',2)->update(['m_return'=>$request->vip2_percentage]);
+              \DB::table('machines')->where('m_id',3)->update(['m_return'=>$request->vip3_percentage]);
             
             $notify[] = ['success', 'Roi updated successfully'];
         return redirect()->back()->withNotify($notify);
@@ -199,6 +197,7 @@ class Dashboard extends Controller
         }
 
     }
+
 
 
     public function add_reward(Request $request)

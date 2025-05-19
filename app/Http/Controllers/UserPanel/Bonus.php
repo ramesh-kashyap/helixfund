@@ -85,7 +85,7 @@ class Bonus extends Controller
           $limit = $request->limit ? $request->limit : paginationLimit();
             $status = $request->status ? $request->status : null;
             $search = $request->search ? $request->search : null;
-            $notes = Income::where('user_id',$user->id)->where('remarks','Activities Bonus')->orderBy('id', 'DESC');
+            $notes = Income::where('user_id',$user->id)->where('remarks','Rank Reward Bonus')->orderBy('id', 'DESC');
            if($search <> null && $request->reset!="Reset"){
             $notes = $notes->where(function($q) use($search){
               $q->Where('rname', 'LIKE', '%' . $search . '%')
@@ -102,7 +102,7 @@ class Bonus extends Controller
                 ]);
         $this->data['level_income'] =$notes;
         $this->data['search'] =$search;
-        $this->data['page'] = 'user.bonus.activitiesBonus';
+        $this->data['page'] = 'user.bonus.rank-bonus';
         return $this->dashboard_layout();
 
 
@@ -148,7 +148,7 @@ class Bonus extends Controller
           $limit = $request->limit ? $request->limit : paginationLimit();
             $status = $request->status ? $request->status : null;
             $search = $request->search ? $request->search : null;
-            $notes = Income::where('user_id',$user->id)->where('remarks','Leadership Bonus')->orderBy('id', 'DESC');
+            $notes = Income::where('user_id',$user->id)->where('remarks','Royalty Bonus')->orderBy('id', 'DESC');
            if($search <> null && $request->reset!="Reset"){
             $notes = $notes->where(function($q) use($search){
               $q->Where('rname', 'LIKE', '%' . $search . '%')
@@ -165,7 +165,7 @@ class Bonus extends Controller
                 ]);
         $this->data['level_income'] =$notes;
         $this->data['search'] =$search;
-        $this->data['page'] = 'user.bonus.daily-incentive';
+        $this->data['page'] = 'user.bonus.royalty-bonus';
         return $this->dashboard_layout();
 
 
@@ -213,7 +213,7 @@ class Bonus extends Controller
           $limit = $request->limit ? $request->limit :  paginationLimit();
             $status = $request->status ? $request->status : null;
             $search = $request->search ? $request->search : null;
-            $notes = Income::where('user_id',$user->id)->where('remarks','Roi Bonus')->orderBy('id', 'DESC');
+            $notes = Income::where('user_id',$user->id)->where('remarks','Trading Bonus')->orderBy('id', 'DESC');
            if($search <> null && $request->reset!="Reset"){
             $notes = $notes->where(function($q) use($search){
               $q->Where('ttime', 'LIKE', '%' . $search . '%')

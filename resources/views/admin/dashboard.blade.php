@@ -167,8 +167,38 @@
 								<div class="card">
 									<div class="card-body d-flex align-items-center justify-content-between">
 										<div class="menu">
-											<span class="font-w500 fs-16 d-block mb-2">Leadership Income</span>
-											<h2>{{currency()}} {{  number_format((\App\Models\Income::where('remarks','Leadership Income')->sum('comm')),2)   }} </h2>
+											<span class="font-w500 fs-16 d-block mb-2">Level Income</span>
+											<h2>{{currency()}} {{  number_format((\App\Models\Income::where('remarks','Level Income')->sum('comm')),2)   }} </h2>
+										</div>	
+										<div class="d-inline-block position-relative donut-chart-sale">
+										
+                                                <img src="{{asset('admin/images/medal.png')}}" style="    width: 61px;" alt="">
+									
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-3 col-sm-3">
+								<div class="card">
+									<div class="card-body d-flex align-items-center justify-content-between">
+										<div class="menu">
+											<span class="font-w500 fs-16 d-block mb-2">Rank & Reward Income</span>
+											<h2>{{currency()}} {{  number_format((\App\Models\Income::where('remarks','Rank Reward Income')->sum('comm')),2)   }} </h2>
+										</div>	
+										<div class="d-inline-block position-relative donut-chart-sale">
+										
+                                                <img src="{{asset('admin/images/medal.png')}}" style="    width: 61px;" alt="">
+									
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-3 col-sm-3">
+								<div class="card">
+									<div class="card-body d-flex align-items-center justify-content-between">
+										<div class="menu">
+											<span class="font-w500 fs-16 d-block mb-2">Royalty Income</span>
+											<h2>{{currency()}} {{  number_format((\App\Models\Income::where('remarks','Royalty Income')->sum('comm')),2)   }} </h2>
 										</div>	
 										<div class="d-inline-block position-relative donut-chart-sale">
 										

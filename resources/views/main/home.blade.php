@@ -113,10 +113,10 @@
                         </div>
                         <ul class="features-list">
                             <li><i class="bx bx-check"></i> Daily Return</li>
-                            <li><i class="bx bx-check"></i> 3 Days Contract</li>
-                            <li><i class="bx bx-check"></i> Total ROI 4.50%</li>
+                            <li><i class="bx bx-check"></i>  3 Trade Assigned</li>
+                            <li><i class="bx bx-check"></i>No referrals Needed</li>
                             <li><i class="bx bx-check"></i> Deposit $10 - $100</li>
-                            <li><i class="bx bx-check"></i> Deposit Return at the End</li>
+                            <li><i class="bx bx-check"></i> Min Withdrawal : $10</li>
                         </ul>
                         <a href="{{route('register')}}" class="button mt-4">Start Investing</a>
                     </div>
@@ -136,10 +136,10 @@
                         </div>
                         <ul class="features-list">
                              <li><i class="bx bx-check"></i> Daily Return</li>
-                            <li><i class="bx bx-check"></i> 4 Days Contract</li>
-                            <li><i class="bx bx-check"></i> Total ROI 12.50%</li>
+                            <li><i class="bx bx-check"></i> 4 Trade Assigned</li>
+                            <li><i class="bx bx-check"></i> Requires 5 Valid referrals</li>
                             <li><i class="bx bx-check"></i> Deposit $210 - $500</li>
-                            <li><i class="bx bx-check"></i> Deposit Return at the End</li>
+                            <li><i class="bx bx-check"></i> Min Withdrawal : $10</li>
                         </ul>
                         <a href="{{route('register')}}" class="button mt-4">Start Investing</a>
                     </div>
@@ -159,10 +159,10 @@
                         </div>
                         <ul class="features-list">
                             <li><i class="bx bx-check"></i> Daily Return</li>
-                            <li><i class="bx bx-check"></i> 6 Days Contract</li>
-                            <li><i class="bx bx-check"></i> Total ROI 28%</li>
+                            <li><i class="bx bx-check"></i> 6 Trade Assigned</li>
+                            <li><i class="bx bx-check"></i> Requires 10 Valid referrals</li>
                             <li><i class="bx bx-check"></i> Deposit $510 - $1000</li>
-                            <li><i class="bx bx-check"></i> Deposit Return at the End</li>
+                            <li><i class="bx bx-check"></i> Min Withdrawal : $10</li>
                         </ul>
                         <a href="{{route('register')}}" class="button mt-4">Start Investing</a>
                     </div>

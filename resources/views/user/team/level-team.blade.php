@@ -50,24 +50,24 @@
     
     <div class="card mt-3">
         <div class="card-header">
-            <h3>Your Referrals</h3>
+            <h3>Total Team List</h3>
         </div>
         <div class="card-body">
 
             <div class="row mb-4">
-                <div class="col-md-4">
+                <div style="margin-bottom:16px" class="col-md-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5>Total Referrals</h5>
-<h2 class="mb-0">{{ Auth::user()->user_directall()->count() }}</h2>
+                            <h5>Total Team</h5>
+<h2 class="mb-0">{{ $totalTeam }}</h2>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div style="margin-bottom:16px" class="col-md-4">
                     <div class="card">
                         <div class="card-body">
                             <h5>Active Referrals</h5>
-<h2 class="mb-0">{{ Auth::user()->user_direct()->count() }}</h2>
+<h2 class="mb-0">{{ $activetotalTeam }}</h2>
                         </div>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
             </div>
 
 
-            <h4 class="mb-4 mt-5">Your Referral List</h4>
+            <h4 class="mb-4 mt-5">Total Team List</h4>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -117,13 +117,13 @@
                             <td><a href="mailto:{{ $value->email }}" class="themed-link">{{ $value->email }}</a></td>
                             <td class="themed-link">{{$value->level - Auth::user()->level}}</td>
                             <td class="themed-link">{{$value->sponsor_detail->username}}</td>
-<td>
-  @if ($value->investment && $value->investment->status)
-    <span class="text-success">{{ ucfirst($value->investment->status) }}</span>
-  @else
-    <span class="text-warning">No deposit yet</span>
-  @endif
-</td>
+                            <td>
+                            @if ($value->active_status!="Pending")
+                                <span class="text-success">${{ number_format($value->package,2) }}</span>
+                            @else
+                                <span class="text-warning">No deposit yet</span>
+                            @endif
+                            </td>
 
                         </tr>
                         <tr>
@@ -158,58 +158,55 @@
             aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
-                <a href="?a=account" class="nav-link text-white">
-                    <i class="fas fa-user fa-fw me-2"></i>Account
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=deposit" class="nav-link text-white">
-                    <i class="fas fa-download fa-fw me-2"></i>Deposit
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=withdraw" class="nav-link text-white">
-                    <i class="fas fa-upload fa-fw me-2"></i>Withdraw
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=deposit_list" class="nav-link text-white">
-                    <i class="fas fa-list-alt fa-fw me-2"></i>Deposit List
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=history" class="nav-link text-white">
-                    <i class="fas fa-history fa-fw me-2"></i>History
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=referals" class="nav-link text-white">
-                    <i class="fas fa-users fa-fw me-2"></i>Referrals
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=referallinks" class="nav-link text-white">
-                    <i class="fas fa-link fa-fw me-2"></i>Banners
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=security" class="nav-link text-white">
-                    <i class="fas fa-shield-alt fa-fw me-2"></i>Security
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=edit_account" class="nav-link text-white">
-                    <i class="fas fa-user-edit fa-fw me-2"></i>Edit Account
-                </a>
-            </li>
-            <li class="nav-item mt-auto">
-                <a href="?a=logout" class="nav-link text-warning">
-                    <i class="fas fa-sign-out-alt fa-fw me-2"></i>Logout
-                </a>
-            </li>
-        </ul>
+         <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a href="{{route('user.dashboard')}}" class="nav-link text-white">
+                            <i class="fas fa-user fa-fw me-2"></i>Account
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('user.invest')}}" class="nav-link text-white">
+                            <i class="fas fa-download fa-fw me-2"></i>Deposit
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('user.Withdraw')}}" class="nav-link text-white">
+                            <i class="fas fa-upload fa-fw me-2"></i>Withdraw
+                        </a>
+                    </li>
+                   
+                    <li class="nav-item">
+                        <a href="{{route('user.DepositHistory')}}" class="nav-link text-white">
+                            <i class="fas fa-history fa-fw me-2"></i>History
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('user.level-team')}}" class="nav-link text-white">
+                            <i class="fas fa-users fa-fw me-2"></i>Referrals
+                        </a>
+                    </li>
+                  
+                    <li class="nav-item">
+                        <a href="{{route('user.ChangePass')}}" class="nav-link text-white">
+                            <i class="fas fa-shield-alt fa-fw me-2"></i>Security
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('user.profile')}}" class="nav-link text-white">
+                            <i class="fas fa-user-edit fa-fw me-2"></i>Edit Account
+                        </a>
+                    </li>
+                   <li class="nav-item mt-auto">
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                            class="d-none">
+                            @csrf
+                        </form>
+                    <a href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link text-warning" title="Logout" data-bs-toggle="tooltip"
+                        data-bs-placement="right">
+                        <i class="fas fa-sign-out-alt fa-fw"></i><span class="sidebar-text ms-2">Logout</span>
+                    </a>
+                </li>
+                </ul>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"

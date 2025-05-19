@@ -10,29 +10,25 @@
                 <i class="fas fa-bars"></i>
             </button>
 
-            <span class="navbar-brand text-capitalize text-white mb-0 h1 d-none d-sm-inline-block">Deposit History</span>
+            <span class="navbar-brand text-capitalize text-white mb-0 h1 d-none d-sm-inline-block"> Royalty Income</span>
 
-          <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item mb-0 dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-user-circle fa-lg me-1"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownUser">
-                        <li><a class="dropdown-item" href="{{route('user.GenerateTicket')}}"><i
+                        <li><a class="dropdown-item" href="?a=support"><i
                                     class="fas fa-headset fa-fw me-2"></i>Support</a></li>
-                        <li><a class="dropdown-item" href="{{route('user.profile')}}"><i
+                        <li><a class="dropdown-item" href="?a=edit_account"><i
                                     class="fas fa-user-edit fa-fw me-2"></i>Edit Account</a></li>
-                        <li><a class="dropdown-item" href="{{route('user.ChangePass')}}"><i
+                        <li><a class="dropdown-item" href="?a=security"><i
                                     class="fas fa-shield-alt fa-fw me-2"></i>Security</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                         <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                            class="d-none">
-                            @csrf
-                        </form>
-                        <li><a class="dropdown-item text-danger" href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
+                        <li><a class="dropdown-item text-danger" href="?a=logout"><i
                                     class="fas fa-sign-out-alt fa-fw me-2"></i>Logout</a></li>
                     </ul>
                 </li>
@@ -65,7 +61,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
   <label class="form-label">Transaction Type</label>
-  <select class="form-control" onchange="if(this.value) window.location.href=this.value;">
+    <select class="form-control" onchange="if(this.value) window.location.href=this.value;">
     <option style="background-color: #1f1f1f;" value="{{ route('user.DepositHistory') }}" 
         {{ Request::routeIs('user.DepositHistory') ? 'selected' : '' }}>Deposit</option>
 
@@ -86,7 +82,6 @@
     <option style="background-color: #1f1f1f;" value="{{ route('user.dailyIncentive') }}" 
         {{ Request::routeIs('user.dailyIncentive') ? 'selected' : '' }}>Royalty Income</option>  
 </select>
-
 </div>
 
 <!-- 
@@ -229,7 +224,7 @@
     </div>
 <div class="d-flex justify-content-between align-items-center mb-3">
 
-    <form action="{{ route('user.DepositHistory') }}" method="GET" class="d-flex ms-auto" style="width: 300px;">
+    <form action="{{ route('user.level-income') }}" method="GET" class="d-flex ms-auto" style="width: 300px;">
         <div class="input-group">
             <input type="text" name="search" class="form-control" placeholder="Search..." value="{{ request('search') }}">
             <button class="btn btn-outline-secondary" type="submit">
@@ -239,56 +234,54 @@
     </form>
 </div>
    <div class="row g-3">
-    @forelse($deposit_list as $deposit)
+    @forelse($level_income as $income)
         <div class="col-md-6">
             <div class="card h-100">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-start mb-2">
                         <div>
-                            <h5 class="mb-1">Deposit</h5>
-                            <div class="small">
-                                {{ $deposit->status == 'Active' ? 'Completed' : $deposit->status }}
-                            </div>
+                            <h5 class="mb-1">Royalty Income</h5>
+                            <div class="small">User ID: {{ $income->rname }}</div>
                         </div>
                         <div class="text-end">
                             <div class="d-flex align-items-center justify-content-end">
-                                <h4 class="mb-0 me-2">${{ number_format($deposit->amount, 2) }}</h4>
+                                <h4 class="mb-0 me-2">${{ number_format($income->comm, 2) }}</h4>
                                 <img src="{{ asset('assets/images/102.png') }}" height="17">
                             </div>
-                            <small>{{ \Carbon\Carbon::parse($deposit->created_at)->format('M-d-Y h:i:s A') }}</small>
+                            <small>{{ \Carbon\Carbon::parse($income->created_at)->format('M-d-Y h:i:s A') }}</small>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     @empty
-        <div class="col-12">
-                No Deposit data found.
+        <div class="col-12 text-center">
+                No data found.
         </div>
     @endforelse
 </div>
 
 
     {{-- Custom Pagination --}}
-    @if ($deposit_list->lastPage() > 1)
+    @if ($level_income->lastPage() > 1)
     <div class="pagination justify-content-center mt-4">
         <ul class="pagination">
 
             {{-- Previous Page Link --}}
-            <li class="page-item {{ $deposit_list->onFirstPage() ? 'disabled' : '' }}">
-                <a class="prev page-link" href="{{ $deposit_list->previousPageUrl() ?? '#' }}">&lt;&lt;</a>
+            <li class="page-item {{ $level_income->onFirstPage() ? 'disabled' : '' }}">
+                <a class="prev page-link" href="{{ $level_income->previousPageUrl() ?? '#' }}">&lt;&lt;</a>
             </li>
 
             {{-- Page Number Links --}}
-            @for ($i = 1; $i <= $deposit_list->lastPage(); $i++)
-                <li class="page-item {{ $deposit_list->currentPage() == $i ? 'active' : '' }}">
-                    <a class="page-link" href="{{ $deposit_list->url($i) }}">{{ $i }}</a>
+            @for ($i = 1; $i <= $level_income->lastPage(); $i++)
+                <li class="page-item {{ $level_income->currentPage() == $i ? 'active' : '' }}">
+                    <a class="page-link" href="{{ $level_income->url($i) }}">{{ $i }}</a>
                 </li>
                 @endfor
 
                 {{-- Next Page Link --}}
-                <li class="page-item {{ $deposit_list->currentPage() == $deposit_list->lastPage() ? 'disabled' : '' }}">
-                    <a class="next page-link" href="{{ $deposit_list->nextPageUrl() ?? '#' }}">&gt;&gt;</a>
+                <li class="page-item {{ $level_income->currentPage() == $level_income->lastPage() ? 'disabled' : '' }}">
+                    <a class="next page-link" href="{{ $level_income->nextPageUrl() ?? '#' }}">&gt;&gt;</a>
                 </li>
 
         </ul>

@@ -135,13 +135,13 @@
                                         
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="mb-2">Username</label>
+                                        <label class="mb-2">Sponsor</label>
                                         <div class="input-group">
                                             <span class="input-group-text">
                                                 <i class='bx bx-user-circle'></i>
                                             </span>
                                             <input type="text" name="sponsor" value=""   class="form-control"
-                                                placeholder="Choose a username">
+                                                placeholder="Choose a sponsor">
                                         </div>
                                     </div>
                                 </div>

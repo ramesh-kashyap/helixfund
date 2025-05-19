@@ -42,12 +42,12 @@
 
 
                             <div class="form-group mb-4">
-                                <label class="mb-2">Username</label>
+                                <label class="mb-2">Email</label>
                                 <div class="input-group">
                                     <span class="input-group-text">
                                         <i class='bx bx-user'></i>
                                     </span>
-                                    <input type="text" name="username" value="" placeholder="Your Login Id" class="form-control"
+                                    <input type="text" name="email" value="" placeholder="Your Email Id" class="form-control"
                                         autofocus="autofocus">
                                 </div>
                             </div>

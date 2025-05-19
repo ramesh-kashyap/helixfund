@@ -80,6 +80,20 @@ class Team extends Controller
       $ids=$this->my_level_team_count($user->id);
 
 
+       $toatll = User::where(function($query) use($ids)
+{
+  if(!empty($ids)){
+    foreach ($ids as $key => $value) {
+    //   $f = explode(",", $value);
+    //   print_r($f)."<br>";
+      $query->orWhere('id', $value);
+    }
+  }else{$query->where('id',null);}
+})->orderBy('id', 'DESC');
+$totalTeam=$toatll->count();
+$activetotalTeam=$toatll->where('active_status','Active')->count();
+;
+
       // print_r($ids);die;
         $limit = $request->limit ? $request->limit : paginationLimit();
             $status = $request->status ? $request->status : null;
@@ -95,6 +109,9 @@ class Team extends Controller
     }
   }else{$query->where('id',null);}
 })->orderBy('id', 'DESC');
+
+
+
        if($search <> null && $request->reset!="Reset"){
         $notes = $notes->where(function($q) use($search){
           $q->orWhere('name', 'LIKE', '%' . $search . '%')
@@ -113,6 +130,8 @@ class Team extends Controller
 
         $this->data['direct_team'] =$notes;
         $this->data['search'] =$search;
+        $this->data['activetotalTeam'] =$activetotalTeam;
+        $this->data['totalTeam'] =$totalTeam;
         $this->data['page'] = 'user.team.level-team';
         return $this->dashboard_layout();
 
@@ -348,15 +367,15 @@ class Team extends Controller
             }
         }
 
-        // $final = array();
-        // if(!empty($ret)){
-        //     array_walk_recursive($ret, function($item, $key) use (&$final){
-        //         $final[] = $item;
-        //     });
-        // }
+        $final = array();
+        if(!empty($ret)){
+            array_walk_recursive($ret, function($item, $key) use (&$final){
+                $final[] = $item;
+            });
+        }
 
 
-        return $ret;
+        return $final;
 
     }
 

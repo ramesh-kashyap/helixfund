@@ -614,34 +614,39 @@
                     <h4 class="mb-0"><i class="fas fa-history me-2"></i>Recent Transactions</h4>
                 </div>
                 <div class="card-body">
-                    <div class="row g-3">
-                        @if (is_array($level_income) || $level_income)
-                        @foreach ($level_income as $value)
-                        <div class="col-md-12">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-start mb-2">
-                                        <div>
-                                            <h5 class="mb-1">Order Revnue</h5>
-                                            <div class="small">{{ strtoupper($value->c_name) }}-USDT</div>
-                                        </div>
-                                        <div class="text-end">
-                                            <div class="d-flex align-items-center justify-content-end">
-                                                <h4 class="mb-0 me-2">{{ $value->profit }}</h4>
-                                                <img src="http://127.0.0.1:8000/assets/images/102.png" height="17">
-                                            </div>
-                                            <small> {{ date('D, d M Y H:i:s', strtotime($value->created_at)) }}</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                   <div class="row g-3">
+                     @if (is_array($records) || $records)
+                                    @foreach ($records as $value)
+                <div class="col-md-12">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <div>
+                            <h5 class="mb-1">{{ $value->type === 'contract' ? 'ORDER REVENUE' : ($value->type === 'investment' ? 'DEPOSIT' : strtoupper($value->type)) }}
+</h5>
+                       <div class="small" style="color: {{ in_array(strtolower($value->description), ['approved', 'active']) ? 'green' : 'inherit' }}">
+    {{ strtolower($value->description) === 'approved' ? 'COMPLETED' : strtoupper($value->description) }}
+    {{ $value->type === 'contract' ? '-USDT' : '' }}
+</div>
 
                         </div>
-                        @endforeach
-                        @else
-                        <p style="color: #000;">@lang('No bill history available.')</p>
-                        @endif
+                        <div class="text-end">
+                            <div class="d-flex align-items-center justify-content-end">
+                                <h4 class="mb-0 me-2">{{ number_format($value->amount, 2) }}</h4>
+                                <img src="http://127.0.0.1:8000/assets/images/102.png" height="17">
+                            </div>
+                            <small>  {{ date('D, d M Y H:i:s', strtotime($value->date)) }}</small>
+                        </div>
                     </div>
+                </div>
+            </div>
+            
+        </div>
+               @endforeach
+                                @else
+                                    <p style="color: #000;">@lang('No bill history available.')</p>
+                                @endif
+            </div>
                 </div>
             </div>
         </div>

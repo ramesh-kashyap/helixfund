@@ -479,7 +479,45 @@ if($cnt==7 )
      return true;
   }
 
+function first_deposit_bonus($user_id, $deposit_amount)
+{
+    // Fetch the user
+    $user = User::where('id', $user_id)->first();
 
+    if (!$user) {
+        return false; // User not found
+    }
+
+    // Check if deposit is made within 7 days of registration
+    $registrationDate = Carbon::parse($user->created_at);
+    $now = Carbon::now();
+
+    if ($now->diffInDays($registrationDate) > 7) {
+        return false; // Deposit made after 7 days — not eligible
+    }
+
+    // Determine bonus
+    $bonus = $deposit_amount < 100 ? $deposit_amount : 100;
+   $invoice = substr(str_shuffle("0123456789"), 0, 7);
+    // Prepare investment data
+    $data = [
+        'plan' => $plan ?? null,
+        'orderId' => $invoice ?? null,
+        'transaction_id' => $resultAarray['data']['txn_id'] ?? null,
+        'user_id' => $user->id,
+        'user_id_fk' => $user->username,
+        'amount' => $bonus,
+        'payment_mode' => 'USDT',
+        'status' => 'Active',
+        'sdate' => date("Y-m-d"),
+        'active_from' => 'Deposit Bonus',
+    ];
+
+    // Save to database
+    Investment::create($data);
+
+    return true;
+}
 
 function add_direct_income_new($id,$amt,$newDate,$newDateTime)
 {
@@ -595,7 +633,7 @@ $user_mid = $data->id;
                 $total_profit =0;
                 $total_get =0;
               }
-             $percent = 8;
+             $percent = 10;
 
              if($sp_status=="Active")
                {

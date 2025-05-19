@@ -8,7 +8,19 @@ use Carbon\Carbon;
 class Investment extends Model
 {
     use HasFactory;
-
+protected $fillable = [
+    'plan',
+    'orderId',
+    'transaction_id',
+    'user_id',
+    'user_id_fk',
+    'amount',
+    'payment_mode',
+    'status',
+    'sdate',
+    'active_from',
+    'edate', // if used
+];
 
     public function user()
     {

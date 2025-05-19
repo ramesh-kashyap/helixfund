@@ -357,6 +357,7 @@ class UserController extends Controller
                      $users = User::where('id',$user->id)->first();
                   if ($users->active_status=="Pending")
                    {
+                     first_deposit_bonus($users->id,$request->amount);
                     $user_update=array('active_status'=>'Active','adate'=>Date("Y-m-d H:i:s"),'package'=>$request->amount);
                   User::where('id',$user->id)->update($user_update);
                   

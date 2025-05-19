@@ -18,7 +18,7 @@ use DatePeriod;
 use Carbon\Carbon;
 use Helper;
 use Plisio\PlisioSdkLaravel\Payment;
-
+use Illuminate\Support\Facades\Log;
 class Cron extends Controller
 {
     
@@ -439,186 +439,323 @@ public function dailyIncentive()
 
 
 
-public function dynamicupicallback()
-{
+// public function dynamicupicallback()
+// {
     
  
   
-//   echo "Hello";
-//   print_r($response);die();
-         $response = file_get_contents('php://input');
-          date_default_timezone_set('Asia/Kolkata');
-          $day=date('l');
-          $todays=date("Y-m-d");
-         $result = json_decode($response, true);
+// //   echo "Hello";
+// //   print_r($response);die();
+//          $response = file_get_contents('php://input');
+//           date_default_timezone_set('Asia/Kolkata');
+//           $day=date('l');
+//           $todays=date("Y-m-d");
+//          $result = json_decode($response, true);
            
-         \DB::table('activities')->insert(['data' =>$response]);  
-         if(!empty($result))
-         {
+//          \DB::table('activities')->insert(['data' =>$response]);  
+//          if(!empty($result))
+//          {
              
-             if($result['status']=="completed")
-             {
+//              if($result['status']=="completed")
+//              {
                  
-              $orderId= $result['order_number'];
-              $username= $result['order_name'];
-              $amount= $result['source_amount'];
-              $updateTrue = Investment::where('orderId',$orderId)->where('status','Pending')->update(['status' => 'Active']);
+//               $orderId= $result['order_number'];
+//               $username= $result['order_name'];
+//               $amount= $result['source_amount'];
+//               $updateTrue = Investment::where('orderId',$orderId)->where('status','Pending')->update(['status' => 'Active']);
            
-           if($updateTrue)  
-           {
+//            if($updateTrue)  
+//            {
             
-             $user_detail=User::where('username',$username)->first();
-              if ($user_detail->active_status=="Pending")
-              {   
-              $user_update=array('active_status'=>'Active','adate'=>Date("Y-m-d H:i:s"),'package'=>$amount);
-              User::where('id',$user_detail->id)->update($user_update);
-            \DB::table('general_settings')->where('id',1)->update(['people_online'=>generalDetail()->people_online+1]);
-            \DB::table('general_settings')->where('id',1)->update(['our_investors'=>generalDetail()->our_investors+1]);
-             }
-             else
-             {
-               $total=$user_detail->package+$amount;
-                $user_update=array('package'=>$total,'active_status'=>'Active');
-              User::where('id',$user_detail->id)->update($user_update); 
-             }
+//              $user_detail=User::where('username',$username)->first();
+//               if ($user_detail->active_status=="Pending")
+//               {   
+//               $user_update=array('active_status'=>'Active','adate'=>Date("Y-m-d H:i:s"),'package'=>$amount);
+//               User::where('id',$user_detail->id)->update($user_update);
+//             \DB::table('general_settings')->where('id',1)->update(['people_online'=>generalDetail()->people_online+1]);
+//             \DB::table('general_settings')->where('id',1)->update(['our_investors'=>generalDetail()->our_investors+1]);
+//              }
+//              else
+//              {
+//                $total=$user_detail->package+$amount;
+//                 $user_update=array('package'=>$total,'active_status'=>'Active');
+//               User::where('id',$user_detail->id)->update($user_update); 
+//              }
                 
                   
-             \DB::table('general_settings')->where('id',1)->update(['total_fund_invested'=>generalDetail()->total_fund_invested+$amount]);
-                  $plan ='BEGINNER';
-                if ($amount>=50 && $amount<=200) 
-                   {
-                    $plan ='BEGINNER';
-                   }
-                   elseif($amount>=400 && $amount<=800)
-                   {
-                    $plan ='STANDARD';
-                   }
-                   elseif($amount>=1000 && $amount<=2000)
-                   {
-                    $plan ='EXCLUSIVE';
-                   }
-                   elseif($amount>=2500 && $amount<=5000)
-                   {
-                    $plan ='ULTIMATE';
-                   }
+//              \DB::table('general_settings')->where('id',1)->update(['total_fund_invested'=>generalDetail()->total_fund_invested+$amount]);
+//                   $plan ='BEGINNER';
+//                 if ($amount>=50 && $amount<=200) 
+//                    {
+//                     $plan ='BEGINNER';
+//                    }
+//                    elseif($amount>=400 && $amount<=800)
+//                    {
+//                     $plan ='STANDARD';
+//                    }
+//                    elseif($amount>=1000 && $amount<=2000)
+//                    {
+//                     $plan ='EXCLUSIVE';
+//                    }
+//                    elseif($amount>=2500 && $amount<=5000)
+//                    {
+//                     $plan ='ULTIMATE';
+//                    }
             
-                   elseif($amount>=5000 && $amount<=10000)
-                   {
-                    $plan ='PREMIUM';
-                   }
+//                    elseif($amount>=5000 && $amount<=10000)
+//                    {
+//                     $plan ='PREMIUM';
+//                    }
             
-                   elseif($amount>=5000)
-                   {
-                    $plan ='PREMIUM';
-                   }
+//                    elseif($amount>=5000)
+//                    {
+//                     $plan ='PREMIUM';
+//                    }
                    
-                  sendEmail($user_detail->email, 'Account Activated -'.siteName(), [
-                    'name' => $user_detail->name,
-                    'username' => $user_detail->username,
-                    'amount' => $amount,
-                    'plan' => $plan,
-                    'date' => date("D, d M Y h:i:s a", strtotime(Date("Y-m-d H:i:s"))),
-                    'viewpage' => 'activation',
+//                   sendEmail($user_detail->email, 'Account Activated -'.siteName(), [
+//                     'name' => $user_detail->name,
+//                     'username' => $user_detail->username,
+//                     'amount' => $amount,
+//                     'plan' => $plan,
+//                     'date' => date("D, d M Y h:i:s a", strtotime(Date("Y-m-d H:i:s"))),
+//                     'viewpage' => 'activation',
     
-                 ]);
+//                  ]);
                      
-            add_direct_income($user_detail->id,$amount);
+//             add_direct_income($user_detail->id,$amount);
 
                     
-           }
+//            }
            
                  
-             }
-             else
-             {
-                if($result['status']=="mismatch" && $result['amount'] >= $result['invoice_total_sum']) 
-                {
+//              }
+//              else
+//              {
+//                 if($result['status']=="mismatch" && $result['amount'] >= $result['invoice_total_sum']) 
+//                 {
                     
                          
-              $orderId= $result['order_number'];
-              $username= $result['order_name'];
-              $amount= $result['source_amount'];
-              $updateTrue = Investment::where('orderId',$orderId)->where('status','Pending')->update(['status' => 'Active']);
+//               $orderId= $result['order_number'];
+//               $username= $result['order_name'];
+//               $amount= $result['source_amount'];
+//               $updateTrue = Investment::where('orderId',$orderId)->where('status','Pending')->update(['status' => 'Active']);
            
-           if($updateTrue)  
-           {
+//            if($updateTrue)  
+//            {
             
-             $user_detail=User::where('username',$username)->first();
-              if ($user_detail->active_status=="Pending")
-              {   
-              $user_update=array('active_status'=>'Active','adate'=>Date("Y-m-d H:i:s"),'package'=>$amount);
-              User::where('id',$user_detail->id)->update($user_update);
-            \DB::table('general_settings')->where('id',1)->update(['people_online'=>generalDetail()->people_online+1]);
-            \DB::table('general_settings')->where('id',1)->update(['our_investors'=>generalDetail()->our_investors+1]);
-             }
-             else
-             {
-               $total=$user_detail->package+$value->amount;
-                $user_update=array('package'=>$total,'active_status'=>'Active');
-              User::where('id',$user_detail->id)->update($user_update); 
-             }
+//              $user_detail=User::where('username',$username)->first();
+//               if ($user_detail->active_status=="Pending")
+//               {   
+//               $user_update=array('active_status'=>'Active','adate'=>Date("Y-m-d H:i:s"),'package'=>$amount);
+//               User::where('id',$user_detail->id)->update($user_update);
+//             \DB::table('general_settings')->where('id',1)->update(['people_online'=>generalDetail()->people_online+1]);
+//             \DB::table('general_settings')->where('id',1)->update(['our_investors'=>generalDetail()->our_investors+1]);
+//              }
+//              else
+//              {
+//                $total=$user_detail->package+$value->amount;
+//                 $user_update=array('package'=>$total,'active_status'=>'Active');
+//               User::where('id',$user_detail->id)->update($user_update); 
+//              }
                 
                   
-             \DB::table('general_settings')->where('id',1)->update(['total_fund_invested'=>generalDetail()->total_fund_invested+$amount]);
-                  $plan ='BEGINNER';
-                if ($amount>=50 && $amount<=200) 
-                   {
-                    $plan ='BEGINNER';
-                   }
-                   elseif($amount>=400 && $amount<=800)
-                   {
-                    $plan ='STANDARD';
-                   }
-                   elseif($amount>=1000 && $amount<=2000)
-                   {
-                    $plan ='EXCLUSIVE';
-                   }
-                   elseif($amount>=2500 && $amount<=5000)
-                   {
-                    $plan ='ULTIMATE';
-                   }
+//              \DB::table('general_settings')->where('id',1)->update(['total_fund_invested'=>generalDetail()->total_fund_invested+$amount]);
+//                   $plan ='BEGINNER';
+//                 if ($amount>=50 && $amount<=200) 
+//                    {
+//                     $plan ='BEGINNER';
+//                    }
+//                    elseif($amount>=400 && $amount<=800)
+//                    {
+//                     $plan ='STANDARD';
+//                    }
+//                    elseif($amount>=1000 && $amount<=2000)
+//                    {
+//                     $plan ='EXCLUSIVE';
+//                    }
+//                    elseif($amount>=2500 && $amount<=5000)
+//                    {
+//                     $plan ='ULTIMATE';
+//                    }
             
-                   elseif($amount>=5000 && $amount<=10000)
-                   {
-                    $plan ='PREMIUM';
-                   }
+//                    elseif($amount>=5000 && $amount<=10000)
+//                    {
+//                     $plan ='PREMIUM';
+//                    }
             
-                   elseif($amount>=5000)
-                   {
-                    $plan ='PREMIUM';
-                   }
-                  add_direct_income($user_detail->id,$amount);
+//                    elseif($amount>=5000)
+//                    {
+//                     $plan ='PREMIUM';
+//                    }
+//                   add_direct_income($user_detail->id,$amount);
                   
                   
-                  sendEmail($user_detail->email, 'Account Activated -'.siteName(), [
-                    'name' => $user_detail->name,
-                    'username' => $user_detail->username,
-                    'amount' => $amount,
-                    'plan' => $plan,
-                    'date' => date("D, d M Y h:i:s a", strtotime(Date("Y-m-d H:i:s"))),
-                    'viewpage' => 'activation',
+//                   sendEmail($user_detail->email, 'Account Activated -'.siteName(), [
+//                     'name' => $user_detail->name,
+//                     'username' => $user_detail->username,
+//                     'amount' => $amount,
+//                     'plan' => $plan,
+//                     'date' => date("D, d M Y h:i:s a", strtotime(Date("Y-m-d H:i:s"))),
+//                     'viewpage' => 'activation',
     
-                 ]);
+//                  ]);
                      
           
 
                     
-           }
+//            }
            
            
                     
-                }
-             }
+//                 }
+//              }
              
-         }
+//          }
         
             
          
         
            
+// }
+
+
+public function dynamicUpiCallback(Request $request)
+{
+    try {
+        $queryData = $request->query();
+        Log::info('Incoming callback data: ' . json_encode($queryData));
+
+        // Save raw JSON
+        Activitie::create(['data' => json_encode($queryData)]);
+
+        $validAddresses = [
+            "0x8219b89666A71cd53B9B52967A704572eFF19967",
+            "TJPhCR5fbJH9fS7ubEQz59FQ4hLbWd9jAh"
+        ];
+
+        if (
+            in_array($queryData['address_out'], $validAddresses) &&
+            $queryData['result'] === "sent" &&
+            in_array($queryData['coin'], ['bep20_usdt', 'trc20_usdt'])
+        ) {
+            $txnId = $queryData['txid_in'];
+            $userName = $queryData['refid'];
+
+            $exists = Investment::where('transaction_id', $txnId)->exists();
+
+            if (!$exists) {
+                Log::info("Processing new transaction: {$txnId} for user: {$userName}");
+
+                $amount = number_format((float) $queryData['value_coin'], 2, '.', '');
+                $blockchain = $queryData['coin'] === 'bep20_usdt' ? 'USDT_BSC' : 'USDT_TRON';
+
+                $user = User::where('username', $userName)->first();
+                if (!$user) {
+                    return response()->json([
+                        'message' => 'User not found',
+                        'status' => false,
+                    ]);
+                }
+
+                $now = Carbon::now();
+                $invoice = rand(1000000, 9999999);
+
+                $users = User::where('id',$user->id)->first();
+                if ($users->active_status=="Pending")
+                 {
+                      
+                  first_deposit_bonus($users->id,$amount);
+                  $user_update=array('active_status'=>'Active','adate'=>Date("Y-m-d H:i:s"),'package'=>$amount);
+                User::where('id',$user->id)->update($user_update);
+                
+                  \DB::table('general_settings')->where('id',1)->update(['people_online'=> generalDetail()->people_online+1]);
+                   \DB::table('general_settings')->where('id',1)->update(['our_investors'=> generalDetail()->our_investors+1]);
+      
+                }
+                 else
+               {
+                $total = $users->package+$amount;
+                  $user_update=array('package'=>$total,'active_status'=>'Active',);
+                User::where('id',$user->id)->update($user_update); 
+               }
+              
+             
+
+                
+                // Insert investment
+                Investment::insert([
+                    'plan' => 1,
+                    'orderId' => $invoice,
+                    'transaction_id' => $txnId,
+                    'user_id' => $user->id,
+                    'user_id_fk' => $user->username,
+                    'amount' => $amount,
+                    'payment_mode' => $blockchain,
+                    'status' => 'Active',
+                    'sdate' => $now,
+                    'active_from' => $user->username,
+                    'created_at' => $now,
+                ]);
+
+              
+
+                // Update user balance and status
+                $newPackage = $user->package + $amount;
+
+                $updateData = [
+                    // 'userbalance' => $newPackage,
+                    'active_status' => 'Active',
+                ];
+
+                if ($user->active_status === 'Pending') {
+                    $updateData['adate'] = $now;
+                    $updateData['package'] = $amount;
+                } else {
+                    $updateData['package'] = $newPackage;
+                }
+
+                $user->update($updateData);
+                
+                   add_direct_income($user->id,$amount);  
+                
+                    // Log::info("Processing new transaction: {$txnId} for user: {$userName}");
+                
+              
+            }
+        }
+
+        return response()->json([
+            'message' => 'Callback processed',
+            'status' => true,
+        ]);
+    } catch (\Exception $e) {
+        Log::error('UPI Callback Error: ' . $e->getMessage());
+        return response()->json([
+            'message' => 'Failed',
+            'status' => false,
+        ]);
+    }
 }
 
 
+function expireOldBonusInvestments()
+{
+    $sevenDaysAgo = Carbon::now()->subDays(7)->toDateString();
+
+    // Get all active "Deposit Bonus" investments older than 7 days
+    $investments = Investment::where('active_from', 'Deposit Bonus')
+        ->where('status', 'Active')
+        ->whereDate('sdate', '<=', $sevenDaysAgo)
+        ->get();
+
+    foreach ($investments as $investment) {
+        $investment->status = 'Expire';
+        $investment->save();
+
+        // Optional: log the change
+        Log::info("Bonus expired for investment ID: {$investment->id}, User ID: {$investment->user_id}");
+    }
+}
         public  function my_binary($userid){
         $arrin=array($userid);
         $ret=array();

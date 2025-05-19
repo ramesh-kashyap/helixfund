@@ -470,7 +470,7 @@ popup.classList.add("show");
         </div>
 
         <!-- Popup Modal -->
-<div class="modal fade van-popup" tabindex="-1" style="display: block;">
+<div class="modal fade van-popup" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content text-white bg-dark rounded-4 p-4 position-relative text-center">
       <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>

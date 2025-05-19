@@ -146,31 +146,7 @@
                                     </div>
                                 </div>
                                
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="mb-2">Password</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text">
-                                                <i class='bx bx-lock-alt'></i>
-                                            </span>
-                                            <input type="password" name="password" value="" class="form-control"
-                                                placeholder="Create password">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="mb-2">Confirm Password</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text">
-                                                <i class='bx bx-lock'></i>
-                                            </span>
-                                            <input type="password" name="password_confirmation" value="" class="form-control"
-                                                placeholder="Confirm password">
-                                        </div>
-                                    </div>
-                                </div>
+                               
 
 
 <!-- 
@@ -200,6 +176,31 @@
                                             </span>
                                             <input type="number" name="phone" value="" class="form-control"
                                                 placeholder="Enter your phone">
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="mb-2">Password</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">
+                                                <i class='bx bx-lock-alt'></i>
+                                            </span>
+                                            <input type="password" name="password" value="" class="form-control"
+                                                placeholder="Create password">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="mb-2">Confirm Password</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">
+                                                <i class='bx bx-lock'></i>
+                                            </span>
+                                            <input type="password" name="password_confirmation" value="" class="form-control"
+                                                placeholder="Confirm password">
                                         </div>
                                     </div>
                                 </div>

@@ -153,7 +153,7 @@
 									<div class="card-body d-flex align-items-center justify-content-between">
 										<div class="menu">
 											<span class="font-w500 fs-16 d-block mb-2">Trading Income</span>
-											<h2>{{currency()}}  {{  number_format((\App\Models\Income::where('remarks','Trading Bonus')->sum('comm')),2)   }}  </h2>
+											<h2>{{currency()}}  {{  number_format((\App\Models\Income::where('remarks','Trading Income')->sum('comm')),2)   }}  </h2>
 										</div>	
 										<div class="d-inline-block position-relative donut-chart-sale">
 											
@@ -168,7 +168,7 @@
 									<div class="card-body d-flex align-items-center justify-content-between">
 										<div class="menu">
 											<span class="font-w500 fs-16 d-block mb-2">Level Income</span>
-											<h2>{{currency()}} {{  number_format((\App\Models\Income::where('remarks','Level Bonus')->sum('comm')),2)   }} </h2>
+											<h2>{{currency()}} {{  number_format((\App\Models\Income::where('remarks','Level Income')->sum('comm')),2)   }} </h2>
 										</div>	
 										<div class="d-inline-block position-relative donut-chart-sale">
 										
@@ -183,7 +183,7 @@
 									<div class="card-body d-flex align-items-center justify-content-between">
 										<div class="menu">
 											<span class="font-w500 fs-16 d-block mb-2">Rank & Reward Income</span>
-											<h2>{{currency()}} {{  number_format((\App\Models\Income::where('remarks','Rank Reward Bonus')->sum('comm')),2)   }} </h2>
+											<h2>{{currency()}} {{  number_format((\App\Models\Income::where('remarks','Rank Reward Income')->sum('comm')),2)   }} </h2>
 										</div>	
 										<div class="d-inline-block position-relative donut-chart-sale">
 										
@@ -198,7 +198,7 @@
 									<div class="card-body d-flex align-items-center justify-content-between">
 										<div class="menu">
 											<span class="font-w500 fs-16 d-block mb-2">Royalty Income</span>
-											<h2>{{currency()}} {{  number_format((\App\Models\Income::where('remarks','Royalty Bonus')->sum('comm')),2)   }} </h2>
+											<h2>{{currency()}} {{  number_format((\App\Models\Income::where('remarks','Royalty Income')->sum('comm')),2)   }} </h2>
 										</div>	
 										<div class="d-inline-block position-relative donut-chart-sale">
 										

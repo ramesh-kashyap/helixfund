@@ -125,9 +125,9 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ route('faq') }}">FAQs</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" href="{{ route('news') }}">News</a>
-        </li>
+        </li> -->
         <li class="nav-item">
             <a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>
         </li>

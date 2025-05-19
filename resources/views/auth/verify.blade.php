@@ -1,52 +1,122 @@
-<!DOCTYPE html>
-<html class="no-js" lang="en-US">
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,user-scalable=no">
-    <title>{{ siteName() }} - Register Successfully</title>
-    <meta name="csrf-param" content="_csrf">
+@include('layouts.mainsite.header')
 
-    <link type="image/png" href="{{ asset('') }}assets/c20a81c4/img/favicon.png" rel="icon">
-    <link href="{{ asset('') }}assets/c20a81c4/fonts/icomoon/style985d.css?v=1634350014" rel="stylesheet">
-    <link href="{{ asset('') }}assets/c20a81c4/fonts/stylesheet11f1.css?v=1634187776" rel="stylesheet">
-    <link href="{{ asset('') }}assets/c20a81c4/css/jquery-ui.min11f1.css?v=1634187776" rel="stylesheet">
-    <link href="{{ asset('') }}assets/c20a81c4/css/selectric11f1.css?v=1634187776" rel="stylesheet">
-    <link href="{{ asset('') }}assets/c20a81c4/css/jquery.mCustomScrollbar11f1.css?v=1634187776" rel="stylesheet">
-    <link href="{{ asset('') }}assets/c20a81c4/css/ion.rangeSlider11f1.css?v=1634187776" rel="stylesheet">
-    <link href="{{ asset('') }}assets/c20a81c4/css/ion.rangeSlider.skinSimple94b9.css?v=1700299396"
-        rel="stylesheet">
-    <link href="{{ asset('') }}assets/c20a81c4/css/slick11f1.css?v=1634187776" rel="stylesheet">
-    <link href="{{ asset('') }}assets/c20a81c4/css/style7d51.css?v=1700506980" rel="stylesheet">
-    <link href="{{ asset('') }}assets/c20a81c4/css/responsived706.css?v=1701345157" rel="stylesheet">
-    <link href="{{ asset('') }}assets/c20a81c4/css/alert9b0b.css?v=1627541768" rel="stylesheet">
-</head>
+<div class="hero">
+    <div class="container text-center">
+        <h1>Register <span class="gradient-text">Successfully</span></h1>
+        <p class="lead mt-4 mb-5" style="color: rgba(255, 255, 255, 0.9); max-width: 600px; margin: 0 auto;">
+            Join helixfund.live and start your investment journey today
+        </p>
+    </div>
+</div>
 
-<body>
-    <script src="{{ asset('') }}assets/b808595e/jquery.mincba3.js?v=1669716178"></script>
-    <script src="{{ asset('') }}assets/c20a81c4/js/jquery-3.3.1.min11f1.js?v=1634187776"></script>
-    <script src="{{ asset('') }}assets/c20a81c4/js/jquery-ui.min11f1.js?v=1634187776"></script>
-    <script src="{{ asset('') }}assets/c20a81c4/js/detect.min11f1.js?v=1634187776"></script>
-    <script src="{{ asset('') }}assets/c20a81c4/js/clipboard.min11f1.js?v=1634187776"></script>
-    <script src="{{ asset('') }}assets/c20a81c4/js/slick.min11f1.js?v=1634187776"></script>
-    <script src="{{ asset('') }}assets/c20a81c4/js/jquery.selectric.min11f1.js?v=1634187776"></script>
-    <script src="{{ asset('') }}assets/c20a81c4/js/jquery.mCustomScrollbar11f1.js?v=1634187776"></script>
-    <script src="{{ asset('') }}assets/c20a81c4/js/ion.rangeSlider.min11f1.js?v=1634187776"></script>
-    <script src="{{ asset('') }}assets/c20a81c4/js/clock2eb3.js?v=1640874314"></script>
-    <script src="{{ asset('') }}assets/c20a81c4/js/modal11f1.js?v=1634187776"></script>
-    <script src="{{ asset('') }}assets/c20a81c4/js/script5b51.js?v=1699953866"></script>
+<section class="unique-section">
+    <div class="container">
+
+        <script language=javascript>
+            function checkform() {
+                if (document.regform.fullname.value == '') {
+                    alert("Please enter your full name!");
+                    document.regform.fullname.focus();
+                    return false;
+                }
 
 
-    <section class="wrapper">
-        <div class="loginPage" style="background-image: url({{ asset('') }}assets/c20a81c4/img/login-bg.jpeg);">
-            <div class="loginForm">
-                <form action="{{ route('login') }}" method="POST">
+                if (document.regform.username.value == '') {
+                    alert("Please enter your username!");
+                    document.regform.username.focus();
+                    return false;
+                }
+                if (!document.regform.username.value.match(/^[A-Za-z0-9_\-]+$/)) {
+                    alert("For username you should use English letters and digits only!");
+                    document.regform.username.focus();
+                    return false;
+                }
+                if (document.regform.password.value == '') {
+                    alert("Please enter your password!");
+                    document.regform.password.focus();
+                    return false;
+                }
+                if (document.regform.password.value != document.regform.password2.value) {
+                    alert("Please check your password!");
+                    document.regform.password2.focus();
+                    return false;
+                }
 
 
+                if (document.regform.email.value == '') {
+                    alert("Please enter your e-mail address!");
+                    document.regform.email.focus();
+                    return false;
+                }
+                if (document.regform.email.value != document.regform.email1.value) {
+                    alert("Please retype your e-mail!");
+                    document.regform.email.focus();
+                    return false;
+                }
 
-                    {{ csrf_field() }}
+                for (i in document.regform.elements) {
+                    f = document.regform.elements[i];
+                    if (f.name && f.name.match(/^pay_account/)) {
+                        if (f.value == '') continue;
+                        var notice = f.getAttribute('data-validate-notice');
+                        var invalid = 0;
+                        if (f.getAttribute('data-validate') == 'regexp') {
+                            var re = new RegExp(f.getAttribute('data-validate-regexp'));
+                            if (!f.value.match(re)) {
+                                invalid = 1;
+                            }
+                        } else if (f.getAttribute('data-validate') == 'email') {
+                            var re = /^[^\@]+\@[^\@]+\.\w{2,4}$/;
+                            if (!f.value.match(re)) {
+                                invalid = 1;
+                            }
+                        }
+                        if (invalid) {
+                            alert('Invalid account format. Expected ' + notice);
+                            f.focus();
+                            return false;
+                        }
+                    }
+                }
 
-                    <div class="formBl">
+                if (document.regform.agree.checked == false) {
+                    alert("You have to agree with the Terms and Conditions!");
+                    return false;
+                }
+
+                return true;
+            }
+
+            function IsNumeric(sText) {
+                var ValidChars = "0123456789";
+                var IsNumber = true;
+                var Char;
+                if (sText == '') return false;
+                for (i = 0; i < sText.length && IsNumber == true; i++) {
+                    Char = sText.charAt(i);
+                    if (ValidChars.indexOf(Char) == -1) {
+                        IsNumber = false;
+                    }
+                }
+                return IsNumber;
+            }
+
+        </script>
+
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card bento-card">
+                    <div class="card-body p-4">
+
+                        <form method="post" action="{{ route('registers') }}" name="regform">
+                            {{ csrf_field() }}
+
+
+                            <div class="row g-4">
+
+                               <div class="formBl">
                         <div class="logo invisLink">
                             <a href="{{ asset('') }}"></a>
                             <img src="{{ asset('') }}assets/c20a81c4/img/logo.png" alt="">
@@ -97,104 +167,93 @@
                                 value="">
                         </div> <a class="btn btnBlue" style="margin-top:-5px; margin-bottom:30px"
                             href="{{route('login')}}">Login</a>
-                </form>
-                <div class="links">
-                    <a href="{{ route('forgot-password') }}" class="link">Forgot your password?</a>
-                    <a href="{{ route('register') }}" class="link">Sign up</a>
-                </div>
-            </div>
-        </div>
-        </div>
-    </section>
-    <div class="modalsScroll">
-        <div class="modals table">
-            <div class="middle tCell">
-                <span class="closeModal">
-                    <span></span>
-                    <span></span>
-                </span>
-                <div class="blockMod" id="modal_error">
-                    <div class="in">
-                        <div class="modalsContent">
-                            <div class="grayBl">
-                                <span class="iconCircle icon-plus"></span>
-                                <span class="title">Error</span>
-                                <div class="modalSend">
-                                    <ul class="txt" id="error-message" style="text-align: center;"></ul>
-                                </div>
+
+                                
+   
+
+
+
                             </div>
+                        </form>
+
+                        <div class="text-center mt-4">
+                            <p style="color: rgba(255, 255, 255, 0.7);">
+                                Already have an account?
+                                <a href="{{route('login')}}" class="themed-link">Sign in here</a>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="overlayModal"></div>
     </div>
+</section>
 
-    <script>
-        function show_error() {
-            $(document).find('.error-summary ul').each(function() {
-                if (!$(this).is(':empty')) {
-                    error = $(this).html();
-                    $(this).html('');
-                    $('#error-message').html(error);
-                    modalEventOpen('modal_error');
+@include('layouts.mainsite.footer')
+@include('partials.notify')
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">
+</script>
+<script src="{{asset('')}}assets/js/gsap.min.js"></script>
+<script src="{{asset('')}}assets/js/ScrollTrigger.min.js"></script>
+<script src="{{asset('')}}assets/js/SplitText.min.js"></script>
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+<script src="{{asset('')}}assets/js/app.js"></script>
+
+
+<script>
+    window.addEventListener('load', function () {
+        // All resources (images, scripts, stylesheets, etc.) are loaded
+        const preloaderContainer = document.querySelector('.preloader-container');
+        const content = document.querySelector('.content');
+
+        if (preloaderContainer) {
+            // Add the 'hidden' class to trigger the fade-out animation
+            preloaderContainer.classList.add('hidden');
+
+            // Optional: If you want to completely remove the preloader from the DOM
+            // after the transition, you can listen for the 'transitionend' event.
+            preloaderContainer.addEventListener('transitionend', function () {
+                if (preloaderContainer.style.opacity === '0' || getComputedStyle(preloaderContainer)
+                    .opacity === '0') {
+                    preloaderContainer.style.display = 'none'; // Or preloaderContainer.remove();
                 }
-            })
+            }, {
+                once: true
+            }); // {once: true} ensures the event listener is removed after it fires
         }
 
+        if (content) {
+            content.style.display = 'block'; // Or any other display type you need, e.g., 'flex'
+            // If you used opacity for content:
+            // content.style.opacity = '1';
+            // content.style.visibility = 'visible';
+        }
+    });
 
-        $(document).on("ajaxComplete", function() {
-            show_error();
-        });
-        show_error();
-    </script>
+    // Fallback in case 'load' event doesn't fire or takes too long (e.g., for broken images)
+    // You might want to adjust the timeout duration
+    setTimeout(function () {
+        const preloaderContainer = document.querySelector('.preloader-container');
+        const content = document.querySelector('.content');
+
+        if (preloaderContainer && !preloaderContainer.classList.contains('hidden')) {
+            console.warn("Preloader timeout reached. Forcing hide.");
+            preloaderContainer.classList.add('hidden');
+            if (preloaderContainer.style.opacity === '0' || getComputedStyle(preloaderContainer).opacity ===
+                '0') {
+                preloaderContainer.style.display = 'none';
+            }
+            if (content) {
+                content.style.display = 'block';
+            }
+        }
+    }, 10000); // 10 seconds timeout as an example
+
+</script>
 
 
-    <script src="{{ asset('') }}assets/9d244e36/yii.js?v=1669716178"></script>
-    <script src="{{ asset('') }}assets/9d244e36/yii.captcha.js?v=1669716178"></script>
-    <script src="{{ asset('') }}assets/9d244e36/yii.activeForm.js?v=1669716178"></script>
-    <script>
-        jQuery(function($) {
-            jQuery('#loginform-code-image').yiiCaptcha({
-                "refreshUrl": "\/site\/captcha\/?refresh=1",
-                "hashKey": "yiiCaptcha\/site\/captcha"
-            });
-            jQuery('#login-form').yiiActiveForm([{
-                "id": "loginform-username",
-                "name": "username",
-                "container": ".field-loginform-username",
-                "input": "#loginform-username",
-                "enableAjaxValidation": true,
-                "validateOnChange": false,
-                "validateOnBlur": false
-            }, {
-                "id": "loginform-password",
-                "name": "password",
-                "container": ".field-loginform-password",
-                "input": "#loginform-password",
-                "enableAjaxValidation": true,
-                "validateOnChange": false,
-                "validateOnBlur": false
-            }, {
-                "id": "loginform-code",
-                "name": "code",
-                "container": ".field-loginform-code",
-                "input": "#loginform-code",
-                "enableAjaxValidation": true,
-                "validateOnChange": false,
-                "validateOnBlur": false
-            }, {
-                "id": "agreeReg",
-                "name": "rememberMe",
-                "container": ".field-agreeReg",
-                "input": "#agreeReg",
-                "enableAjaxValidation": true,
-                "validateOnChange": false,
-                "validateOnBlur": false
-            }], []);
-        });
-    </script>
 </body>
 
 </html>

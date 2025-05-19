@@ -17,7 +17,7 @@
             <div class="accordion-item bento-card mb-3">
                 <h2 class="accordion-header mb-0" id="headingOne">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        How do I start investing with XYO-flow?
+                        How do I start investing with Helix Fund?
                     </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
@@ -35,7 +35,7 @@
                 </h2>
                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        XYO-flow currently accepts deposits in BTC, USDT (TRC20 and BEP20), TRX, and LTC.
+                        Helix Fund currently accepts deposits in BTC, USDT (TRC20 and BEP20), TRX, and LTC.
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                 </h2>
                 <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
                     <div class="accordion-body">
-                        No, XYO-flow does not apply any fees to either deposits or withdrawals.
+                        No, Helix Fund does not apply any fees to either deposits or withdrawals.
                     </div>
                 </div>
             </div>

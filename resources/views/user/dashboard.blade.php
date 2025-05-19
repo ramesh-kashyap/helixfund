@@ -15,27 +15,31 @@
                     <span
                         class="navbar-brand text-capitalize text-white mb-0 h1 d-none d-sm-inline-block">account</span>
 
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item mb-0 dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user-circle fa-lg me-1"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownUser">
-                                <li><a class="dropdown-item" href="?a=support"><i
-                                            class="fas fa-headset fa-fw me-2"></i>Support</a></li>
-                                <li><a class="dropdown-item" href="?a=edit_account"><i
-                                            class="fas fa-user-edit fa-fw me-2"></i>Edit Account</a></li>
-                                <li><a class="dropdown-item" href="?a=security"><i
-                                            class="fas fa-shield-alt fa-fw me-2"></i>Security</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item text-danger" href="?a=logout"><i
-                                            class="fas fa-sign-out-alt fa-fw me-2"></i>Logout</a></li>
-                            </ul>
+                     <ul class="navbar-nav ms-auto">
+                <li class="nav-item mb-0 dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-circle fa-lg me-1"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownUser">
+                        <li><a class="dropdown-item" href="{{route('user.GenerateTicket')}}"><i
+                                    class="fas fa-headset fa-fw me-2"></i>Support</a></li>
+                        <li><a class="dropdown-item" href="{{route('user.profile')}}"><i
+                                    class="fas fa-user-edit fa-fw me-2"></i>Edit Account</a></li>
+                        <li><a class="dropdown-item" href="{{route('user.ChangePass')}}"><i
+                                    class="fas fa-shield-alt fa-fw me-2"></i>Security</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
                         </li>
+                         <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                            class="d-none">
+                            @csrf
+                        </form>
+                        <li><a class="dropdown-item text-danger" href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
+                                    class="fas fa-sign-out-alt fa-fw me-2"></i>Logout</a></li>
                     </ul>
+                </li>
+            </ul>
                 </div>
             </nav>
             <!-- <div class="top-video">
@@ -172,55 +176,52 @@
             <div class="offcanvas-body">
                 <ul class="nav nav-pills flex-column">
                     <li class="nav-item">
-                        <a href="?a=account" class="nav-link text-white">
+                        <a href="{{route('user.dashboard')}}" class="nav-link text-white">
                             <i class="fas fa-user fa-fw me-2"></i>Account
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="?a=deposit" class="nav-link text-white">
+                        <a href="{{route('user.invest')}}" class="nav-link text-white">
                             <i class="fas fa-download fa-fw me-2"></i>Deposit
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="?a=withdraw" class="nav-link text-white">
+                        <a href="{{route('user.Withdraw')}}" class="nav-link text-white">
                             <i class="fas fa-upload fa-fw me-2"></i>Withdraw
                         </a>
                     </li>
+                   
                     <li class="nav-item">
-                        <a href="?a=deposit_list" class="nav-link text-white">
-                            <i class="fas fa-list-alt fa-fw me-2"></i>Deposit List
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="?a=history" class="nav-link text-white">
+                        <a href="{{route('user.DepositHistory')}}" class="nav-link text-white">
                             <i class="fas fa-history fa-fw me-2"></i>History
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="?a=referals" class="nav-link text-white">
+                        <a href="{{route('user.level-team')}}" class="nav-link text-white">
                             <i class="fas fa-users fa-fw me-2"></i>Referrals
                         </a>
                     </li>
+                  
                     <li class="nav-item">
-                        <a href="?a=referallinks" class="nav-link text-white">
-                            <i class="fas fa-link fa-fw me-2"></i>Banners
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="?a=security" class="nav-link text-white">
+                        <a href="{{route('user.ChangePass')}}" class="nav-link text-white">
                             <i class="fas fa-shield-alt fa-fw me-2"></i>Security
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="?a=edit_account" class="nav-link text-white">
+                        <a href="{{route('user.profile')}}" class="nav-link text-white">
                             <i class="fas fa-user-edit fa-fw me-2"></i>Edit Account
                         </a>
                     </li>
-                    <li class="nav-item mt-auto">
-                        <a href="?a=logout" class="nav-link text-warning">
-                            <i class="fas fa-sign-out-alt fa-fw me-2"></i>Logout
-                        </a>
-                    </li>
+                   <li class="nav-item mt-auto">
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                            class="d-none">
+                            @csrf
+                        </form>
+                    <a href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link text-warning" title="Logout" data-bs-toggle="tooltip"
+                        data-bs-placement="right">
+                        <i class="fas fa-sign-out-alt fa-fw"></i><span class="sidebar-text ms-2">Logout</span>
+                    </a>
+                </li>
                 </ul>
             </div>
         </div>

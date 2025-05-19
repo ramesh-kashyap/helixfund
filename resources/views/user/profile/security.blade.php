@@ -105,7 +105,7 @@
               device.<br>
               2. Your Secret Code is: <b>JXM5EZWXB3FJTAQP</b>
               <input type=hidden name="tfa_secret" value="JXM5EZWXB3FJTAQP"><br>
-              <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=otpauth%3A%2F%2Ftotp%2Fxyo-flow.com%3Fsecret%3DJXM5EZWXB3FJTAQP">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=otpauth%3A%2F%2Ftotp%2Fhelixfund.live%3Fsecret%3DJXM5EZWXB3FJTAQP">
               3. Please enter two factor token from Google Authenticator to verify correct setup:<br>
               <input type=text name="code" class="form-control"> <input type=submit value="Enable" class="sbmt mt-2">
                       </form>

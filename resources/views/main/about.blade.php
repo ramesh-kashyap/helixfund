@@ -5,7 +5,7 @@
       <section id="about-hero" class="hero">
       <div class="container text-center">
           <h1>
-              The Genesis of <span class="gradient-text">XYO-Flow</span>
+              The Genesis of <span class="gradient-text">Helix Fund</span>
           </h1>
           <p class="lead mt-4 mb-5" style="color: rgba(255, 255, 255, 0.9); max-width: 800px; margin: 0 auto;">
               Unveiling the story, the passion, and the principles that propel us forward in the dynamic universe of digital assets.
@@ -27,11 +27,11 @@
               </div>
               <div class="col-lg-6">
                   <h2 class="mb-3">Forged in Opportunity</h2>
-                  <p class="text-white mb-4" style="color: #a7b4ff;">XYO-flow is a modern crypto investment platform designed for those who value speed, transparency, and consistent returns. Our mission is to simplify high-yield investing by offering automated, reliable, and well-structured plans that fit both beginners and experienced users.
+                  <p class="text-white mb-4" style="color: #a7b4ff;">Helix Fund is a modern crypto investment platform designed for those who value speed, transparency, and consistent returns. Our mission is to simplify high-yield investing by offering automated, reliable, and well-structured plans that fit both beginners and experienced users.
 
-Founded by a team of crypto traders and blockchain enthusiasts, XYO-flow was built to give people an opportunity to grow their capital through carefully calculated strategies. We focus on short- and mid-term investment cycles, ensuring daily or hourly profitability, depending on the plan you choose.</p>
-                  <p>With a commitment to clear communication, instant withdrawals, and a smooth user experience, XYO-flow brings together technology, trust, and performance — all in one seamless platform. Our community grows every day, and we’re excited to help more people stay in the flow of the crypto world.</p>
-                   <a href="#approach" class="button mt-3">Discover Our Approach</a>
+Founded by a team of crypto traders and blockchain enthusiasts, Helix Fund was built to give people an opportunity to grow their capital through carefully calculated strategies. We focus on short- and mid-term investment cycles, ensuring daily or hourly profitability, depending on the plan you choose.</p>
+                  <p>With a commitment to clear communication, instant withdrawals, and a smooth user experience, Helix Fund brings together technology, trust, and performance — all in one seamless platform. Our community grows every day, and we’re excited to help more people stay in the flow of the crypto world.</p>
+                   <a href="{{route('about-us')}}" class="button mt-3">Discover Our Approach</a>
               </div>
           </div>
       </div>
@@ -69,7 +69,7 @@ Founded by a team of crypto traders and blockchain enthusiasts, XYO-flow was bui
 
   <section id="approach" class="approach-section unique-section">
       <div class="container">
-          <h2 class="text-center mb-5">The XYO-flow Method</h2>
+          <h2 class="text-center mb-5">The Helix Fund Method</h2>
           <div class="row g-5 align-items-center">
 
               <div class="col-lg-6 approach-item">
@@ -156,12 +156,12 @@ Founded by a team of crypto traders and blockchain enthusiasts, XYO-flow was bui
           <div class="row justify-content-center">
               <div class="col-lg-10">
                    <div class="bento-card featured text-center">
-                      <h2>Ready to Join the XYO-flow?</h2>
+                      <h2>Ready to Join the Helix Fund?</h2>
                       <p class="lead mt-3 mb-4" style="color: rgba(255, 255, 255, 0.8);">
-                          Become part of a forward-thinking investment Fam. Secure your financial future in the digital age with XYO-flow.
+                          Become part of a forward-thinking investment Fam. Secure your financial future in the digital age with Helix Fund.
                       </p>
                       <div class="cta-buttons">
-                          <a href="?a=signup" class="button">Create Account</a>
+                          <a href="{{route('register')}}" class="button">Create Account</a>
                       </div>
                   </div>
               </div>

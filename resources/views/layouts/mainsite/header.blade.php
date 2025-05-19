@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="images/favicon.png" />
-  <title>xyo-flow.com</title>
+  <title>{{siteName()}}</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -106,8 +106,8 @@
     <div class="container">
       <nav class="navbar navbar-expand-lg bg-transparent navbar-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="?a=home">
-            <img src="{{asset('')}}assets/images/logo.png" class="logo" alt="">
+          <a class="navbar-brand" href="{{route('user.dashboard')}}">
+            <img src="{{asset('')}}assets/images/logo1.png" class="logo" alt="">
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"

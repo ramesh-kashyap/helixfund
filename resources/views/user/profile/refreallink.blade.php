@@ -88,7 +88,7 @@
                 <td width="100%" height="22" align="center">
 
                     <textarea rows="2" name="S1" cols="20" class="form-control"
-                        id="myInput1"><a href="https://xyo-flow.com/?ref=rameshk036"><img border="0" src="https://xyo-flow.com/images/125x125.gif" width="125" height="125"></a></textarea>
+                        id="myInput1"><a href="https://helixfund.live/?ref=rameshk036"><img border="0" src="https://helixfund.live/images/125x125.gif" width="125" height="125"></a></textarea>
                     <br>
                     <button class="sbmt" onclick="myFunction1()">Copy Code</button>
 
@@ -116,7 +116,7 @@
             <tr>
                 <td width="100%" height="22" align="center">
                     <textarea rows="2" name="S1" cols="20" class="form-control"
-                        id="myInput8"><a href="https://xyo-flow.com/?ref=rameshk036"><img border="0" src="https://xyo-flow.com/images/468x60.gif" width="468" height="60"></a></textarea>
+                        id="myInput8"><a href="https://helixfund.live/?ref=rameshk036"><img border="0" src="https://helixfund.live/images/468x60.gif" width="468" height="60"></a></textarea>
 
                     <br>
                     <button class="sbmt" onclick="myFunction8()">Copy Code</button>
@@ -145,7 +145,7 @@
             <tr>
                 <td width="100%" height="22" align="center">
                     <textarea rows="2" name="S1" cols="20" class="form-control"
-                        id="myInput3"><a href="https://xyo-flow.com/?ref=rameshk036"><img border="0" src="https://xyo-flow.com/images/728x90.gif" width="728" height="90"></a></textarea>
+                        id="myInput3"><a href="https://helixfund.live/?ref=rameshk036"><img border="0" src="https://helixfund.live/images/728x90.gif" width="728" height="90"></a></textarea>
 
                     <br>
                     <button class="sbmt" onclick="myFunction3()">Copy Code</button>
@@ -173,7 +173,7 @@
             <tr>
                 <td width="100%" height="22" align="center">
                     <textarea rows="2" name="S1" cols="20" class="form-control"
-                        id="myInput2"><a href="https://xyo-flow.com/?ref=rameshk036"><img border="0" src="https://xyo-flow.com/images/1200x150.gif" width="1200" height="150"></a></textarea>
+                        id="myInput2"><a href="https://helixfund.live/?ref=rameshk036"><img border="0" src="https://helixfund.live/images/1200x150.gif" width="1200" height="150"></a></textarea>
 
                     <br>
                     <button class="sbmt" onclick="myFunction2()">Copy Code</button>
@@ -201,7 +201,7 @@
             <tr>
                 <td width="100%" height="22" align="center">
                     <textarea rows="2" name="S1" cols="20" class="form-control"
-                        id="myInput4"><a href="https://xyo-flow.com/?ref=rameshk036"><img border="0" src="https://xyo-flow.com/images/160x600.gif" width="160" height="600"></a></textarea>
+                        id="myInput4"><a href="https://helixfund.live/?ref=rameshk036"><img border="0" src="https://helixfund.live/images/160x600.gif" width="160" height="600"></a></textarea>
 
                     <br>
                     <button class="sbmt" onclick="myFunction4()">Copy Code</button>

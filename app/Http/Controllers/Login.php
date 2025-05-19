@@ -71,20 +71,14 @@ class Login extends Controller
     public function forgot_password_submit(Request $request)
     {
          $validation =  Validator::make($request->all(), [
-                'username' => 'required|unique:users',
                 'email' => 'required',
 
             ]);
 
 
-         if (isset($request->captcha)) {
-                if (!captchaVerify($request->captcha, $request->captcha_secret)) {
-                    $notify[] = ['error', "Invalid Captcha"];
-                    return back()->withNotify($notify)->withInput();
-                }
-            }
+        
             
-        $credentials = User::where('username',$request->username)->where('email',$request->email)->first();
+        $credentials = User::where('email',$request->email)->first();
 
         if ($credentials)
         {
@@ -101,16 +95,16 @@ class Login extends Controller
             $password->created_at = \Carbon\Carbon::now();
             $password->save();
 
-               sendEmail($credentials->email, 'Recovery Password', [
-                'name' => $credentials->name,
-                 'browser' => @$userBrowserInfo['browser'],
-                 'ip' => @$userIpInfo['ip'],
-                 'time' => @$userIpInfo['time'],
-                'operating_system' => @$userBrowserInfo['os_platform'],
-                'code' => $code,
-                'viewpage' => 'forgot_sucess',
+            //    sendEmail($credentials->email, 'Recovery Password', [
+            //     'name' => $credentials->name,
+            //      'browser' => @$userBrowserInfo['browser'],
+            //      'ip' => @$userIpInfo['ip'],
+            //      'time' => @$userIpInfo['time'],
+            //     'operating_system' => @$userBrowserInfo['os_platform'],
+            //     'code' => $code,
+            //     'viewpage' => 'forgot_sucess',
 
-             ]);
+            //  ]);
 
               $page_title = 'Account Recovery';
              $userID = $credentials->id;

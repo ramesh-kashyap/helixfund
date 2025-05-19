@@ -505,7 +505,6 @@ public function cancel_payment($id)
                     ->orWhere('created_at', 'LIKE', '%' . $search . '%');
 
         });
-
       }
 
         $notes = $notes->paginate($limit)->appends(['limit' => $limit ]);

@@ -19,21 +19,21 @@ class Login extends Controller
     {
 
             $validation =  Validator::make($request->all(), [
-                'username' => 'required|unique:users',
+                'email' => 'required|unique:users',
                 'password' => 'required|string',
 
             ]);
 
        
-          if (isset($request->captcha)) {
-                if (!captchaVerify($request->captcha, $request->captcha_secret)) {
-                    $notify[] = ['error', "Invalid Captcha"];
-                    return back()->withNotify($notify)->withInput();
-                }
-            }
+        //   if (isset($request->captcha)) {
+        //         if (!captchaVerify($request->captcha, $request->captcha_secret)) {
+        //             $notify[] = ['error', "Invalid Captcha"];
+        //             return back()->withNotify($notify)->withInput();
+        //         }
+        //     }
             
             $post_array  = $request->all();
-            $credentials = $request->only('username', 'password');
+            $credentials = $request->only('email', 'password');
 
 
 

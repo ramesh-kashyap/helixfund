@@ -125,18 +125,29 @@
 
                     <!-- Wallet Address + Copy Icon -->
                     <div class="d-flex justify-content-center align-items-center mb-3">
-                        <div class="form-control d-flex align-items-center" id="walletAddressText" style="width: auto;">
-                             {{ $data['address_in'] ?? 'Address not found' }}
-                            <span onclick="copyWalletAddress()" style="cursor: pointer; font-size: 1.5rem; color:rgb(212, 220, 230); margin-left: auto;margin-left:10px">
-                                <i class="fas fa-copy"></i>
-                            </span>
-                        </div>
-                    </div>
+    <div class="form-control d-flex align-items-center" id="walletAddressText" style="overflow-x: auto; white-space: nowrap;">
+        <span style="flex: 1; overflow-x: auto;">{{ $data['address_in'] ?? 'Address not found' }}</span>
+        <span onclick="copyWalletAddress()" style="cursor: pointer; font-size: 1.5rem; color:rgb(212, 220, 230); margin-left: 10px;">
+            <i class="fas fa-copy"></i>
+        </span>
+    </div>
+</div>
+
 
                     <!-- Minimum Investment Text -->
-                    <div class="text-center text-muted" style="font-size: 0.9rem;color:rgb(159 161 163 / 75%) !important;">
-                        Minimum amount <strong>100</strong> invest
-                    </div>
+                   <!-- Deposit Rules Box -->
+<div class="card mt-4" style="background-color: #06080b; ">
+    <div class="card-body text-start p-3">
+        <h5 style="color:#6610f2" class=" mb-2">Deposit Rules</h5>
+        <ul class="mb-0 ps-3" style="font-size: 0.9rem; color: #ffff;">
+            <li><strong>Minimum Deposit:</strong> $10</li>
+            <li><strong>Payment Method:</strong> USDT (BEP20) only</li>
+            <li><strong>Important:</strong> Please select the <strong>BEP20</strong> network when sending USDT.</li>
+            <li class="text-danger">Sending funds via any other network may result in permanent loss of your funds.</li>
+        </ul>
+    </div>
+</div>
+
 
                     <!-- Get Wallet Address Button -->
                    

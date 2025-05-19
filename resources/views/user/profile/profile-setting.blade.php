@@ -121,7 +121,9 @@
 
         </style>
 
+   <form method="post" action="{{ route('user.update-profile') }}" >
 
+        {{ csrf_field() }}
         <div class="row mt-3">
             <div class="col-md-6 mb-3">
                 <div class="card">
@@ -136,35 +138,42 @@
                         </div>
                         <div class="mb-3">
                             <label>Account Name</label>
-                            <input type=text name=fullname value="{{ $profile_data ? $profile_data->name : '' }}"
-                                class="form-control" readonly size=30>
+                            <input type=text name=name value="{{ $profile_data ? $profile_data->name : '' }}"
+                                class="form-control"  size=30>
                         </div>
                         <div class="mb-3">
-                            <label>Registration date</label>
-                            <input type="text" value="{{ $profile_data ? $profile_data->created_at : '' }}"
+                            <label>Email</label>
+                            <input type="text" value="{{ $profile_data ? $profile_data->email : '' }}"
                                 class="form-control" readonly>
                         </div>
 
 
 
 
-                        <div class="mb-3">
-                            <label>Your E-mail address</label>
-                            {{ $profile_data ? $profile_data->email : '' }}
+                       <div class="mb-3">
+                            <label>Phone</label>
+                            <input type="text" value="{{ $profile_data ? $profile_data->phone : '' }}"
+                                class="form-control" readonly>
+                        </div>
+                         <div class="mb-3">
+                            <label>Wallet Address (USDT BEP20)</label>
+                            <input type="text" value="{{ $profile_data ? $profile_data->usdtBep20 : '' }}" name="usdtBep20"
+                                class="form-control" >
                         </div>
 
-                        <!-- <div class="mb-3">
-              <label>Your RCB Percent</label>
-              <input type=text class="form-control" size=30 name="rcb"
-                value="0.00">            </div> -->
+                  <div class="text-center">
+                   <input type="submit" value="Submit" class="sbmt btn btn-primary">
+                   </div>
+
                     </div>
                 </div>
             </div>
           
         </div>
+        </form>
 
 
-
+    @include('partials.notify')
 
 
 

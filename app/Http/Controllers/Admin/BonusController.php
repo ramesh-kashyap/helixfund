@@ -49,7 +49,7 @@ class BonusController extends Controller
            $limit = $request->limit ? $request->limit :  paginationLimit();
             $status = $request->status ? $request->status : null;
             $search = $request->search ? $request->search : null;
-            $notes = Income::where('remarks','Leadership Income')->orderBy('id', 'DESC');
+            $notes = Income::where('remarks','Level Income')->orderBy('id', 'DESC');
            if($search <> null && $request->reset!="Reset"){
             $notes = $notes->where(function($q) use($search){
               $q->Where('rname', 'LIKE', '%' . $search . '%')
@@ -81,7 +81,7 @@ class BonusController extends Controller
            $limit = $request->limit ? $request->limit :  paginationLimit();
             $status = $request->status ? $request->status : null;
             $search = $request->search ? $request->search : null;
-            $notes = Income::where('remarks','Activities Bonus')->orderBy('id', 'DESC');
+            $notes = Income::where('remarks','Royalty Bonus')->orderBy('id', 'DESC');
            if($search <> null && $request->reset!="Reset"){
             $notes = $notes->where(function($q) use($search){
               $q->Where('rname', 'LIKE', '%' . $search . '%')
@@ -101,7 +101,7 @@ class BonusController extends Controller
 
                 $this->data['level_incomes'] =  $notes;
                 $this->data['search'] = $search;
-                $this->data['page'] = 'admin.bonus.activities-bonus';
+                $this->data['page'] = 'admin.bonus.royalty-bonus';
                 return $this->admin_dashboard();
     }
 
@@ -180,7 +180,7 @@ class BonusController extends Controller
            $limit = $request->limit ? $request->limit :  paginationLimit();
             $status = $request->status ? $request->status : null;
             $search = $request->search ? $request->search : null;
-            $notes = Income::where('remarks','Royalty Bonus')->orderBy('id', 'DESC');
+            $notes = Income::where('remarks','Rank Reward Bonus')->orderBy('id', 'DESC');
            if($search <> null && $request->reset!="Reset"){
             $notes = $notes->where(function($q) use($search){
               $q->Where('rname', 'LIKE', '%' . $search . '%')

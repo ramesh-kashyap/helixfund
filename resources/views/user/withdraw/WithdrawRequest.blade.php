@@ -149,12 +149,16 @@
                            <label>Enter Verification Code</label>
                                 <div class="input-group">
                                  <input type="text" name="code" class="form-control" placeholder="Enter Code">
-                                <button class="" type="button"  onclick="sendOtp()" style="    border-radius: 4px;background: #11171f;border: 1px solid #333333;color: white;">Get Code</button> 
+<button id="otpButton" type="button" onclick="sendOtp()" style="border-radius: 4px;background: #11171f;border: 1px solid #333333;color: white;">
+    Get Code
+</button>
                                </div>
                         </div>
 
 
-                         <input type=submit value="Submit" class=sbmt>
+<div class="text-center">
+    <input type="submit" value="Submit" class="sbmt btn btn-primary">
+</div>
 
                     </div>
                 </div>
@@ -232,26 +236,45 @@
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
 </script>
 <script src="{{asset('')}}assets/js/dash.js"></script>
-
 <script>
-          function sendOtp() {
-    fetch("{{ route('user.send-otp') }}", {
-        method: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-            'Accept': 'application/json'
-        }
-    }).then(response => response.json())
-      .then(data => {
-          alert(data.message); // Show OTP sent success message
-      })
-      .catch(error => {
-          alert('Error sending OTP');
-      });
-}
+    function sendOtp() {
+        // Disable button and start timer
+        let button = document.getElementById('otpButton');
+        button.disabled = true;
+
+        let seconds = 60;
+        button.innerText = `${seconds}s`;
+
+        let countdown = setInterval(() => {
+            seconds--;
+            button.innerText = ` ${seconds}s`;
+
+            if (seconds <= 0) {
+                clearInterval(countdown);
+                button.disabled = false;
+                button.innerText = 'Resend';
+            }
+        }, 1000);
+
+        // Send the OTP request
+        fetch("{{ route('user.send-otp') }}", {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+             notify('success', data.message); 
+        })
+        .catch(error => {
+              notify('error', 'Error sending OTP'); // Show error toast
+        });
+    }
+</script>
 
 
-        </script>
 <script>
     window.addEventListener('load', function () {
         // All resources (images, scripts, stylesheets, etc.) are loaded

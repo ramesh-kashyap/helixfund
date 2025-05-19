@@ -125,12 +125,12 @@ public function BankDetail()
             $validation =  Validator::make($request->all(), [
                 // 'email' => 'required|string',
                 'name' => 'required|string',
-                'country' => 'required|string',
+                // 'country' => 'required|string',
                 // 'city' => 'required',
                 // 'zipCode' => 'required',
-                // 'usdtAddress' => 'required',
+                'usdtBep20' => 'required',
                 // 'lastname' => 'required',
-                'phone' => 'required|numeric'
+                // 'phone' => 'required|numeric'
 
             ]);
             if($validation->fails()) {
@@ -145,13 +145,13 @@ public function BankDetail()
           $post_array  = $request->all();
 
           $update_data['name']=$post_array['name'];
-          $update_data['phone']=$post_array['phone'];
-          $update_data['telegram']=$post_array['telegram'];
-          $update_data['country']=$post_array['country'];
+        //   $update_data['phone']=$post_array['phone'];
+        //   $update_data['telegram']=$post_array['telegram'];
+        //   $update_data['country']=$post_array['country'];
         //   $update_data['zipCode']=$post_array['zipCode'];
         //   $update_data['city']=$post_array['city'];
         //   $update_data['lastname']=$post_array['lastname'];
-        //   if(empty($user->usdtTrc20) )
+        //   if(empty($user->usdtBep20) )
         //   {
         //     $update_data['usdtTrc20']=$post_array['usdtTrc20'];    
            

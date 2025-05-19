@@ -10,7 +10,7 @@
                 <i class="fas fa-bars"></i>
             </button>
 
-            <span class="navbar-brand text-capitalize text-white mb-0 h1 d-none d-sm-inline-block"> Roi Income</span>
+            <span class="navbar-brand text-capitalize text-white mb-0 h1 d-none d-sm-inline-block"> Trading Income</span>
 
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item mb-0 dropdown">
@@ -61,7 +61,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
   <label class="form-label">Transaction Type</label>
-  <select class="form-control" onchange="if(this.value) window.location.href=this.value;">
+   <select class="form-control" onchange="if(this.value) window.location.href=this.value;">
     <option style="background-color: #1f1f1f;" value="{{ route('user.DepositHistory') }}" 
         {{ Request::routeIs('user.DepositHistory') ? 'selected' : '' }}>Deposit</option>
 
@@ -72,10 +72,15 @@
         {{ Request::routeIs('user.level-income') ? 'selected' : '' }}>Level Income</option>
 
     <option style="background-color: #1f1f1f;" value="{{ route('user.roi-bonus') }}" 
-        {{ Request::routeIs('user.roi-bonus') ? 'selected' : '' }}>Roi Income</option>
+        {{ Request::routeIs('user.roi-bonus') ? 'selected' : '' }}>Trading Income</option>
 
     <option style="background-color: #1f1f1f;" value="{{ route('user.reward-bonus') }}" 
-        {{ Request::routeIs('user.reward-bonus') ? 'selected' : '' }}>Direct Income</option>  
+        {{ Request::routeIs('user.reward-bonus') ? 'selected' : '' }}>Direct Income</option> 
+           <option style="background-color: #1f1f1f;" value="{{ route('user.activitiesBonus') }}" 
+        {{ Request::routeIs('user.activitiesBonus') ? 'selected' : '' }}>Rank & Reward Income</option>
+
+    <option style="background-color: #1f1f1f;" value="{{ route('user.dailyIncentive') }}" 
+        {{ Request::routeIs('user.dailyIncentive') ? 'selected' : '' }}>Royalty Income</option>  
 </select>
 </div>
 
@@ -229,19 +234,19 @@
     </form>
 </div>
     <div class="row g-3">
-        @foreach($level_income as $income)
+    @forelse($level_income as $income)
         <div class="col-md-6">
             <div class="card h-100">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-start mb-2">
                         <div>
-                            <h5 class="mb-1">Roi Income</h5>
+                            <h5 class="mb-1">Trading Income</h5>
                             <div class="small">Completed</div>
                         </div>
                         <div class="text-end">
                             <div class="d-flex align-items-center justify-content-end">
                                 <h4 class="mb-0 me-2">${{ number_format($income->comm, 2) }}</h4>
-                                <img src="{{asset('')}}assets/images/102.png" height="17">
+                                <img src="{{ asset('') }}assets/images/102.png" height="17">
                             </div>
                             <small>{{ \Carbon\Carbon::parse($income->created_at)->format('M-d-Y h:i:s A') }}</small>
                         </div>
@@ -249,8 +254,12 @@
                 </div>
             </div>
         </div>
-        @endforeach
-    </div>
+    @empty
+        <div class="col-12">
+                No Trading Income found.
+        </div>
+    @endforelse
+</div>
 
     {{-- Custom Pagination --}}
     @if ($level_income->lastPage() > 1)

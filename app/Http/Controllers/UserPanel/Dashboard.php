@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Crypt;
 use App\Models\User;
 use App\Models\Investment;
 use App\Models\Income;
+use App\Models\Withdraw;
 use App\Models\User_trade;
 use App\Models\Activitie;
 use Carbon\Carbon;
@@ -38,7 +39,7 @@ class Dashboard extends Controller
 
       $tolteam=$this->my_level_team_count($user->id);               
  
-      
+      $userId = Auth::user()->id;
 
      
       $deposit_report = Investment::where('user_id',$user->id)->orderBy('id','desc')->get();
@@ -131,6 +132,69 @@ class Dashboard extends Controller
       $userDirect = User::where('sponsor',$user->id)->where('active_status','Active')->where('package','>=',30)->count();
       $totalRoi = \DB::table('contract')->where('user_id',$user->id)->sum('profit');
       $todaysRoi = \DB::table('contract')->where('user_id',$user->id)->where('ttime',date('Y-m-d'))->get();
+$investment = Investment::select(
+    'id',
+    'user_id',
+    'amount as amount',
+    'status as description',
+    'sdate as date'
+)
+->where('user_id', $userId)
+->whereIn('status', ['Active', 'Pending'])
+->orderBy('sdate', 'desc')
+->get()
+->map(function ($item) {
+    $item->type = 'investment';
+    $item->created_at = $item->date;
+    return $item;
+});
+
+$withdraw = Withdraw::select(
+    'id',
+    'user_id',
+    'amount as amount',
+    'status as description',
+    'created_at as date'
+)
+->where('user_id', $userId)
+->whereIn('status', ['Approved', 'Pending']) // 👈 Add this line
+->orderBy('created_at', 'desc')
+->get()
+->map(function ($item) {
+    $item->type = 'withdraw';
+    return $item;
+});
+
+$contract = Contract::select(
+    'id',
+    'user_id',
+    'profit as amount',
+    'c_name as description',
+    'created_at as date'
+)
+->where('user_id', $userId)
+->orderBy('created_at', 'desc')
+->get()
+->map(function ($item) {
+    $item->type = 'contract';
+    return $item;
+});
+
+// Merge remaining collections
+$all = $investment->merge($withdraw)->merge($contract);
+
+// Sort by date descending
+$sorted = $all->sortByDesc('date');
+
+// Take latest 10
+$latest = $sorted->take(10)->values();
+
+if ($latest->isEmpty()) {
+    return null;
+} else {
+    $this->data['records'] = $latest;
+}
+
       $this->data['todaysTrade'] = $todaysRoi;
       $this->data['totalRoi'] = $totalRoi;
       $this->data['userDirect'] = $userDirect;

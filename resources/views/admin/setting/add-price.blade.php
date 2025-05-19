@@ -24,27 +24,22 @@
                                      {{ csrf_field() }}
                                         <div class="row">
                                        
+                                            <div class="mb-3 col-md-6">
+                                                <label class="form-label">VIP1 %</label>                                            
+                                               <input type="text" placeholder="VIP1 %" name="vip1_percentage" value="{{$trade[0]->m_return}}" class="form-control" required id="">
+                                            </div>
+
+                                            <div class="mb-3 col-md-6">
+                                                <label class="form-label">VIP2 %</label>                                             
+                                                <input type="text" placeholder="" value="{{$trade[1]->m_return}}" name="vip2_percentage" class="form-control" required id="">
+                                            </div>
+                                            
+                                            <div class="mb-3 col-md-6">
+                                                <label class="form-label">VIP3 %</label>                                             
+                                                <input type="text" placeholder="" value="{{$trade[2]->m_return}}" name="vip3_percentage" class="form-control" required id="">
+                                            </div>
+
                                            
-
-                                            <div class="mb-3 col-md-6">
-                                                <label class="form-label">TOTAL FUNDS INVESTED</label>                                            
-                                               <input type="text" placeholder="TOTAL FUNDS INVESTED" name="total_fund_invested" value="{{generalDetail()->total_fund_invested}}" class="form-control" required id="">
-                                            </div>
-
-                                            <div class="mb-3 col-md-6">
-                                                <label class="form-label">TOTAL PAID</label>                                             
-                                                <input type="text" placeholder="TOTAL PAID" value="{{generalDetail()->paid_withdrawal}}" name="paid_withdrawal" class="form-control" required id="">
-                                            </div>
-
-                                            <div class="mb-3 col-md-6">
-                                                <label class="form-label">PEOPLE ONLINE</label>                                             
-                                                <input type="text" placeholder="PEOPLE ONLINE" value="{{generalDetail()->people_online}}" name="people_online" class="form-control" required id="">
-                                            </div>
-
-                                            <div class="mb-3 col-md-6">
-                                                <label class="form-label">OUR INVESTORS</label>                                             
-                                                <input type="text" placeholder="OUR INVESTORS" value="{{generalDetail()->our_investors}}" name="our_investors" class="form-control" required id="">
-                                            </div>
 
               
                                            

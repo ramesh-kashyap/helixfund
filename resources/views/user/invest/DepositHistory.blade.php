@@ -246,9 +246,10 @@
                     <div class="d-flex justify-content-between align-items-start mb-2">
                         <div>
                             <h5 class="mb-1">Deposit</h5>
-                            <div class="small">
-                                {{ $deposit->status == 'Active' ? 'Completed' : $deposit->status }}
-                            </div>
+                           <div class="small {{ $deposit->status == 'Active' ? 'text-success' : 'text-white' }}">
+    {{ $deposit->status == 'Active' ? 'Completed' : $deposit->status }}
+</div>
+
                         </div>
                         <div class="text-end">
                             <div class="d-flex align-items-center justify-content-end">

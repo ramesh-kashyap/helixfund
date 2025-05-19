@@ -160,103 +160,12 @@
                     </div>
                 </div>
             </div>
-                            <form method="POST" action="{{ route('user.update-password') }}">
-    @csrf
-            <div class="col-md-6 mb-3">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Set up Password</h3>
-                    </div>
-                    <div class="card-body">
-
-
-       
-    <div class="mb-3">
-        <label>New Password</label>
-        <input type="password" name="password" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label>Retype Password</label>
-        <input type="password" name="password2" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label>Verification Code</label>
-        <div class="input-group">
-            <input type="text" name="code" class="form-control" placeholder="Enter code" required />
-            <button type="button" class="btn btn-dark" onclick="sendOtp()">Send</button>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Update Password</button>
-
-
-
-
-
-                    </div>
-                </div>
-            </div>
-            </form>
-<script>
-    function sendOtp() {
-        fetch("{{ route('user.send-otp') }}", {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                'Accept': 'application/json'
-            }
-        }).then(response => response.json())
-        .then(data => {
-            alert(data.message);
-        }).catch(error => {
-            alert('Error sending OTP');
-        });
-    }
-</script>
-            <div class="col-md-12 mb-3">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Set up Wallet</h3>
-                    </div>
-                    <div class="card-body">
-
-                        <div class="mb-3">
-                            <label>Your Bitcoin acc no</label>
-                            <input type=text class="form-control" size=30 name="pay_account[48]" value=""
-                                data-validate="regexp" data-validate-regexp="^(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,39}$"
-                                data-validate-notice="Bitcoin Address"> </div>
-
-                        <div class="mb-3">
-                            <label>Your Litecoin acc no</label>
-                            <input type=text class="form-control" size=30 name="pay_account[68]" value=""
-                                data-validate="regexp" data-validate-regexp="^ltc1|[LM3][a-km-zA-HJ-NP-Z1-9]{25,40}$"
-                                data-validate-notice="Litecoin Address"> </div>
-
-                        <div class="mb-3">
-                            <label>Your Tron acc no</label>
-                            <input type=text class="form-control" size=30 name="pay_account[85]" value=""
-                                data-validate="regexp" data-validate-regexp="^T[a-km-zA-HJ-NP-Z1-9]{25,34}$"
-                                data-validate-notice="Tron Address"> </div>
-
-                        <div class="mb-3">
-                            <label>Your Tether TRC20 acc no</label>
-                            <input type=text class="form-control" size=30 name="pay_account[92]" value=""
-                                data-validate="regexp" data-validate-regexp="^T[a-km-zA-HJ-NP-Z1-9]{25,34}$"
-                                data-validate-notice="Tether TRC20 Address"> </div>
-
-                        <div class="mb-3">
-                            <label>Your Tether BEP20 acc no</label>
-                            <input type=text class="form-control" size=30 name="pay_account[102]" value=""
-                                data-validate="regexp" data-validate-regexp="^(0x)?[0-9a-fA-F]{40}$"
-                                data-validate-notice="Tether BEP20 Address"> </div>
-                    </div>
-                </div>
-            </div>
+          
         </div>
 
 
 
 
-        <input type=submit value="Update" class=sbmt>
 
 
 </div>
@@ -267,60 +176,57 @@
         <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas"
             aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body">
-        <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
-                <a href="?a=account" class="nav-link text-white">
-                    <i class="fas fa-user fa-fw me-2"></i>Account
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=deposit" class="nav-link text-white">
-                    <i class="fas fa-download fa-fw me-2"></i>Deposit
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=withdraw" class="nav-link text-white">
-                    <i class="fas fa-upload fa-fw me-2"></i>Withdraw
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=deposit_list" class="nav-link text-white">
-                    <i class="fas fa-list-alt fa-fw me-2"></i>Deposit List
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=history" class="nav-link text-white">
-                    <i class="fas fa-history fa-fw me-2"></i>History
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=referals" class="nav-link text-white">
-                    <i class="fas fa-users fa-fw me-2"></i>Referrals
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=referallinks" class="nav-link text-white">
-                    <i class="fas fa-link fa-fw me-2"></i>Banners
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=security" class="nav-link text-white">
-                    <i class="fas fa-shield-alt fa-fw me-2"></i>Security
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=edit_account" class="nav-link text-white">
-                    <i class="fas fa-user-edit fa-fw me-2"></i>Edit Account
-                </a>
-            </li>
-            <li class="nav-item mt-auto">
-                <a href="?a=logout" class="nav-link text-warning">
-                    <i class="fas fa-sign-out-alt fa-fw me-2"></i>Logout
-                </a>
-            </li>
-        </ul>
-    </div>
+      <div class="offcanvas-body">
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a href="{{route('user.dashboard')}}" class="nav-link text-white">
+                            <i class="fas fa-user fa-fw me-2"></i>Account
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('user.invest')}}" class="nav-link text-white">
+                            <i class="fas fa-download fa-fw me-2"></i>Deposit
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('user.Withdraw')}}" class="nav-link text-white">
+                            <i class="fas fa-upload fa-fw me-2"></i>Withdraw
+                        </a>
+                    </li>
+                   
+                    <li class="nav-item">
+                        <a href="{{route('user.DepositHistory')}}" class="nav-link text-white">
+                            <i class="fas fa-history fa-fw me-2"></i>History
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('user.level-team')}}" class="nav-link text-white">
+                            <i class="fas fa-users fa-fw me-2"></i>Referrals
+                        </a>
+                    </li>
+                  
+                    <li class="nav-item">
+                        <a href="{{route('user.ChangePass')}}" class="nav-link text-white">
+                            <i class="fas fa-shield-alt fa-fw me-2"></i>Security
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('user.profile')}}" class="nav-link text-white">
+                            <i class="fas fa-user-edit fa-fw me-2"></i>Edit Account
+                        </a>
+                    </li>
+                   <li class="nav-item mt-auto">
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                            class="d-none">
+                            @csrf
+                        </form>
+                    <a href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link text-warning" title="Logout" data-bs-toggle="tooltip"
+                        data-bs-placement="right">
+                        <i class="fas fa-sign-out-alt fa-fw"></i><span class="sidebar-text ms-2">Logout</span>
+                    </a>
+                </li>
+                </ul>
+            </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>

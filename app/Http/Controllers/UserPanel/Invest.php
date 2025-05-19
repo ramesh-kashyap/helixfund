@@ -499,10 +499,11 @@ public function cancel_payment($id)
       if($search <> null && $request->reset!="Reset"){
         $notes = $notes->where(function($q) use($search){
           $q->Where('user_id_fk', 'LIKE', '%' . $search . '%')
-          ->orWhere('txn_no', 'LIKE', '%' . $search . '%')
           ->orWhere('status', 'LIKE', '%' . $search . '%')
-          ->orWhere('type', 'LIKE', '%' . $search . '%')
-          ->orWhere('amount', 'LIKE', '%' . $search . '%');
+          ->orWhere('payment_mode', 'LIKE', '%' . $search . '%')
+          ->orWhere('amount', 'LIKE', '%' . $search . '%')
+                    ->orWhere('created_at', 'LIKE', '%' . $search . '%');
+
         });
 
       }

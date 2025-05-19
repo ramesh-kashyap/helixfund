@@ -19,22 +19,22 @@
         <div class="row">
                             <div class="col-md-4 mb-3">
                     <div class="card overflow-hidden">
-                <img src="https://xyo-flow.com/images/bonus.png" class="img-fluid">                        <div class="card-body">
+                <img src="https://Helix Fund.com/images/bonus.png" class="img-fluid">                        <div class="card-body">
                             <a href="?a=news&id=2" style="text-decoration: none; color:aliceblue; font-weight:600;">
-                                <h3>XYO-flow Bounty Program Is Live — Get Rewarded for Your Activity!</h3>
+                                <h3>Helix Fund Bounty Program Is Live — Get Rewarded for Your Activity!</h3>
                             </a>
-                            <p>We’re excited to launch the XYO-flow Bounty Program, designed to reward our most active and engaged community members. Getting bonuses has never been easier — you only need to activate a deposit and share your experience!</p>
+                            <p>We’re excited to launch the Helix Fund Bounty Program, designed to reward our most active and engaged community members. Getting bonuses has never been easier — you only need to activate a deposit and share your experience!</p>
                             <p><small>May-7-2025 09:19:28 PM</small></p>
                         </div>
                     </div>
                 </div>
                             <div class="col-md-4 mb-3">
                     <div class="card overflow-hidden">
-                <img src="https://xyo-flow.com/images/launch.png" class="img-fluid">                        <div class="card-body">
+                <img src="https://Helix Fund.com/images/launch.png" class="img-fluid">                        <div class="card-body">
                             <a href="?a=news&id=1" style="text-decoration: none; color:aliceblue; font-weight:600;">
-                                <h3>XYO-flow Officially Launched!</h3>
+                                <h3>Helix Fund Officially Launched!</h3>
                             </a>
-                            <p>XYO-flow is now live! Start earning with hourly and daily investment plans, instant withdrawals, and a powerful affiliate program.</p>
+                            <p>Helix Fund is now live! Start earning with hourly and daily investment plans, instant withdrawals, and a powerful affiliate program.</p>
                             <p><small>May-6-2025 01:51:55 PM</small></p>
                         </div>
                     </div>

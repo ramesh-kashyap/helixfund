@@ -62,15 +62,21 @@
                         <div class="form-group">
   <label class="form-label">Transaction Type</label>
   <select class="form-control" onchange="if(this.value) window.location.href=this.value;">
-    <option value="">All transactions</option>
-    <option value="{{ route('user.DepositHistory') }}">Deposit</option>
-    <option value="{{ route('user.Withdraw-History') }}">Withdrawal</option>
-    <option value="{{ route('user.level-income') }}">Level Income</option>
-        <option value="{{ route('user.roi-bonus') }}">Roi Income</option>
-                        <option value="{{ route('user.reward-bonus') }}">Direct Income</option>
+    <option style="background-color: #1f1f1f;" value="{{ route('user.DepositHistory') }}" 
+        {{ Request::routeIs('user.DepositHistory') ? 'selected' : '' }}>Deposit</option>
 
+    <option style="background-color: #1f1f1f;" value="{{ route('user.Withdraw-History') }}" 
+        {{ Request::routeIs('user.Withdraw-History') ? 'selected' : '' }}>Withdrawal</option>
 
-  </select>
+    <option style="background-color: #1f1f1f;" value="{{ route('user.level-income') }}" 
+        {{ Request::routeIs('user.level-income') ? 'selected' : '' }}>Level Income</option>
+
+    <option style="background-color: #1f1f1f;" value="{{ route('user.roi-bonus') }}" 
+        {{ Request::routeIs('user.roi-bonus') ? 'selected' : '' }}>Roi Income</option>
+
+    <option style="background-color: #1f1f1f;" value="{{ route('user.reward-bonus') }}" 
+        {{ Request::routeIs('user.reward-bonus') ? 'selected' : '' }}>Direct Income</option>  
+</select>
 </div>
 
 <!-- 
@@ -211,7 +217,17 @@
             </form>
         </div>
     </div>
+<div class="d-flex justify-content-between align-items-center mb-3">
 
+    <form action="{{ route('user.roi-bonus') }}" method="GET" class="d-flex ms-auto" style="width: 300px;">
+        <div class="input-group">
+            <input type="text" name="search" class="form-control" placeholder="Search..." value="{{ request('search') }}">
+            <button class="btn btn-outline-secondary" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </form>
+</div>
     <div class="row g-3">
         @foreach($level_income as $income)
         <div class="col-md-6">
@@ -220,7 +236,7 @@
                     <div class="d-flex justify-content-between align-items-start mb-2">
                         <div>
                             <h5 class="mb-1">Roi Income</h5>
-                            <div class="small">Roi Income to X-Daily</div>
+                            <div class="small">Completed</div>
                         </div>
                         <div class="text-end">
                             <div class="d-flex align-items-center justify-content-end">
@@ -271,60 +287,57 @@
         <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas"
             aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body">
-        <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
-                <a href="?a=account" class="nav-link text-white">
-                    <i class="fas fa-user fa-fw me-2"></i>Account
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=deposit" class="nav-link text-white">
-                    <i class="fas fa-download fa-fw me-2"></i>Deposit
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=withdraw" class="nav-link text-white">
-                    <i class="fas fa-upload fa-fw me-2"></i>Withdraw
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=deposit_list" class="nav-link text-white">
-                    <i class="fas fa-list-alt fa-fw me-2"></i>Deposit List
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=history" class="nav-link text-white">
-                    <i class="fas fa-history fa-fw me-2"></i>History
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=referals" class="nav-link text-white">
-                    <i class="fas fa-users fa-fw me-2"></i>Referrals
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=referallinks" class="nav-link text-white">
-                    <i class="fas fa-link fa-fw me-2"></i>Banners
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=security" class="nav-link text-white">
-                    <i class="fas fa-shield-alt fa-fw me-2"></i>Security
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="?a=edit_account" class="nav-link text-white">
-                    <i class="fas fa-user-edit fa-fw me-2"></i>Edit Account
-                </a>
-            </li>
-            <li class="nav-item mt-auto">
-                <a href="?a=logout" class="nav-link text-warning">
-                    <i class="fas fa-sign-out-alt fa-fw me-2"></i>Logout
-                </a>
-            </li>
-        </ul>
-    </div>
+      <div class="offcanvas-body">
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a href="{{route('user.dashboard')}}" class="nav-link text-white">
+                            <i class="fas fa-user fa-fw me-2"></i>Account
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('user.invest')}}" class="nav-link text-white">
+                            <i class="fas fa-download fa-fw me-2"></i>Deposit
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('user.Withdraw')}}" class="nav-link text-white">
+                            <i class="fas fa-upload fa-fw me-2"></i>Withdraw
+                        </a>
+                    </li>
+                   
+                    <li class="nav-item">
+                        <a href="{{route('user.DepositHistory')}}" class="nav-link text-white">
+                            <i class="fas fa-history fa-fw me-2"></i>History
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('user.level-team')}}" class="nav-link text-white">
+                            <i class="fas fa-users fa-fw me-2"></i>Referrals
+                        </a>
+                    </li>
+                  
+                    <li class="nav-item">
+                        <a href="{{route('user.ChangePass')}}" class="nav-link text-white">
+                            <i class="fas fa-shield-alt fa-fw me-2"></i>Security
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('user.profile')}}" class="nav-link text-white">
+                            <i class="fas fa-user-edit fa-fw me-2"></i>Edit Account
+                        </a>
+                    </li>
+                   <li class="nav-item mt-auto">
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                            class="d-none">
+                            @csrf
+                        </form>
+                    <a href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link text-warning" title="Logout" data-bs-toggle="tooltip"
+                        data-bs-placement="right">
+                        <i class="fas fa-sign-out-alt fa-fw"></i><span class="sidebar-text ms-2">Logout</span>
+                    </a>
+                </li>
+                </ul>
+            </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>

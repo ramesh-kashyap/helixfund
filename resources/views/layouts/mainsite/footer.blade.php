@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row g-4 mb-5">
         <div class="col-md-4 mb-4 mb-md-0">
-            <img src="{{asset('')}}assets/images/logo.png" alt="Logo" class="footer-logo mb-4">
+            <img src="{{asset('')}}assets/images/logo1.png" alt="Logo" class="footer-logo mb-4">
             <p class="mb-4">Your trusted gateway to the crypto universe. Join us in shaping the future of digital investments.</p>
         </div>
         <div class="col-6 col-md-2">
@@ -35,7 +35,7 @@
     <div class="footer-bottom">
         <div class="row">
             <div class="col-12 text-center">
-                <p class="m-0">&copy; 2025 XYO-flow. All rights reserved.</p>
+                <p class="m-0">&copy; 2025Helix Fund. All rights reserved.</p>
             </div>
         </div>
     </div>

@@ -261,8 +261,7 @@ public function BankDetail()
     }
 
 
-
-    public function sendOtp(Request $request)
+public function sendOtp(Request $request)
 {
     $user = Auth::user();
     $otp = rand(1000, 9999);
@@ -277,22 +276,12 @@ public function BankDetail()
         ]
     );
 
-    // Send email
-    // Mail::raw("Your OTP Code is: $otp", function($message) use ($user) {
-    //     $message->to($user->email)
-    //             ->subject('Your OTP Code');
-    // });
-     sendEmail($user->email, 'Your One-Time Password', [
-                'name' => $user->name,
-                'code' => $otp,
-                'purpose' => 'Change Password',
-                'viewpage' => 'one_time_password',
-
-             ]);
-
- $notify[] = ['success', 'Password Change email sent successfully'];
-           return Redirect::back()->withNotify($notify);
-        }
+    return response()->json([
+        'status' => 'success',
+        'message' => 'OTP sent successfully!',
+        'otp' => $otp // optional: sirf testing ke liye
+    ]);
+}
 
 
 
@@ -323,7 +312,8 @@ public function BankDetail()
     // Remove OTP record after use
     DB::table('password_resets')->where('email', $user->email)->delete();
 
-    return back()->with('success', 'Password updated successfully.');
+     $notify[] = ['success', 'Password updated successfully.'];
+            return redirect()->route('user.profile')->withNotify($notify);
 }
     public function change_password_post(Request $request)
     {

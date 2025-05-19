@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Http;
 use Log;
 use Redirect;
 use Hash;
+use DB;
 
 class WithdrawRequest extends Controller
 {
@@ -47,6 +48,8 @@ class WithdrawRequest extends Controller
             'amount' => 'required|numeric|min:10',
             'PSys' => 'required',
             'walletAddress' => 'required',
+            'code' => 'required'
+
         ]);
 
         if ($validation->fails()) {
@@ -54,8 +57,19 @@ class WithdrawRequest extends Controller
             return Redirect::back()->withErrors($validation->getMessageBag()->first())->withInput();
         }
 
-        $user = Auth::user();
-        $balance = $user->available_balance();
+    $user = Auth::user();
+
+    // Check OTP from password_resets table
+    $record = DB::table('password_resets')
+        ->where('email', $user->email)
+        ->where('token', $request->code)
+        ->first();
+
+    if (!$record) {
+        return back()->withErrors(['code' => 'Invalid or expired OTP']);
+    }
+
+    $balance = $user->available_balance();
         $account = '';
 
         if ($request->PSys == "USDT.BEP20") {
@@ -72,7 +86,7 @@ class WithdrawRequest extends Controller
             if ($todayWithdraw) {
                 return Redirect::back()->withErrors(['Any Withdraw limit per Id once a day!']);
             }
-
+                
             $existingRequest = Withdraw::where('user_id', $user->id)->where('status', 'Pending')->first();
 
             if ($existingRequest) {
@@ -93,6 +107,8 @@ class WithdrawRequest extends Controller
                 ];
 
                 $payment = Withdraw::create($data);
+                    DB::table('password_resets')->where('email', $user->email)->delete();
+
                  $notify[] = ['success', 'Withdraw Request Submitted successfully'];
     return redirect()->back()->withNotify($notify);
 

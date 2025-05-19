@@ -4,7 +4,7 @@
     <div class="container text-center">
         <h1>Create an <span class="gradient-text">Account</span></h1>
         <p class="lead mt-4 mb-5" style="color: rgba(255, 255, 255, 0.9); max-width: 600px; margin: 0 auto;">
-            Join xyo-flow.com and start your investment journey today
+            Join helixfund.live and start your investment journey today
         </p>
     </div>
 </div>
@@ -173,10 +173,10 @@
                                 </div>
 
 
-
+<!-- 
                                 <div class="col-12">
                                     <h4 class="mb-4 mt-4">Contact Information</h4>
-                                </div>
+                                </div> -->
 
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -204,14 +204,14 @@
                                     </div>
                                 </div>
                           
-
+<!-- 
                                 <div class="col-12">
                                     <h4 class="mb-4 mt-4">Referral Information</h4>
                                     <div class="alert alert-info d-flex align-items-center">
                                         <i class='bx bx-user-plus me-2' style="font-size: 1.2rem;"></i>
                                         Your Upline: <strong class="ms-2">N/A (n/a)</strong>
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="col-12 mt-4">
 
@@ -223,7 +223,7 @@
                                         <input class="form-check-input" type="checkbox" name="agree" value="1"
                                             id="agreeTerms">
                                         <label class="form-check-label" for="agreeTerms">
-                                            I agree with the <a href="?a=rules" class="themed-link">Terms and
+                                            I agree with the <a href="{{route('faq')}}" class="themed-link">Terms and
                                                 Conditions</a>
                                         </label>
                                     </div>
@@ -239,7 +239,7 @@
                         <div class="text-center mt-4">
                             <p style="color: rgba(255, 255, 255, 0.7);">
                                 Already have an account?
-                                <a href="?a=login" class="themed-link">Sign in here</a>
+                                <a href="{{route('login')}}" class="themed-link">Sign in here</a>
                             </p>
                         </div>
                     </div>

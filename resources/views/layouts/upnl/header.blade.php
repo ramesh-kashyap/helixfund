@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="images/favicon.png" />
-    <title>xyo-flow.com</title>
+    <title>{{siteName()}}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -136,7 +136,7 @@
 </head>
 
 <body>
-    <div class="preloader-container">
+    <!-- <div class="preloader-container">
         <div class="loader">
             <div class="square" id="sq1"></div>
             <div class="square" id="sq2"></div>
@@ -148,18 +148,17 @@
             <div class="square" id="sq8"></div>
             <div class="square" id="sq9"></div>
         </div>
-    </div>
+    </div> -->
     <video class="video-background" src="{{asset('')}}assets/video/bg.mp4" type="video/mp4" muted autoplay loop plays-inline
         poster="video/poster2.png"></video>
 
     <div class="d-flex main-wrapper">
         <nav id="sidebar" class="text-white p-3 d-none d-md-flex flex-column sidebar-narrow">
             <div class="sidebar-header nav-item text-center mb-4">
-                <a href="?a=home" class="d-inline-block site-icon">
-                    <img src="{{asset('')}}assets/images/favicon.png" style="max-width: 48px; margin-left: 10px;">
+                <a href="{{route('user.dashboard')}}" class="d-inline-block site-icon">
+                    <img src="{{asset('')}}assets/images/logo1.png" style="max-width: 140px; margin-left: 17px;">
 
                 </a>
-                <a href="?a=home" class="site-brand">xyo-flow.com</a>
             </div>
 
             <ul class="nav nav-pills flex-column flex-grow-1">
@@ -194,11 +193,23 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('user.referral-team')}}" class="nav-link text-white" title="Referrals" data-bs-toggle="tooltip"
+                    <a href="{{route('user.level-team')}}" class="nav-link text-white" title="Referrals" data-bs-toggle="tooltip"
                         data-bs-placement="right">
                         <i class="fas fa-users fa-fw"></i><span class="sidebar-text ms-2">Referrals</span>
                     </a>
                 </li>
+                 <!-- <li class="nav-item">
+                    <a href="{{route('user.GenerateTicket')}}" class="nav-link text-white" title="Referrals" data-bs-toggle="tooltip"
+                        data-bs-placement="right">
+                        <i class="fas fa-users fa-fw"></i><span class="sidebar-text ms-2">Support</span>
+                    </a>
+                </li>
+                 <li class="nav-item">
+                    <a href="{{route('user.SupportMessage')}}" class="nav-link text-white" title="Referrals" data-bs-toggle="tooltip"
+                        data-bs-placement="right">
+                        <i class="fas fa-users fa-fw"></i><span class="sidebar-text ms-2">Support Message</span>
+                    </a>
+                </li> -->
                 <!-- <li class="nav-item">
                     <a href="{{route('user.refreallink')}}" class="nav-link text-white" title="Banners" data-bs-toggle="tooltip"
                         data-bs-placement="right">
@@ -220,7 +231,7 @@
                 <li class="nav-item">
                     <a href="{{route('user.ChangePass')}}" class="nav-link text-white" title="Edit Account" data-bs-toggle="tooltip"
                         data-bs-placement="right">
-                        <i class="fas fa-user-edit fa-fw"></i><span class="sidebar-text ms-2">Change Password</span>
+                        <i class="fas fa-shield-alt fa-fw"></i><span class="sidebar-text ms-2">Security</span>
                     </a>
                 </li>
                 <li class="nav-item mt-auto">

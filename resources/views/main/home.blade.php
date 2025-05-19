@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-2 mb-3 mb-md-0">
             <div class="social">
-                <a href="https://t.me/XYOLOW_FAM" target="_blank">
+                <!-- <a href="https://t.me/XYOLOW_FAM" target="_blank">
                 <img src="{{asset('')}}assets/images/tg.png" style="max-width: 1.7rem;">
                 </a>
                 <a href="https://t.me/XYOFLOW_HELPTEAM" target="_blank">
@@ -15,17 +15,17 @@
                 <a href="https://x.com/FlowXyoFam" target="_blank">
                 <img src="{{asset('')}}assets/images/tw.png" style="max-width: 1.9rem;">
                 </a>
-                <a href="https://h-metrics.com/project/xyo-flow.com/" target="_blank">
+                <a href="https://h-metrics.com/project/Helix Fund.com/" target="_blank">
                 <img src="{{asset('')}}assets/images/hm.png" style="max-width: 1.7rem;">
-                </a>
+                </a> -->
             </div>
         </div>
         <div class="col-md-9 mb-3 mb-md-0">
             <h1 style="null">Your <span class="gradient-text">Gateway</span> to <br> Consistent <span class="gradient-text">Crypto </span> Flow</h1>
             <p class="text-center" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;">Join the next generation of crypto investors and grow your wealth in the
-                XYO-flow ecosystem.</p>
+                Helix Fund ecosystem.</p>
             <div class="d-flex justify-content-center">
-                <a href="?a=signup" class="button" style="translate: none; rotate: none; scale: none; transform: translate(0px, 20px); opacity: 1;">Join Us</a>
+                <a href="{{route('register')}}" class="button" style="translate: none; rotate: none; scale: none; transform: translate(0px, 20px); opacity: 1;">Join Us</a>
             </div>
         </div>
         <div class="col-md-2 mb-3 mb-md-0"></div>
@@ -37,7 +37,7 @@
     <div class="row mb-6">
         <div class="col-12 text-start">
             <h2 style="translate: none; rotate: none; scale: none;  transform: translate(0px, 30px);margin-bottom: 50px;">About <span class="gradient-text">Us</span></h2>
-            <a href="?a=about" class="text-white">Read More →</a>
+            <a href="{{route('about-us')}}" class="text-white">Read More →</a>
         </div>
     </div>
     <div class="row g-4">
@@ -48,8 +48,8 @@
                         <i class="bx bx-line-chart" style="font-size: 2rem; color: #72a1de"></i>
                     </div>
                     <h3>Investment Excellence</h3>
-                    <p>XYO-flow is a modern crypto investment platform designed for those who value speed, transparency, and consistent returns. Our mission is to simplify high-yield investing by offering automated, reliable, and well-structured plans that fit both beginners and experienced users.</p>
-                    <p>Founded by a team of crypto traders and blockchain enthusiasts, XYO-flow was built to give people an opportunity to grow their capital through carefully calculated strategies. We focus on short- and mid-term investment cycles, ensuring daily or hourly profitability, depending on the plan you choose.</p>
+                    <p>Helix Fund is a modern crypto investment platform designed for those who value speed, transparency, and consistent returns. Our mission is to simplify high-yield investing by offering automated, reliable, and well-structured plans that fit both beginners and experienced users.</p>
+                    <p>Founded by a team of crypto traders and blockchain enthusiasts, Helix Fund was built to give people an opportunity to grow their capital through carefully calculated strategies. We focus on short- and mid-term investment cycles, ensuring daily or hourly profitability, depending on the plan you choose.</p>
                 </div>
             </div>
         </div>
@@ -82,7 +82,7 @@
                         <i class="bx bx-wallet" style="font-size: 2rem; color: #72a1de"></i>
                     </div>
                     <h3>Diverse Portfolio</h3>
-                    <p>With a commitment to clear communication, instant withdrawals, and a smooth user experience, XYO-flow brings together technology, trust, and performance — all in one seamless platform. Our community grows every day, and we’re excited to help more people stay in the flow of the crypto world.
+                    <p>With a commitment to clear communication, instant withdrawals, and a smooth user experience, Helix Fund brings together technology, trust, and performance — all in one seamless platform. Our community grows every day, and we’re excited to help more people stay in the flow of the crypto world.
                     </p>
                 </div>
             </div>
@@ -106,20 +106,19 @@
                         <div class="card-icon mx-auto">
                             <i class="bx bx-rocket" style="font-size: 2.5rem; color: #72a1de"></i>
                         </div>
-                        <h3 class="gradient-text mb-4">X-Daily</h3>
+                        <h3 class="gradient-text mb-4">VIP-1</h3>
                         <div class="price-wrap mb-4">
-                            
-                            <span class="price">1.5</span>
-                            <span class="currency">%</span>
+                        <span class="price">1.25-1.50</span>
+                        <span class="currency">%</span>
                         </div>
                         <ul class="features-list">
                             <li><i class="bx bx-check"></i> Daily Return</li>
                             <li><i class="bx bx-check"></i> 3 Days Contract</li>
                             <li><i class="bx bx-check"></i> Total ROI 4.50%</li>
-                            <li><i class="bx bx-check"></i> Deposit $35 - $200</li>
+                            <li><i class="bx bx-check"></i> Deposit $10 - $100</li>
                             <li><i class="bx bx-check"></i> Deposit Return at the End</li>
                         </ul>
-                        <a href="?a=deposit" class="button mt-4">Start Investing</a>
+                        <a href="{{route('register')}}" class="button mt-4">Start Investing</a>
                     </div>
                 </div>
             </div>
@@ -130,19 +129,19 @@
                         <div class="card-icon mx-auto">
                             <i class="bx bx-diamond" style="font-size: 2.5rem; color: #72a1de"></i>
                         </div>
-                        <h3 class="gradient-text mb-4">Y-Daily</h3>
+                        <h3 class="gradient-text mb-4">VIP -2</h3>
                         <div class="price-wrap mb-4">
-                            <span class="price">2.5</span>
+                            <span class="price">1.55-2.00</span>
                             <span class="currency">%</span>
                         </div>
                         <ul class="features-list">
                              <li><i class="bx bx-check"></i> Daily Return</li>
-                            <li><i class="bx bx-check"></i> 5 Days Contract</li>
+                            <li><i class="bx bx-check"></i> 4 Days Contract</li>
                             <li><i class="bx bx-check"></i> Total ROI 12.50%</li>
-                            <li><i class="bx bx-check"></i> Deposit $75 - $500</li>
+                            <li><i class="bx bx-check"></i> Deposit $210 - $500</li>
                             <li><i class="bx bx-check"></i> Deposit Return at the End</li>
                         </ul>
-                        <a href="?a=deposit" class="button mt-4">Start Investing</a>
+                        <a href="{{route('register')}}" class="button mt-4">Start Investing</a>
                     </div>
                 </div>
             </div>
@@ -153,91 +152,24 @@
                         <div class="card-icon mx-auto">
                             <i class="bx bx-crown" style="font-size: 2.5rem; color: #72a1de"></i>
                         </div>
-                        <h3 class="gradient-text mb-4">O-Daily</h3>
+                        <h3 class="gradient-text mb-4">VIP-3</h3>
                         <div class="price-wrap mb-4">
-                            <span class="price">3.5</span>
+                            <span class="price">2.25-2.50</span>
                             <span class="currency">%</span>
                         </div>
                         <ul class="features-list">
                             <li><i class="bx bx-check"></i> Daily Return</li>
-                            <li><i class="bx bx-check"></i> 8 Days Contract</li>
+                            <li><i class="bx bx-check"></i> 6 Days Contract</li>
                             <li><i class="bx bx-check"></i> Total ROI 28%</li>
-                            <li><i class="bx bx-check"></i> Deposit $150 - $1000</li>
+                            <li><i class="bx bx-check"></i> Deposit $510 - $1000</li>
                             <li><i class="bx bx-check"></i> Deposit Return at the End</li>
                         </ul>
-                        <a href="?a=deposit" class="button mt-4">Start Investing</a>
+                        <a href="{{route('register')}}" class="button mt-4">Start Investing</a>
                     </div>
                 </div>
             </div>
             
-            <div class="col-lg-4">
-                <div class="card h-100 bento-card plan-card" style="translate: none; rotate: none; scale: none;   transform: translate(0px, 50px);">
-                    <div class="card-body text-center">
-                        <div class="card-icon mx-auto">
-                            <i class="bx bx-rocket" style="font-size: 2.5rem; color: #72a1de"></i>
-                        </div>
-                        <h3 class="gradient-text mb-4">X-Hourly</h3>
-                        <div class="price-wrap mb-4">
-                            <span class="price">0.92</span>
-                            <span class="currency">%</span>
-                        </div>
-                        <ul class="features-list">
-                             <li><i class="bx bx-check"></i> Hourly Return</li>
-                            <li><i class="bx bx-check"></i> 120 Hours Contract</li>
-                            <li><i class="bx bx-check"></i> Total ROI 110.40%</li>
-                            <li><i class="bx bx-check"></i> Deposit $75 - $500</li>
-                            <li><i class="bx bx-check"></i> Deposit Included in Profit</li>
-                        </ul>
-                        <a href="?a=deposit" class="button mt-4">Start Investing</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4">
-                <div class="card h-100 bento-card plan-card" style="translate: none; rotate: none; scale: none;   transform: translate(0px, 50px);">
-                    <div class="card-body text-center">
-                        <div class="card-icon mx-auto">
-                            <i class="bx bx-diamond" style="font-size: 2.5rem; color: #72a1de"></i>
-                        </div>
-                        <h3 class="gradient-text mb-4">Y-Hourly</h3>
-                        <div class="price-wrap mb-4">
-                            <span class="price">0.65</span>
-                           <span class="currency">%</span>
-                        </div>
-                        <ul class="features-list">
-                            <li><i class="bx bx-check"></i> Hourly Return</li>
-                            <li><i class="bx bx-check"></i> 190 Hours Contract</li>
-                            <li><i class="bx bx-check"></i> Total ROI 123.50%</li>
-                            <li><i class="bx bx-check"></i> Deposit $150 - $1000</li>
-                            <li><i class="bx bx-check"></i> Deposit Included in Profit</li>
-                        </ul>
-                        <a href="?a=deposit" class="button mt-4">Start Investing</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4">
-                <div class="card h-100 bento-card plan-card" style="translate: none; rotate: none; scale: none;   transform: translate(0px, 50px);">
-                    <div class="card-body text-center">
-                        <div class="card-icon mx-auto">
-                            <i class="bx bx-crown" style="font-size: 2.5rem; color: #72a1de"></i>
-                        </div>
-                        <h3 class="gradient-text mb-4">O-Hourly</h3>
-                        <div class="price-wrap mb-4">
-                            <span class="price">0.52</span>
-                           <span class="currency">%</span>
-                        </div>
-                        <ul class="features-list">
-                            <li><i class="bx bx-check"></i> Hourly Return</li>
-                            <li><i class="bx bx-check"></i> 290 Hours Contract</li>
-                            <li><i class="bx bx-check"></i> Total ROI 150.80%</li>
-                            <li><i class="bx bx-check"></i> Deposit $300 - $2000 </li>
-                            <li><i class="bx bx-check"></i> Deposit Included in Profit</li>
-                        </ul>
-                        <a href="?a=deposit" class="button mt-4">Start Investing</a>
-                    </div>
-                </div>
-            </div>
+          
         </div>
     </div>
 </section>
@@ -339,10 +271,10 @@
                     </div>
                     <h3 class="gradient-text">Level 1</h3>
                     <div class="commission">
-                        <span class="percentage">0%</span>
-                        <p class="mb-3">Direct Referral Commission</p>
+                        <span class="percentage">5%</span>
+                        <p class="mb-3">Level Referral Commission</p>
                     </div>
-                    <p>Earn 6% commission from your direct referrals' investments</p>
+                    <p>Earn 5% commission from your level referrals' investments</p>
                 </div>
             </div>
         </div>
@@ -354,7 +286,7 @@
                     </div>
                     <h3 class="gradient-text">Level 2</h3>
                     <div class="commission">
-                        <span class="percentage">0%</span>
+                        <span class="percentage">10%</span>
                         <p class="mb-3">Second Level Commission</p>
                     </div>
                     <p>Receive 2% from your referrals' referrals</p>
@@ -369,17 +301,65 @@
                     </div>
                     <h3 class="gradient-text">Level 3</h3>
                     <div class="commission">
-                        <span class="percentage">0%</span>
+                        <span class="percentage">15%</span>
                         <p class="mb-3">Third Level Commission</p>
                     </div>
-                    <p>Earn 1% from third level referrals</p>
+                    <p>Earn 15% from third level referrals</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+     <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 bento-card referral-card" style="translate: none; rotate: none; scale: none;   transform: translate(0px, 50px);">
+                <div class="card-body text-center">
+                    <div class="card-icon">
+                        <i class="bx bx-medal" style="font-size: 2.5rem; color: #72a1de"></i>
+                    </div>
+                    <h3 class="gradient-text">Level 4</h3>
+                    <div class="commission">
+                        <span class="percentage">20%</span>
+                        <p class="mb-3">Level Referral Commission</p>
+                    </div>
+                    <p>Earn 20% commission from your level referrals' investments</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 bento-card referral-card featured" style="translate: none; rotate: none; scale: none;   transform: translate(0px, 50px);">
+                <div class="card-body text-center">
+                    <div class="card-icon">
+                        <i class="bx bxs-medal" style="font-size: 2.5rem; color: #72a1de"></i>
+                    </div>
+                    <h3 class="gradient-text">Level 5</h3>
+                    <div class="commission">
+                        <span class="percentage">25%</span>
+                        <p class="mb-3">Second Level Commission</p>
+                    </div>
+                    <p>Receive 25% from your referrals' referrals</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 bento-card referral-card" style="translate: none; rotate: none; scale: none;   transform: translate(0px, 50px);">
+                <div class="card-body text-center">
+                    <div class="card-icon">
+                        <i class="bx bxs-badge-check" style="font-size: 2.5rem; color: #72a1de"></i>
+                    </div>
+                    <h3 class="gradient-text">Level 6</h3>
+                    <div class="commission">
+                        <span class="percentage">30%</span>
+                        <p class="mb-3">Third Level Commission</p>
+                    </div>
+                    <p>Earn 30% from third level referrals</p>
                 </div>
             </div>
         </div>
     </div>
     <div class="row " style="margin-top: 80px;">
         <div class="col-12 text-center">
-            <a href="?a=signup" class="button">Start Earning Now</a>
+            <a href="{{route('register')}}" class="button">Start Earning Now</a>
         </div>
     </div>
 </div>
@@ -391,9 +371,9 @@
             <div class="card bento-card featured text-center" style="translate: none; rotate: none; scale: none;   transform: translate(0px, 50px);">
                 <div class="card-body">
                     <h2>Ready to Start Your <span class="gradient-text">Crypto Journey?</span></h2>
-                    <p class="lead mb-4">Join thousands of successful investors in the XYO-Flow ecosystem</p>
+                    <p class="lead mb-4">Join thousands of successful investors in the Helix Fund ecosystem</p>
                     <div class="cta-buttons">
-                        <a href="?a=signup" class="button" style="translate: none; rotate: none; scale: none;   transform: translate(0px, 30px);">Create Account</a>
+                        <a href="{{route('register')}}" class="button" style="translate: none; rotate: none; scale: none;   transform: translate(0px, 30px);">Create Account</a>
                     </div>
                 </div>
             </div>

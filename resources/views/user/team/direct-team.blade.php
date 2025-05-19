@@ -12,23 +12,27 @@
 
             <span class="navbar-brand text-capitalize text-white mb-0 h1 d-none d-sm-inline-block">referals</span>
 
-            <ul class="navbar-nav ms-auto">
+             <ul class="navbar-nav ms-auto">
                 <li class="nav-item mb-0 dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-user-circle fa-lg me-1"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownUser">
-                        <li><a class="dropdown-item" href="?a=support"><i
+                        <li><a class="dropdown-item" href="{{route('user.GenerateTicket')}}"><i
                                     class="fas fa-headset fa-fw me-2"></i>Support</a></li>
-                        <li><a class="dropdown-item" href="?a=edit_account"><i
+                        <li><a class="dropdown-item" href="{{route('user.profile')}}"><i
                                     class="fas fa-user-edit fa-fw me-2"></i>Edit Account</a></li>
-                        <li><a class="dropdown-item" href="?a=security"><i
+                        <li><a class="dropdown-item" href="{{route('user.ChangePass')}}"><i
                                     class="fas fa-shield-alt fa-fw me-2"></i>Security</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item text-danger" href="?a=logout"><i
+                         <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                            class="d-none">
+                            @csrf
+                        </form>
+                        <li><a class="dropdown-item text-danger" href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
                                     class="fas fa-sign-out-alt fa-fw me-2"></i>Logout</a></li>
                     </ul>
                 </li>
@@ -87,12 +91,12 @@
                     </thead>
                     <tbody>
                         {{-- Logged-in User Info --}}
-                        <tr>
+                        <!-- <tr>
                             <td><b>{{ Auth::user()->username }}</b></td>
                             <td><a href="mailto:{{ Auth::user()->email }}"
                                     class="themed-link">{{ Auth::user()->email }}</a></td>
                             <td><span class="text-success">Logged In User</span></td>
-                        </tr>
+                        </tr> -->
 
                         {{-- Direct Team Members --}}
                         @if(is_array($direct_team) || is_object($direct_team))
@@ -111,15 +115,15 @@
                         <tr>
                             <td colspan="3">
                                 <small>
-                                    User referrals:
-                                    <span class="badge bg-primary">0 active of 1 on level 1</span>
+                                    
+                                    <span class="badge bg-primary"></span>
                                 </small>
                             </td>
                         </tr>
                         @endforeach
                         @endif
                     </tbody>
-                    <tfoot>
+                    <!-- <tfoot>
                         <tr>
                             <td colspan="3">
                                 <div class="d-flex justify-content-between align-items-center">
@@ -128,7 +132,7 @@
                                 </div>
                             </td>
                         </tr>
-                    </tfoot>
+                    </tfoot> -->
                 </table>
 
                 {{-- Pagination --}}
